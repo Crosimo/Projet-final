@@ -15,4 +15,8 @@ class Pricing extends Model
 "packageLink2", "packageLink3", "packageLink4", "button"
 ];
     
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+    
 }

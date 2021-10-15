@@ -1,4 +1,4 @@
-<div class="slider-area">	
+{{-- <div class="slider-area">	
     <div class="slider-wrapper">
     
         @foreach ($sliders as $item)
@@ -10,8 +10,8 @@
                             <div class="text-content-wrapper">
                                 <div class="text-content text-left">
                                      
-                                    <h5>{{ $titres->titre0 }}</h5>
-                                    <h1>{{ $titres->description0 }}</h1> 
+                                    <h5>{{ $titres[0]->titre }}</h5>
+                                    <h1>{{ $titres[0]->description }}</h1> 
                                     <p>{{ $item->description }}</p>
                                     <a class="banner-btn" href="gallery.html" data-text="read more"><span>{{$item->button }}</span></a>
                                 </div>
@@ -42,4 +42,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

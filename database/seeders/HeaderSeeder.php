@@ -15,12 +15,11 @@ class HeaderSeeder extends Seeder
     public function run()
     {
         DB::table('headers')->insert([
-            "image"=>"logo.png",
+            "image"=>"logo1.png",
             "titre1"=>"Home",
             "titre2"=>"About us",
             "titre3"=>"classes",
             "titre4"=>"gallery",
-            
             "titre5"=>"Contact",
         ]);
     }

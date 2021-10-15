@@ -12,6 +12,6 @@ class Footer extends Model
     protected $table = "footers";
 
     protected $fillable = [
-        "image", "description", "email", "tel", "adresse", "tweets", "tweetcontenu1", "tweetcontenu2", "getintouch"
+        "image", "description", "email", "tel", "adresse", "tweets", "tweetcontenu1", "tweetcontenu2", "getintouch", "formeElem1","formeElem2","formeElem3","tweetIcon"
     ];
 }

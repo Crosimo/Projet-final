@@ -18,12 +18,22 @@ class CreateFootersTable extends Migration
             $table->string("image");
             $table->string("description");
             $table->string("email");
+            $table->string("logoEmail");
             $table->string("tel");
+            $table->string("logoTel");
             $table->string("adresse");
+            $table->string("logoAdresse");
             $table->string("tweets");
             $table->string("tweetcontenu1");
             $table->string("tweetcontenu2");
+            $table->string("tweetIcon");
             $table->string("getintouch");
+            $table->string("formElem1");
+            $table->string("formElem2");
+            $table->string("formElem3");
+            $table->string("copyright");
+            $table->string("copyrightAnnée");
+            $table->string("copyrightEntreprise");
             $table->timestamps();
         });
     }

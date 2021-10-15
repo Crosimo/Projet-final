@@ -16,7 +16,7 @@ class CreateClasseTagsTable extends Migration
         Schema::create('classe_tags', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tag_id')->constrained('tags', 'id')->onDelete('cascade');
-            $table->foreignId('classe_id')->constrained('classes', 'id')->onDelete('cascade');
+            $table->foreignId('classe_id')->constrained('classes', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

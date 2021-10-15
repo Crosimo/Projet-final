@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
                 <div class="section-title text-center">
-                    <h2>{{ $titres->titre2 }}</h2>
-                    <p> {{ $titres->description2 }} </p>
+                    <h2>{{ $titres[2]->titre }}</h2>
+                    <p> {{ $titres[2]->description }} </p>
                 </div>  
             </div>
         </div>

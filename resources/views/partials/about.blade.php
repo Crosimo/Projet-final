@@ -3,8 +3,23 @@
         <div class="row">
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="about-content">
-                     <h2>{{ $titres->titre1 }}</h2>
-                     <p class="m-0">{{ $titres->description1 }}</p>
+                     <h2>
+                         @if ($titres[1]->span !== "")
+                         <span @if ($titres[1]->span ===0)
+                            class="span" 
+                         @endif>{{ $titres[1]->titre[0] }}</span> 
+                         <span @if ($titres[1]->span ===1)
+                             class="span" 
+                          @endif>{{ $titres[1]->titre[1] }}</span>  
+                         @if ((count($titres[1]->titre))>2)
+                       
+                         <span>{{ $titres[1]->titre[2] }}</span>
+                         @endif 
+                         @else
+                           {{ $titres[1]->titre}} 
+                         @endif
+                    </h2>
+                     <p class="m-0">{{ $titres[1]->description }}</p>
                      <p>{{ $abouts->content }} </p>
                      <a class="banner-btn" href="about-us.html" data-text="read more"><span>read more</span></a>
                 </div>

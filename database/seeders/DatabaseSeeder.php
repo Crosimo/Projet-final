@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Gallery::factory(6)->create();
+        \App\Models\Gallery::factory(8)->create();
         \App\Models\Trainer::factory(3)->create();
         \App\Models\Classe::factory(3)->create();
         \App\Models\Slider::factory(2)->create();
+        \App\Models\Client::factory(4)->create();
 
         $this->call([
             AboutSeeder::class, EventSeeder::class, FooterSeeder::class,

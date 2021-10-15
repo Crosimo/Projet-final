@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTitresTable extends Migration
+class CreateSpansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateTitresTable extends Migration
      */
     public function up()
     {
-        Schema::create('titres', function (Blueprint $table) {
+        Schema::create('spans', function (Blueprint $table) {
             $table->id();
-            $table->string('titre');
-            $table->text('description');
-            $table->string('span');
-            $table->foreignId('span_id')->constrained('spans', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->string("position");
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateTitresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('titres');
+        Schema::dropIfExists('spans');
     }
 }

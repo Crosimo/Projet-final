@@ -24,14 +24,14 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $titres = Titre::first();
+        $titres = Titre::all();
         $headers = Header::first();
         $categories = Categorie::all();
         $abouts = About::first();
         $classes = Classe::all();
         $clients = Client::all();
         $events = Event::first();
-        $gallerys = Gallery::all();
+        $gallerys = Gallery::all()->random(6);
         $maps = Map::all();
         $newsletters = Newsletter::all();
         $pricings = Pricing::all();
@@ -39,9 +39,27 @@ class IndexController extends Controller
         $sliders = Slider::all();
         $tags = Tag::first();
         $trainers = Trainer::all();
-       
         $footers = Footer::first();
         
+        
+        for($i = 0; $i <= 8; $i++){
+            $data = current(explode('(' , rtrim($titres[$i]->titre, ')')));
+            $dateur = explode('(' , rtrim($titres[$i]->titre, ')'),3);
+            if(count($dateur)>1){
+                $titres[$i]->titre = $dateur;
+                if($data =""){
+                    $titres[$i]->span = 0;
+                }elseif((count($dateur))<3){
+                    $titres[$i]->span = 1;
+                }else{
+                    $titres[$i]->span = 2;
+                }
+            }
+        }
+         
+        
+        // verifier si vide ou pas
+
         return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers'));
     }
 }

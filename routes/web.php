@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\IndexController;
 use App\Models\About;
 use App\Models\Categorie;
@@ -41,6 +44,9 @@ Route::get('/about-us', function () {
 Route::get('/', [IndexController::class,'index']);
 
 Route::resource('/backoffice/about', AboutController::class);
+Route::resource('/backoffice/gallery', GalleryController::class);
+Route::resource('/backoffice/event', EventController::class);
+Route::resource('/backoffice/client', ClientController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

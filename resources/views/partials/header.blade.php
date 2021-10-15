@@ -2,12 +2,12 @@
     <div class="header-area ptb-18 header-sticky">
         <div class="container">
             <div class="row">
-                <div class="col-md-2 col-xs-12">
+                <div class="col-md-3 col-xs-12">
                     <div class="logo">
                         <a href="index.html"><img src="{{ "img/logo/".$headers->image }}" alt="COFFEE" /></a>
                     </div>
                 </div>
-                <div class="col-md-8 col-xs-12">
+                <div class="col-md-6 col-xs-12">
                     <div class="content-wrapper">
                         <!-- Main Menu Start -->
                         <div class="main-menu text-center">
@@ -25,7 +25,7 @@
                         <!-- Main Menu End -->
                     </div>
                 </div>
-                <div class="col-md-2 hidden-sm hidden-xs">
+                <div class="col-md-3 hidden-sm hidden-xs">
                     <div class="header-contact text-right" style="display: flex">
                     @if (Auth::check())
                     <form style=" margin-left:1; width:100%" method="POST" action="{{ route('logout') }}">
@@ -40,8 +40,8 @@
                     <a class="banner-btn" data-text="contact" href="contact.html"><span>contact</span></a>
                     @else
                     
-                    <a href="{{ route('login') }}" class="banner-btn" style="padding : 6px" >Log in</a>
-                    <a href="{{ route('register') }}" class="banner-btn" style="padding : 6px">Register</a>  
+                    <a href="{{ route('login') }}" class="banner-btn"  >Log in</a>
+                    <a href="{{ route('register') }}" class="banner-btn" >Register</a>  
                     @endif
                 </div>
                 </div>

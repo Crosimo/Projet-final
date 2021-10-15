@@ -4,17 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Footer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FooterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $footer = Footer::all();
+        return view('backoffice.footer.indexFooter', compact('footer'));
     }
 
     /**
@@ -24,7 +21,8 @@ class FooterController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('backoffice.footer.createFooter');
     }
 
     /**
@@ -35,51 +33,122 @@ class FooterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->authorize("create", Testimonial::class);
+
+        $request->validate([
+            "image" => ["required"],
+            "description" => ["required"],
+            "email" => ["required"],
+            "tel" => ["required"],
+            "adresse" => ["required"],
+            "tweets" => ["required"],
+            "tweetcontenu1" => ["required"],
+            "tweetcontenu2" => ["required"],
+            "getintouch" => ["required"],
+            "formElem1" => ["required"],
+            "formElem2" => ["required"],
+            "formElem3" => ["required"],
+            
+        ]);
+
+        $footer = new Footer();
+        $x = count(Footer::all());
+        $footer->image = $request->file("image")->hashName();
+        $footer->description = $request->description;
+        $footer->email = $request->email;
+        $footer->tel = $request->tel;
+        $footer->tweets = $request->tweets;
+        $footer->tweetcontenu1 = $request->tweetcontenu1;
+        $footer->tweetcontenu2 = $request->tweetcontenu2;
+        $footer->getintouch = $request->getintouch;
+        $footer->formElem1 = $request->formElem1;
+        $footer->formElem2 = $request->formElem2;
+        $footer->formElem3 = $request->formElem3;
+        $request->file("image")->storePubliclyAs("img/logo",  "logo".$x.".jpg", "public",);
+        $footer->save();
+        return redirect()->route('footer.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Footer  $footer
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function show(Footer $footer)
     {
-        //
+       
+        // return view('backoffice.testimonials.show', compact('testimonial'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Footer  $footer
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function edit(Footer $footer)
     {
-        //
+       
+        return view('backoffice.footer.editFooter', compact('footer'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Footer  $footer
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Footer $footer)
     {
-        //
+        
+
+        $request->validate([
+            "image" => ["required"],
+            "description" => ["required"],
+            "email" => ["required"],
+            "tel" => ["required"],
+            "adresse" => ["required"],
+            "tweets" => ["required"],
+            "tweetcontenu1" => ["required"],
+            "tweetcontenu2" => ["required"],
+            "getintouch" => ["required"],
+            "formElem1" => ["required"],
+            "formElem2" => ["required"],
+            "formElem3" => ["required"],
+            
+        ]);
+
+        Storage::disk("public")->delete("img/footer/" .$footer->image);
+        $footer->image= $request->file("image")->hashName();
+        $footer->description = $request->description;
+        $footer->email = $request->email;
+        $footer->tel = $request->tel;
+        $footer->tweets = $request->tweets;
+        $footer->tweetcontenu1 = $request->tweetcontenu1;
+        $footer->tweetcontenu2 = $request->tweetcontenu2;
+        $footer->getintouch = $request->getintouch;
+        $footer->formElem1 = $request->formElem1;
+        $footer->formElem2 = $request->formElem2;
+        $footer->formElem3 = $request->formElem3;
+        $request->file("image")->storePubliclyAs("img/logo", "logo".$request->id.".jpg", "public");
+        $footer->save();
+        return redirect('/');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Footer  $footer
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function destroy(Footer $footer)
     {
-        //
+       
+
+        Storage::disk("public")->delete("img/logo/" .$footer->image);
+        $footer->delete();
+        return redirect()->route('footer.index');
     }
 }

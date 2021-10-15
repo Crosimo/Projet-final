@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
                 <div class="section-title text-center">
-                    <h2>{{ $titres->titre4 }}</h2>
-                    <p>{{ $titres->description4 }}</p>
+                    <h2>{{ $titres[4]->titre }}</h2>
+                    <p>{{ $titres[4]->description }}</p>
                 </div>
             </div>
             @foreach ($trainers as $item)

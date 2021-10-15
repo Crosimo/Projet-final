@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
                 <div class="section-title text-center">
-                    <h2>{{ $titres->titre6 }} <span class="span"></span></h2>
-                    <p>{{ $titres->description6 }} </p>
+                    <h2>{{ $titres[6]->titre }} <span class="span"></span></h2>
+                    <p>{{ $titres[6]->description }} </p>
                 </div>
                 <div class="event-wrapper">
                     <div class="event-content text-center">

@@ -21,7 +21,6 @@ class CreateHeadersTable extends Migration
             $table->string("titre3");
             $table->string("titre4");
             $table->string("titre5");
-          
             $table->timestamps();
         });
     }

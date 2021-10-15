@@ -3,7 +3,7 @@
 @section('contentBO')
 
        
-        <form class=" d-flex flex-column home-section p-2" action="{{route('slider.update', $slider->id)}}" method="POST" enctype="multipart/form-data">
+        <form class=" d-flex flex-column home-section p-2" action="{{route('client.update', $client->id)}}" method="POST" enctype="multipart/form-data">
             
             <h1 class="text-center fs-4">
             Modifier la section</h1>
@@ -19,9 +19,10 @@
         @endif
             @csrf
             @method('PUT')
-            image: <input type="file" name="image" value="{{$slider->image}}">
-            description: <input type="text" name="description" value="{{$slider->description}}">
-            button: <input type="text" name="button" value="{{$slider->button}}">
+            titre: <input type="text" name="titre" value="{{$client->titre}}">
+            description: <input type="text" name="description" value="{{$client->description}}">
+            data: <input type="text" name="data" value="{{$client->data}}">
+            heure: <input type="text" name="heure" value="{{$client->heure}}">
             <button class="banner-btn w-25 mt-2" type="submit">Submit</button>
         </form>
   

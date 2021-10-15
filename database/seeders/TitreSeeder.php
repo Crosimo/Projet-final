@@ -15,34 +15,43 @@ class TitreSeeder extends Seeder
     public function run()
     {
         DB::table('titres')->insert([
-            ["titre0"=>"Welcome Our Handstand",
-            "description0"=>"Keep <span>Refresh & Strong</span> Your Body",
+            ["titre"=>"Welcome Our Handstand",
+            "description"=>"Keep Refresh & Strong Your Body",
+            "span_id"=>""],
 
-            "titre1"=>"about our handstand",
-            "description1"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, lorem ipsum is.",
+            ["titre"=>"about (our handstand)",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, lorem ipsum is.",
+            "span_id"=>""],
 
-            "titre2"=>"our classes",
-            "description2"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem ",
+           [ "titre"=>"our classes",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem ",
+            "span_id"=>""],
             
-           "titre3"=>"class schedule",
-            "description3"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem ",
+           ["titre"=>"class schedule",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem ",
+            "span_id"=>""],
             
-            "titre4"=>"our trainer",
-            "description4"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+           ["titre"=>"our trainer",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            "span_id"=>""],
 
-            "titre5"=>"our gallery",
-            "description5"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            ["titre"=>"our gallery",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            "span_id"=>""],
             
-            "titre6"=>"awesome event",
-            "description6"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            ["titre"=>"awesome event",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            "span_id"=>""],
 
-            "titre7"=>"pricing table",
-            "description7"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            ["titre"=>"pricing table",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            "span_id"=>""],
 
-            "titre8"=>"gift our<span class=span>client</span> say",
-            "description8"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            ["titre"=>"gift (our client) say",
+            "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum issss has been the industry's standard dummy text ever since the 1500s, when an unknown lorem",
+            "span_id"=>""],
 
-            ]
+            
             
         ]);
     }
