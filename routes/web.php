@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\SliderController;
 use App\Models\About;
 use App\Models\Categorie;
@@ -51,7 +52,7 @@ Route::resource('/backoffice/event', EventController::class);
 Route::resource('/backoffice/client', ClientController::class);
 Route::resource('/backoffice/slider', SliderController::class);
 Route::resource('/backoffice/classe', ClasseController::class);
-
+Route::get("send-mail", [MailController::class, "sendmail"])->name("sendMail");
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

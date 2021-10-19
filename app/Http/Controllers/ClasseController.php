@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
 use App\Models\Classe;
+use App\Models\Pricing;
+use App\Models\Tag;
+use App\Models\Trainer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,9 +24,13 @@ class ClasseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $tag = Tag::all();
+        $categorie = Categorie::all();
+        $trainer = Trainer::all();
         $classe = Classe::all();
-        return view('backoffice.classe.createClasse', compact('classe'));
+        $pricing = Pricing::all();
+        return view('backoffice.classe.createClasse', compact('classe', 'categorie', 'tag', 'trainer', 'pricing'));
     }
 
     /**
@@ -34,22 +42,28 @@ class ClasseController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        
         $request->validate([
             "image" => ["required"],
             "nom" => ["required"],
-            "instructeur" => ["required"],
+            "categorie_id" => ["required"],
+            "lestags" => ["required"],
+            "trainer_id" => ["required"],
             "heure" => ["required"],
         ]);
-
+        
         $classe = new Classe();
         $x = count(Classe::all());
         $classe->image = $request->file("image")->hashName();
         $classe->nom = $request->nom;
-        $classe->instructeur = $request->instructeur;
+        $classe->trainer_id = $request->trainer_id;
+        $classe->categorie_id = $request->categorie_id;
+        $classe->pricing_id = $request->pricing_id;
+        $classe->lestags = implode(',',$request->lestags);
         $classe->heure = $request->heure;
         $request->file("image")->storePubliclyAs("img/class",  $x.".jpg", "public",);
         $classe->save();
+        $classe->tags()->attach($request->lestags);
         return redirect()->route('classe.index');
     }
 
@@ -73,8 +87,11 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
-       
-        return view('backoffice.classe.editClasse', compact('classe'));
+        $tag = Tag::all();
+        $categorie = Categorie::all();
+        $trainer = Trainer::all();
+        $pricing = Pricing::all();
+        return view('backoffice.classe.editClasse', compact('classe', 'tag', 'categorie', 'trainer', 'pricing'));
     }
 
     /**
@@ -87,11 +104,13 @@ class ClasseController extends Controller
     public function update(Request $request, Classe $classe)
     {
         
-
+        
         $request->validate([
             "image" => ["required"],
             "nom" => ["required"],
-            "instructeur" => ["required"],
+            "categorie_id" => ["required"],
+            "lestags" => ["required"],
+            "trainer_id" => ["required"],
             "heure" => ["required"], 
         ]);
 
@@ -99,10 +118,14 @@ class ClasseController extends Controller
         $x = count(Classe::all());
         $classe->image= $request->file("image")->hashName();
         $classe->nom = $request->nom;
-        $classe->instructeur = $request->instructeur;
+        $classe->trainer_id = $request->trainer_id;
+        $classe->categorie_id = $request->categorie_id;
+        $classe->pricing_id = $request->pricing_id;
+        $classe->lestags = implode(',',$request->lestags);
         $classe->heure = $request->heure;
         $request->file("image")->storePubliclyAs("img/class", $x.".jpg", "public");
         $classe->save();
+        $classe->tags()->sync($request->lestags);
         return redirect('/');
     }
 

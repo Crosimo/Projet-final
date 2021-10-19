@@ -17,11 +17,19 @@ class Classe extends Model
        return $this->belongsToMany(Tag::class, 'classe_tags');
     }
 
+    public function users(){
+        return $this->belongsToMany(Tag::class, 'classe_users');
+     }
+
     public function trainer(){
         return $this->belongsTo(Trainer::class);
     }
 
     public function categorie(){
         return $this->belongsTo(Categorie::class);
+    }
+
+    public function pricing(){
+        return $this->belongsTo(Pricing::class);
     }
 }

@@ -12,20 +12,21 @@
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
 
     <!-- All css here -->
+    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/shortcode/shortcodes.css') }}">
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    
     <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>
 
 <body>
     @include('partials.header')
     @yield('content')
-    
+    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
     <script src="{{ asset('js/vendor/jquery-1.12.4.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
@@ -37,7 +38,7 @@
     <script src="{{ asset('js/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('js/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSLSFRa0DyBj9VGzT7GM6SFbSMcG0YNBM "></script>
     <script>
         function initialize() {

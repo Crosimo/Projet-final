@@ -14,9 +14,9 @@
             </div>
         </div>
         <div class="row">
-            <div class="grid" style="position: relative; height: 390px;">
+            <div class="grid">
                 @foreach ($gallerys as $item)
-                <div class="col-md-4 col-sm-4 col-xs-12 grid-item cat1 cat3" style="position: absolute; left: 0%; top: 0px;">
+                <div class="col-md-4 col-sm-4 col-xs-12 grid-item cat1 cat3">
                     <div class="portfolio-img single-img" >
                         <img   src="{{ asset('img/portfolio/'.$item->image) }}" alt="project">
                         <div class="gallery-icon">

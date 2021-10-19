@@ -16,33 +16,51 @@
         @endif
             @csrf
             <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">image</label>
-            <input type="file" name="image" class="form-control" id="exampleInputEmail1">
-            <label for="exampleInputEmail1" class="form-label">nom</label>
-            <input type="file" name="nom" class="form-control" id="exampleInputEmail1">
-            <label for="exampleInputEmail1" class="form-label">instructeur</label>
-            <input type="text" name="instructeur" class="form-control" id="exampleInputEmail1">
-            <label for="exampleInputEmail1" class="form-label">heure</label>
-            <input type="text" name="heure" class="form-control" id="exampleInputEmail1">
+            <label for="image" class="form-label">image</label>
+            <input type="file" name="image" class="form-control" id="image">
+            <label for="nom" class="form-label">nom</label>
+            <input type="text" name="nom" class="form-control" id="nom">
+            <label for="heure" class="form-label">heure</label>
+            <input type="datetime-local" name="heure" class="form-control" id="heure">
+            
             </div>
-            {{ dd($classe[0]->trainer->id) }}
-            <select class="form-select" name="trainer_id" aria-label="Default select example">
+            
+            <label for="categorie" class="form-label ">Catégorie</label>
+            <select class="form-select " id="categorie" name="categorie_id" aria-label="Default select example">
                
-                @foreach ($classe as $item)
-                    
-                    {{-- @foreach ($item->trainer as $qui)
-                    
-                    <option value="{{ $qui->id }}">{{ $qui->nom  }}</option>
-                    @endforeach --}}
+                @foreach ($categorie as $item)                   
+                    <option value = "{{ $item->id }}">{{ $item->nom }}</option>
                 @endforeach
                 
+            </select>
+
+            <label for="trainer" class="form-label ">Instructeur</label>
+            <select class="form-select" id="trainer" name="trainer_id" aria-label="Default select example">
+               
+                @foreach ($trainer as $item)                   
+                    <option value = "{{ $item->id }}">{{ $item->nom }}</option>
+                @endforeach
+                
+            </select>
+
+
+
+            <label for="pricing" class="form-label ">Formule d'accès</label>
+            <select class="form-select " id="pricing" name="pricing_id" aria-label="Default select example">
+               
+                @foreach ($pricing as $item)                   
+                    <option value = "{{ $item->id }}">{{ $item->nom }}</option>
+                @endforeach
+                
+            </select>
+
+            <label for="lestags" class="form-label ">Tags</label>
+              <select name="lestags[]"  id="tags" class="form-select " multiple aria-label="Default select example">
+                  @foreach ($tag as $item)
+                  <option value="{{ $item->id }}">{{ $item->nom }}</option>
+                  @endforeach
               </select>
-              <select class="form-select" multiple aria-label="Default select example">
-                <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+              <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

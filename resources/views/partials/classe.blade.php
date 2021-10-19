@@ -27,17 +27,13 @@
                             {{ $item->nom }}
                           </button></h3>
                         <ul>
-                            <li><i class="zmdi zmdi-face"></i>{{ $item->instructeur }}</li>
+                            <li><i class="zmdi zmdi-face"></i>{{ $item->trainer->nom }}</li>
                             <li><i class="zmdi zmdi-alarm"></i>{{ $item->heure }}</li>
                         </ul>
                     </div>
                 </div>
             </div>
-            
-
-
-            
-            
+                 
             {{-- -----Modal------ --}}
 
            
@@ -58,7 +54,7 @@
                         <h3>{{ $item->nom }}</h3>
                         <h2>Catégorie: {{ $item->categorie->nom }}</h2>
                             <ul>
-                                <li><i class="zmdi zmdi-face"></i>{{ $item->instructeur }}</li>
+                                <li><i class="zmdi zmdi-face"></i>{{ $item->trainer->nom }}</li>
                                 <li><i class="zmdi zmdi-alarm"></i>{{ $item->heure }}</li>  
                             </ul>
                             <ul>
@@ -78,13 +74,6 @@
            
             @endforeach
               
-              <!-- Modal -->
-              
-
-
-
-
-
         <div class="row">
             <div class="col-xs-12 text-center">
                 <a class="banner-btn mt-55" href="class.html" data-text="view all classes"><span>view all classes</span></a>

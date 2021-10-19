@@ -51,4 +51,8 @@ class User extends Authenticatable
     public function pricing(){
         return $this->belongsTo(Pricing::class);
     }
+    
+    public function classes(){
+        return $this->belongsToMany(Classe::class, 'classe_tags');
+    }
 }

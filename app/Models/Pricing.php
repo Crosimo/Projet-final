@@ -18,5 +18,9 @@ class Pricing extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
+
+    public function classes(){
+        return $this->hasMany(Classe::class);
+    }
     
 }

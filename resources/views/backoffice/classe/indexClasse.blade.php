@@ -1,4 +1,4 @@
-@extends('backoffice.indexBO')
+{{-- @extends('backoffice.indexBO')
 
 @section('contentBO')
 
@@ -65,4 +65,4 @@
 
 
 
-@endsection
+@endsection --}}
