@@ -22,6 +22,7 @@
             image: <input type="file" name="image" value="{{$slider->image}}">
             description: <input type="text" name="description" value="{{$slider->description}}">
             button: <input type="text" name="button" value="{{$slider->button}}">
+            <input type="checkbox" name="boolean">
             <button class="banner-btn w-25 mt-2" type="submit">Submit</button>
         </form>
   

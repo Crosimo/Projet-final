@@ -14,10 +14,14 @@ class Classe extends Model
         "nom", "instructeur", "heure", "image"
     ];
     public function tags(){
-        $this->belongsToMany(Tag::class, 'classe_tag');
+       return $this->belongsToMany(Tag::class, 'classe_tags');
     }
 
     public function trainer(){
         return $this->belongsTo(Trainer::class);
+    }
+
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
     }
 }

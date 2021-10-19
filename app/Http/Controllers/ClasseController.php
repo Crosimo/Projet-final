@@ -21,8 +21,8 @@ class ClasseController extends Controller
      */
     public function create()
     {
-        
-        return view('backoffice.classe.createClasse');
+        $classe = Classe::all();
+        return view('backoffice.classe.createClasse', compact('classe'));
     }
 
     /**
@@ -62,7 +62,7 @@ class ClasseController extends Controller
     public function show(Classe $classe)
     {
        
-        return view('backoffice.testimonials.show', compact('testimonial'));
+        return view('backoffice.classe.showClass', compact('classe'));
     }
 
     /**

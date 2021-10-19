@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classe;
 use App\Models\classe_tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClasseTagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $classe = Classe::all();
+        return view('backoffice.classe.indexClasse', compact('classe'));
     }
 
     /**
@@ -24,7 +22,8 @@ class ClasseTagController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('backoffice.classe.createClasse');
     }
 
     /**
@@ -35,51 +34,90 @@ class ClasseTagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->authorize("create", Testimonial::class);
+
+        $request->validate([
+            "nom" => ["required"],
+            "instructeur"=>['required'],
+            "heure"=>['required'],
+            "image"=>['required'],
+            "trainer_id"=>['required'],
+            
+        ]);
+
+        $classe = new Classe();
+        $x = count(Classe::all());
+        $classe->image = $request->file("image")->hashName();
+        $request->file("image")->storePubliclyAs("img/class",  $x.".jpg", "public");
+        $classe->nom=$request->nom;
+        $classe->instructeur=$request->instructeur;
+        $classe->heure=$request->heure;
+        $classe->save();
+        return redirect()->route('classe.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\classe_tag  $classe_tag
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function show(classe_tag $classe_tag)
-    {
-        //
+    public function show(Classe $classe)
+    { 
+        return view('backoffice.classe.showClass', compact('classe'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\classe_tag  $classe_tag
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function edit(classe_tag $classe_tag)
+    public function edit(Classe $classe)
     {
-        //
+       
+        return view('backoffice.classe.editClasse', compact('classe'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\classe_tag  $classe_tag
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, classe_tag $classe_tag)
+    public function update(Request $request, Classe $classe)
     {
-        //
+        
+
+        $request->validate([
+            "instructeur"=>['required'],
+            "heure"=>['required'],
+            "image"=>['required'],
+            "trainer_id"=>['required'],
+            
+        ]);
+
+        Storage::disk("public")->delete("img/class/" .$classe->image);
+        $classe->image= $request->file("image")->hashName();
+        $request->file("image")->storePubliclyAs("img/class", "classe.jpg", "public");
+        $classe->nom=$request->nom;
+        $classe->instructeur=$request->instructeur;
+        $classe->heure=$request->heure;
+        $classe->save();
+        return redirect('/');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\classe_tag  $classe_tag
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function destroy(classe_tag $classe_tag)
+    public function destroy(Classe $classe)
     {
-        //
+        Storage::disk("public")->delete("img/class/" .$classe->image);
+        $classe->delete();
+        return redirect()->route('classe.index');
     }
 }

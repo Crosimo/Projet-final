@@ -4,7 +4,10 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12">
                 <div class="test-content">
                     <div class="section-title text-center">
-                        <h2>{{ $titres[5]->titre }}</h2>
+                        <h2>
+                            
+                           {!! $titres[5]->titre !!}
+                        </h2>
                         <p>{{ $titres[5]->description }} </p>
                     </div>
                 </div>

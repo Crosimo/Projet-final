@@ -20,6 +20,7 @@ class CreateClassesTable extends Migration
             $table->string("heure");
             $table->string("image");
             $table->foreignId('trainer_id')->constrained('trainers', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('categorie_id')->constrained('categories', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

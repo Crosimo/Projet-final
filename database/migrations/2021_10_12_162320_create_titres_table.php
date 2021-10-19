@@ -17,8 +17,7 @@ class CreateTitresTable extends Migration
             $table->id();
             $table->string('titre');
             $table->text('description');
-            $table->string('span');
-            $table->foreignId('span_id')->constrained('spans', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('span_id')->constrained('spans', 'id');
             $table->timestamps();
         });
     }

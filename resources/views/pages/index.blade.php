@@ -17,7 +17,7 @@
        @include('partials.about')
         <!-- Welcome End -->
         <!-- Classes Start -->
-        @include('partials.class')
+        @include('partials.classe')
         <!-- Class Area End -->
         <!-- Schedule Area Strat -->
         @include('partials.schedule')

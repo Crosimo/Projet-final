@@ -15,7 +15,9 @@ class CreateSpansTable extends Migration
     {
         Schema::create('spans', function (Blueprint $table) {
             $table->id();
-            $table->string("position");
+            $table->string("position1");
+            $table->string("position2");
+            $table->string("position3");
             $table->timestamps();
         });
     }

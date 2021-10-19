@@ -43,20 +43,42 @@ class IndexController extends Controller
         
         
         for($i = 0; $i <= 8; $i++){
-            $data = current(explode('(' , rtrim($titres[$i]->titre, ')')));
-            $dateur = explode('(' , rtrim($titres[$i]->titre, ')'),3);
-            if(count($dateur)>1){
-                $titres[$i]->titre = $dateur;
-                if($data =""){
-                    $titres[$i]->span = 0;
-                }elseif((count($dateur))<3){
-                    $titres[$i]->span = 1;
+            $dataTitre = current(explode('(' , rtrim($titres[$i]->titre, ')')));
+            $dateurTitre = explode('(' , rtrim($titres[$i]->titre, ')'),3);
+            if(count($dateurTitre)>1){
+                if($dataTitre ="" ){
+                    $dateurTitre[0] = '<span class="span">'.$dateurTitre[0].'</span>';
+                    $value = implode('', $dateurTitre);
+                    $titres[$i]->titre =  $dateurTitre;
+                    $titres[$i]->titre =  $value;
+                }elseif((count($dateurTitre))<3 ){
+                    $dateurTitre[1] = '<span class="span">'.$dateurTitre[1].'</span>';
+                    $value = implode('', $dateurTitre);
+                    $titres[$i]->titre =  $value;
                 }else{
-                    $titres[$i]->span = 2;
+                    $dateurTitre[2] = '<span class="span">'.$dateurTitre[2].'</span>';
+                    $value = implode('', $dateurTitre);
+                    $titres[$i]->titre =  $value;
                 }
             }
+           
         }
-         
+        
+        
+        function moveElement(&$array, $a, $b) {
+            $arr = $array->toArray();
+            $out = array_splice($arr, $a, 1);
+            array_splice($arr, $b, 0, $out); 
+            $array = $arr; 
+        }
+
+        for($i = 0; $i < count($sliders); $i++){
+            if($sliders[$i]->boolean == "on"){
+                moveElement($sliders, $i, 0);
+            }
+        }
+      
+       
         
         // verifier si vide ou pas
 

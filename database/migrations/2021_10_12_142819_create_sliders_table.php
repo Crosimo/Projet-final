@@ -18,6 +18,7 @@ class CreateSlidersTable extends Migration
             $table->string('description');
             $table->string('image');
             $table->string('button');
+            $table->string('boolean');
             $table->timestamps();
         });
     }

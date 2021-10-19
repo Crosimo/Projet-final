@@ -15,9 +15,21 @@ class SpanSeeder extends Seeder
     public function run()
     {
         DB::table('spans')->insert([
-            ["position"=>["span", "", ""]],
-            ["position"=>["", "span", ""]],
-           [ "position"=>["", "", "span"]]
+            ["position1"=>"",
+            "position2"=>"",
+            "position3"=>"",],
+            ["position1"=>"",
+            "position2"=>"",
+            "position3"=>"",],
+            ["position1"=>"span",
+            "position2"=>"",
+            "position3"=>"",],
+            ["position1"=>"",
+            "position2"=>"span",
+            "position3"=>"",],
+            ["position1"=>"",
+            "position2"=>"",
+            "position3"=>"span",],
         ]);
     }
 }

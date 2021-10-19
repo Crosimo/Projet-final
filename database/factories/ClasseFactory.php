@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Categorie;
 use App\Models\Classe;
 use App\Models\Trainer;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -31,6 +32,7 @@ class ClasseFactory extends Factory
             "heure"=>"10.00Am-05:00Pm",
             "image"=>$x.".jpg",
             "trainer_id"=>$this->faker->numberBetween(1, count(Trainer::all())),
+            "categorie_id"=>$this->faker->numberBetween(1, count(Categorie::all())),
         ];
         
     }

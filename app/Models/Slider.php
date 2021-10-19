@@ -12,6 +12,6 @@ class Slider extends Model
     protected $table = "sliders";
 
     protected $fillable = [
-        "title", "subtitle", "description"
+        "title", "subtitle", "description", "boolean"
     ];
 }

@@ -23,6 +23,7 @@
             <label for="exampleInputEmail1" class="form-label">button</label>
             <input type="text" name="button" class="form-control" id="exampleInputEmail1">
             </div>
+            <input type="checkbox" name="boolean" checked>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

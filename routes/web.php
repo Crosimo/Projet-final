@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\SliderController;
 use App\Models\About;
 use App\Models\Categorie;
 use App\Models\Classe;
@@ -47,6 +49,8 @@ Route::resource('/backoffice/about', AboutController::class);
 Route::resource('/backoffice/gallery', GalleryController::class);
 Route::resource('/backoffice/event', EventController::class);
 Route::resource('/backoffice/client', ClientController::class);
+Route::resource('/backoffice/slider', SliderController::class);
+Route::resource('/backoffice/classe', ClasseController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
