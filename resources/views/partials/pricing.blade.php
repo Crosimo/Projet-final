@@ -26,7 +26,12 @@
                             <li>{{ $item->packageLink3 }}</li>
                             <li>{{ $item->packageLink4 }}</li>
                         </ul>
-                        <a href="#">{{ $item->button }}</a>
+                        @auth
+                        <a href="{{ route('paiement', $item->id) }}">{{ $item->button }}</a>
+                        @else
+                        <a href="{{route('register', $item->id)}}">{{ $item->button }}</a>
+                        @endauth
+                        
                     </div>
                 </div>
             </div>

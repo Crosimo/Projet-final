@@ -12,10 +12,23 @@ class Trainer extends Model
     protected $table = "trainers";
 
     protected $fillable = [
-    "nom"
+    "nom",
+    "image",
+    "role_id",
+    "facebook",
+    "facebookLien",
+    "twitter",
+    "twitterLien",
+    "instagram",
+    "instagramLien",
+    "pinterest",
+    "pinterestLien",
     ];
 
     public function classes(){
         return $this->hasMany(Classe::class);
+    }
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Span;
+use App\Models\Email;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SpanPolicy
+class EmailPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class SpanPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Span  $span
+     * @param  \App\Models\Email  $email
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Span $span)
+    public function view(User $user, Email $email)
     {
         //
     }
@@ -48,10 +48,10 @@ class SpanPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Span  $span
+     * @param  \App\Models\Email  $email
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Span $span)
+    public function update(User $user, Email $email)
     {
         //
     }
@@ -60,10 +60,10 @@ class SpanPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Span  $span
+     * @param  \App\Models\Email  $email
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Span $span)
+    public function delete(User $user, Email $email)
     {
         //
     }
@@ -72,10 +72,10 @@ class SpanPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Span  $span
+     * @param  \App\Models\Email  $email
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Span $span)
+    public function restore(User $user, Email $email)
     {
         //
     }
@@ -84,10 +84,10 @@ class SpanPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Span  $span
+     * @param  \App\Models\Email  $email
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Span $span)
+    public function forceDelete(User $user, Email $email)
     {
         //
     }

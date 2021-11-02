@@ -11,14 +11,18 @@ class Classe extends Model
     protected $table = "classes";
 
     protected $fillable =  [
-        "nom", "instructeur", "heure", "image"
+        "nom", "instructeur", "heure", "image", "places"
     ];
+    protected $casts = [
+        'participants' => 'array'
+    ];
+    protected $dates = ['heureDébut', 'heureFin'];
     public function tags(){
        return $this->belongsToMany(Tag::class, 'classe_tags');
     }
 
     public function users(){
-        return $this->belongsToMany(Tag::class, 'classe_users');
+        return $this->belongsToMany(User::class, 'classe_users');
      }
 
     public function trainer(){

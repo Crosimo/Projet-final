@@ -20,8 +20,14 @@
             <input type="file" name="image" class="form-control" id="image">
             <label for="nom" class="form-label">nom</label>
             <input type="text" name="nom" class="form-control" id="nom">
-            <label for="heure" class="form-label">heure</label>
-            <input type="datetime-local" name="heure" class="form-control" id="heure">
+            <label for="heureDébut" class="form-label">heureDébut</label>
+            <input type="datetime-local" name="heureDébut" class="form-control" id="heureDébut"
+            min="08:00:00" max="22:00:00">
+            <label for="heureFin" class="form-label">heureFin</label>
+            <input type="datetime-local" name="heureFin" class="form-control" id="heureFin"
+            min="08:00:00" max="22:00:00">
+            <label for="places" class="form-label">places</label>
+            <input type="number" name="places" class="form-control" id="places" min="0" max="20">
             
             </div>
             
@@ -44,12 +50,12 @@
             </select>
 
 
-
+            
             <label for="pricing" class="form-label ">Formule d'accès</label>
             <select class="form-select " id="pricing" name="pricing_id" aria-label="Default select example">
                
                 @foreach ($pricing as $item)                   
-                    <option value = "{{ $item->id }}">{{ $item->nom }}</option>
+                    <option value = "{{ $item->id }}">{{ $item->packageTitle }}</option>
                 @endforeach
                 
             </select>
@@ -61,6 +67,10 @@
                   @endforeach
               </select>
               <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
+
+              <label for="prioritaire" class="form-label">Prioritaire</label>
+              <input type="checkbox" name="prioritaire" >
+            
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

@@ -9,17 +9,18 @@
                     <p>{{ $titres[4]->description }}</p>
                 </div>
             </div>
+            
             @foreach ($trainers as $item)
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="single-trainer text-center">
-                    <img src="{{ asset('img/trainer/'.$item->image) }}" alt="trainer">
+                    <img src="{{ asset('img/trainer/'.$item['image']) }}" alt="trainer">
                     <div class="trainer-hover">
-                        <h3>{{ $item->nom }}</h3>
+                        <h3>{{ $item['nom'] }}</h3>
                         <ul>
-                            <li><a href=" https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>  
-                            <li><a href="https://twitter.com3/"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="https://www.pinterest.com/"><i class="fa fa-pinterest"></i></a></li>
+                            <li><a href="{{ $item['facebookLien'] }}"><i class="{{ $item['facebook'] }}"></i></a></li>  
+                            <li><a href="{{ $item['twitterLien'] }}"><i class="{{ $item['twitter'] }}"></i></a></li>
+                            <li><a href="{{ $item['instagramLien'] }}"><i class="{{ $item['instagram'] }}"></i></a></li>
+                            <li><a href="{{ $item['pinterestLien'] }}"><i class="{{ $item['pinterest'] }}"></i></a></li>
                         </ul>
                     </div>
                 </div>

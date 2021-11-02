@@ -17,7 +17,6 @@ class CreateTitresTable extends Migration
             $table->id();
             $table->string('titre');
             $table->text('description');
-            $table->foreignId('span_id')->constrained('spans', 'id');
             $table->timestamps();
         });
     }

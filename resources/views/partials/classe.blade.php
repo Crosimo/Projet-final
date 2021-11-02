@@ -1,3 +1,5 @@
+
+
 <section class="class-area fix bg-gray pb-100 pt-95">
     <div class="container">
         <div class="row">
@@ -9,10 +11,15 @@
                 </div>  
             </div>
         </div>
+       
+        
         <div class="row"> 
             
             @foreach ($classes as $item)
-            <div class="col-md-4 col-sm-6 col-xs-12">     
+           
+            <div class="col-md-4 col-sm-6 col-xs-12">
+            
+            
                 <div class="single-class">
                     <div class="single-img">
                         <a href="class.html"><img src="{{ asset('img/class/'.$item->image) }}" alt="class"></a>
@@ -22,23 +29,37 @@
                             </a>   
                         </div>
                     </div>
+                   
+                    {{-- {{ dd($item) }} --}}
+                    @if ($item->prioritaire == true)
+                    <div class="single-content" style="background-color:green"> 
+                    @elseif((count($item->users)) <= 3 ) 
+                    <div class="single-content" style="background-color:orange">
+                    @elseif((count($item->users)) <= 5 ) 
+                    <div class="single-content" style="background-color:red">
+                    @elseif((count($item->users)) <= 0)
+                    <div class="single-content" style="background-color:grey">
+                    @else
                     <div class="single-content">
+                    @endif
                         <h3><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="{{"#staticBackdrop".$item->id}}">
                             {{ $item->nom }}
                           </button></h3>
                         <ul>
                             <li><i class="zmdi zmdi-face"></i>{{ $item->trainer->nom }}</li>
-                            <li><i class="zmdi zmdi-alarm"></i>{{ $item->heure }}</li>
+                            <li><i class="zmdi zmdi-alarm"></i>{{ $item->heureDébut }}</li>
                         </ul>
                     </div>
                 </div>
             </div>
-                 
+
             {{-- -----Modal------ --}}
 
-           
+           @php
+               
+           @endphp
 
-            <div class="modal" id="{{"staticBackdrop".$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="top:15% !important">
+            <div class="modal" id="{{"staticBackdrop".$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style=" !important">
                 <div class="modal-dialog text-center" style="max-width:35% !important; height: 50rem !important;">
                   <div class="modal-content h-100" >  
                     <div class="single-class">
@@ -62,6 +83,13 @@
                                 <li><i class="zmdi zmdi-alarm"></i>{{ $tag->nom }}</li>
                                 @endforeach
                             </ul>
+                            
+                            @auth
+                            <a href="{{ route('inscription', $item->id) }}">S'inscrire</a>
+                            @else
+                            <a href="{{ route('login') }}">S'inscrire</a>
+                            @endauth
+                           
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" class="btn btn-primary">Understood</button>
                         </div>
@@ -82,3 +110,31 @@
     </div>
 </section>
 
+<script>
+
+    // Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>

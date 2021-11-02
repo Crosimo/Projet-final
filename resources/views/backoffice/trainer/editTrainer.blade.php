@@ -19,8 +19,12 @@
         @endif
             @csrf
             @method('PUT')
-            image: <input type="file" name="image" value="{{$slider->image}}">
-            nom: <input type="text" name="nom" value="{{$slider->nom}}">
+            image: <input type="file" name="image" value="{{$trainer->image}}">
+            nom: <input type="text" name="nom" value="{{$trainer->nom}}">
+            facebookLien: <input type="text" name="facebookLien" value="{{$trainer->facebookLien}}">
+            instagramLien: <input type="text" name="instagramLien" value="{{$trainer->instagramLien}}">
+            twitterLien: <input type="text" name="twitterLien" value="{{$trainer->twitterLien}}">
+            pinterestLien: <input type="text" name="pinterestLien" value="{{$trainer->pinterestLien}}">
             <button class="banner-btn w-25 mt-2" type="submit">Submit</button>
         </form>
   

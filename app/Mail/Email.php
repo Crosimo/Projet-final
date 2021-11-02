@@ -10,15 +10,15 @@ use Illuminate\Queue\SerializesModels;
 class Email extends Mailable
 {
     use Queueable, SerializesModels;
-
+    public $contenuEmail;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($contenuEmail)
     {
-        //
+        $this->contenuEmail = $contenuEmail;
     }
 
     /**
@@ -28,6 +28,14 @@ class Email extends Mailable
      */
     public function build()
     {
-        return $this->markdown('email');
+        
+       $contenu = $this->contenuEmail;
+        if(count($this->contenuEmail)>1){
+           
+            return $this->view('nouvelleClasse', compact('contenu'));
+        }else{
+            return $this->view('email', compact('contenu'));
+        }
+       
     }
 }

@@ -17,11 +17,15 @@ class CreateClassesTable extends Migration
             $table->id();
             $table->string("nom");
             $table->string("lestags");
-            $table->string("heure");
+            $table->timestamp("heureDébut");
+            $table->timestamp("heureFin");
             $table->string("image");
             $table->foreignId('trainer_id')->constrained('trainers', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('categorie_id')->constrained('categories', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('pricing_id')->constrained('pricings', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('places');
+            // $table->json('participants')->nullable();
+            $table->boolean('prioritaire');
             $table->timestamps();
         });
     }

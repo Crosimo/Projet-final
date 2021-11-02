@@ -6,6 +6,7 @@ use App\Models\Categorie;
 use App\Models\Classe;
 use App\Models\Pricing;
 use App\Models\Trainer;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ClasseFactory extends Factory
@@ -27,15 +28,28 @@ class ClasseFactory extends Factory
         
         static $x =0;
         $x++;
+       
         return [
             "nom"=>"yoga for climbers",
             "lestags"=>"Sathi Bhuiyan".$x,
-            "heure"=>"10.00Am-05:00Pm",
+            "heureDébut"=>Carbon::now(),
+            "heureFin"=>Carbon::now(),
             "image"=>$x.".jpg",
             "trainer_id"=>$this->faker->numberBetween(1, count(Trainer::all())),
             "categorie_id"=>$this->faker->numberBetween(1, count(Categorie::all())),
             "pricing_id"=>$this->faker->numberBetween(1, count(Pricing::all())),
+            "places"=>$this->faker->numberBetween(5, 15),
+            // "participants"=> '[]',
+            "prioritaire"=>false,
+            
         ];
+//         $dateString = '25/08/2017';
+//         $dateObject = \Carbon::createFromFormat('d/m/Y', $dateString);
+        // 'Y-m-d H:i:s'
+        // 2017-03-08 00:00:00.000000
+        // $startDate = \Carbon\Carbon::createFromFormat('Y-m-d','2019-10-01');
+        // $endDate = \Carbon\Carbon::createFromFormat('Y-m-d','2019-10-30');
+        // $check = \Carbon\Carbon::now()->between($startDate,$endDate);
         
     }
 }

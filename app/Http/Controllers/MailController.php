@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Email;
+use App\Models\Newsletter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -11,12 +12,12 @@ class MailController extends Controller
     public function sendmail(Request $request){
 
         $contenuEmail = [
-        "name"=>$request->name,
         "email"=>$request->email,
-        "phone"
-         =>$request->phone, 
-         "message"=>$request->message];
-        Mail::to("elias@molengeek.com")->send(new Email($contenuEmail));
-        
+        ];
+        Mail::to("$request->email")->send(new Email($contenuEmail));
+        $newsletter = new Newsletter();
+        $newsletter->email = $request->email;
+        $newsletter->save();
+        return redirect()->back();
         }
 }

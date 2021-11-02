@@ -3,13 +3,19 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pricing;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\Rules;
+use Symfony\Component\Console\Input\Input;
+use Symfony\Component\Routing\Route as RoutingRoute;
 
 class RegisteredUserController extends Controller
 {
@@ -18,9 +24,11 @@ class RegisteredUserController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create($id)
     {
-        return view('auth.register');
+        $pricing = Pricing::find($id);
+       
+        return view('auth.register', compact('pricing'));
     }
 
     /**
@@ -33,6 +41,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -50,6 +59,11 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        
+        $value = URL::previous();
+        $id = ($value[(strlen($value))-1]);
+        $pricing = Pricing::find(intval($id));
+        $date = Carbon::now();
+        return view('pages/paiement/paiement', compact('pricing', 'date'));
     }
 }

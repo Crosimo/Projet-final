@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSpansTable extends Migration
+class CreateEmailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateSpansTable extends Migration
      */
     public function up()
     {
-        Schema::create('spans', function (Blueprint $table) {
+        Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->string("position1");
-            $table->string("position2");
-            $table->string("position3");
+            $table->string('name');
+            $table->string('email');
+            $table->text('message');
+            $table->integer('lu');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateSpansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spans');
+        Schema::dropIfExists('emails');
     }
 }

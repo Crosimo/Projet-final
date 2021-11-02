@@ -6,7 +6,8 @@
                     <div class="newsletter-content section-title text-center">
                         <h2>subscribe now for latest update!</h2> 
                         <div class="newsletter-form">
-                            <form action="#" id="mc-form" class="mc-form fix">
+                            <form action="{{ route('sendMail') }}" id="mc-form" class="mc-form fix" method="POST">
+                                @csrf
                                 <input id="mc-email" type="email" name="email" placeholder="Enter Your E-mail ID">
                                 <button id="mc-submit" type="submit" class="default-btn" data-text="submit"><span>submit</span></button> 
                             </form>

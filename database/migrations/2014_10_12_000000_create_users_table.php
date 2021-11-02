@@ -16,7 +16,17 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image');
+            $table->string('facebook')->nullable();
+            $table->string('facebookLien')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('instagramLien')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('twitterLien')->nullable();
+            $table->string('pinterest')->nullable();
+            $table->string('pinterestLien')->nullable();
             $table->foreignId('role_id')->constrained('roles', 'id')->onUpdate('cascade')->onDelete('cascade');
+            
             // $table->foreignId('pricing_id')->constrained('pricings', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

@@ -18,6 +18,7 @@ use App\Models\Slider;
 use App\Models\Tag;
 use App\Models\Titre;
 use App\Models\Trainer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -61,9 +62,10 @@ class IndexController extends Controller
                     $titres[$i]->titre =  $value;
                 }
             }
-           
         }
         
+
+        //slider
         
         function moveElement(&$array, $a, $b) {
             $arr = $array->toArray();
@@ -78,7 +80,20 @@ class IndexController extends Controller
             }
         }
       
+
+        // ------Trainers------
+        $leadCoach= Trainer::all()->where('role_id', 2)->take(1)->toArray();
+        
+        $coach= Trainer::all()->where('role_id', 3)->take(2);
+        $coach->splice(1, 0, $leadCoach);
        
+
+        $trainers = $coach;
+        
+
+      
+        // ------Classes-------
+        
         
         // verifier si vide ou pas
 

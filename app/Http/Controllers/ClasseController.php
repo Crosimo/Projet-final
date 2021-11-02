@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Email;
 use App\Models\Categorie;
 use App\Models\Classe;
+use App\Models\Newsletter;
 use App\Models\Pricing;
 use App\Models\Tag;
 use App\Models\Trainer;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class ClasseController extends Controller
@@ -30,9 +36,10 @@ class ClasseController extends Controller
         $trainer = Trainer::all();
         $classe = Classe::all();
         $pricing = Pricing::all();
+        
         return view('backoffice.classe.createClasse', compact('classe', 'categorie', 'tag', 'trainer', 'pricing'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -48,22 +55,65 @@ class ClasseController extends Controller
             "nom" => ["required"],
             "categorie_id" => ["required"],
             "lestags" => ["required"],
+            "places" => ["required"],
             "trainer_id" => ["required"],
-            "heure" => ["required"],
+            "heureDébut" => ["required"],
+            "heureFin" => ["required"],
         ]);
+    
+// Checker que ça n'est bloqué par aucunes autres dates    
+        $check1 = Classe::select('heureDébut', 'heureFin')
+        ->whereDate('heureDébut', '<=', $request->heureDébut)
+        ->whereDate('heureFin', '>=', $request->heureDébut)
+        ->first();
         
+        $check2 = Classe::select('heureDébut', 'heureFin')
+        ->whereDate('heureDébut', '<=', $request->heureFin)
+        ->whereDate('heureFin', '>=', $request->heureFin)
+        ->first();
+        
+// checker pas d'erreurs dans l'organisation date début et fin
+        $start = Carbon::parse($request->heureDébut);
+        $fin = Carbon::parse($request->heureFin);
+        if($check1 !== null || $check2 !== null || $start->greaterThan($fin)){
+            return redirect()->back()->with('message', 'you fucked up');
+        }
+
+
+
         $classe = new Classe();
+// Checker si c'ests prioritaire
+        if($request->prioritaire == 'on'){
+            $classe->prioritaire = true;
+        }else{
+            $classe->prioriatier = false;
+        };
         $x = count(Classe::all());
         $classe->image = $request->file("image")->hashName();
         $classe->nom = $request->nom;
+        $classe->places = $request->places;
         $classe->trainer_id = $request->trainer_id;
         $classe->categorie_id = $request->categorie_id;
         $classe->pricing_id = $request->pricing_id;
         $classe->lestags = implode(',',$request->lestags);
-        $classe->heure = $request->heure;
+        $classe->heureDébut = $request->heureDébut;
+        $classe->heureFin = $request->heureFin;
         $request->file("image")->storePubliclyAs("img/class",  $x.".jpg", "public",);
         $classe->save();
         $classe->tags()->attach($request->lestags);
+
+        $allNews = Newsletter::all();
+        
+          
+        foreach($allNews as $news){
+            $contenuEmail = [
+                "email"=>$news->email,
+                "name"=>$request->nom,
+                "pricing"=>$classe->pricing->packageTitle,
+                ];
+            Mail::to("$news->email")->send(new Email($contenuEmail));
+        }
+        
         return redirect()->route('classe.index');
     }
 
@@ -111,7 +161,8 @@ class ClasseController extends Controller
             "categorie_id" => ["required"],
             "lestags" => ["required"],
             "trainer_id" => ["required"],
-            "heure" => ["required"], 
+            "heureDébut" => ["required"], 
+            "heureFin" => ["required"], 
         ]);
 
         Storage::disk("public")->delete("img/classe/" .$classe->image);
@@ -122,7 +173,8 @@ class ClasseController extends Controller
         $classe->categorie_id = $request->categorie_id;
         $classe->pricing_id = $request->pricing_id;
         $classe->lestags = implode(',',$request->lestags);
-        $classe->heure = $request->heure;
+        $classe->heureDébut = $request->heureDébut;
+        $classe->heureFin = $request->heureFin;
         $request->file("image")->storePubliclyAs("img/class", $x.".jpg", "public");
         $classe->save();
         $classe->tags()->sync($request->lestags);
@@ -138,9 +190,25 @@ class ClasseController extends Controller
     public function destroy(Classe $classe)
     {
        
-
         Storage::disk("public")->delete("img/class/" .$classe->image);
         $classe->delete();
         return redirect()->route('classe.index');
+    }
+
+
+    public function inscription(Classe $id){
+        // dd($id->users->find(Auth::user()->id));
+        if((count($id->users)) < $id->places  ){
+            // if($id->users->find(Auth::user()->id) !== null){
+            //     return redirect()->back()->with("error", "La classe est pleine");
+            // }else{
+                $id->users()->attach([Auth::user()->id]);
+                return redirect()->back()->with("message", "vous êtes inscrits");
+            // }
+            
+            
+        }else{
+            return redirect()->back()->with("error", "La classe est pleine");
+        } 
     }
 }

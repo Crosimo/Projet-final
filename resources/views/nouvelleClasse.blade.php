@@ -7,11 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    Bienvenue sur la Newsletter Handstand !
+    
+    <p>Une classe de {{ $contenu['name'] }} vient d'être crée, si vous avez le {{ $contenu['pricing'] }}
+        qu'attendez-vous ??</p>
 
-    Vous serez tenus au courant de toute l'actualité propres au sport et au bien être !
-
-    A bientôt,
-    Handstand
 </body>
 </html>

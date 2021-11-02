@@ -26,6 +26,15 @@ class TrainerFactory extends Factory
         return [
             "image"=>"trainer".$x.".jpg",
             "nom"=>$this->faker->name(),
+            "facebook"=>"fa fa-facebook",
+            "facebookLien"=>"https://www.facebook.com/",
+            "twitter"=>"fa fa-twitter",
+            "twitterLien"=>"https://www.twitter.com/",
+            "instagram"=>"fa fa-instagram",
+            "instagramLien"=>"https://www.instagram.com/",
+            "pinterest"=>"fa fa-pinterest",
+            "pinterestLien"=>"https://www.pinterest.com/",
+            'role_id' => $this->faker->numberBetween(2,3),
         ];
     }
 }
