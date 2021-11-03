@@ -11,8 +11,8 @@
     <!-- Favicon Icon -->
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-        crossorigin="" />
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
     <!-- All css here -->
     {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -21,14 +21,12 @@
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
-
     <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>
 
 <body>
-    {{-- <script>
-        alert('Voici le code coupon de cette semaine pour avoir 10% de réduction dans les packages : coachmolengeek19');
-    </script> --}}
+  
+    
     @include('partials.header')
     @yield('content')
     {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
@@ -111,6 +109,9 @@
     @include('partials.map')
     @include('partials.newsletter')
     @include('partials.footer')
+    {{-- <script>
+        alert('Voici le code coupon de cette semaine pour avoir 10% de réduction dans les packages : "coachmolengeek19"');
+    </script> --}}
 </body>
 
 </html>

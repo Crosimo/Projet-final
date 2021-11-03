@@ -144,6 +144,7 @@ class ClasseController extends Controller
         $categorie = Categorie::all();
         $trainer = Trainer::all();
         $pricing = Pricing::all();
+        
         return view('backoffice.classe.editClasse', compact('classe', 'tag', 'categorie', 'trainer', 'pricing'));
     }
 
@@ -169,8 +170,8 @@ class ClasseController extends Controller
         ]);
 
         Storage::disk("public")->delete("img/classe/" .$classe->image);
-        $x = count(Classe::all());
-        $classe->image= $request->file("image")->hashName();
+        $x = $request->id;
+        $classe->image= $x.".jpg";
         $classe->nom = $request->nom;
         $classe->trainer_id = $request->trainer_id;
         $classe->categorie_id = $request->categorie_id;

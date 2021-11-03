@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ScheduleFactory extends Factory
@@ -22,7 +23,7 @@ class ScheduleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
         ];
     }
 }

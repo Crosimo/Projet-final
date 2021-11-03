@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col-md-3 hidden-sm hidden-xs">
-                   
+                    <div class="header-contact text-right">
                     @if (Auth::check())
                     <form     method="POST" action="{{ route('logout') }}">
                         {{-- class="banner-btn" --}}
@@ -48,7 +48,7 @@
                     <a href="{{ route('login') }}" class="banner-btn"  >Log in</a>
                     {{-- <a href="{{ route('register') }}" class="banner-btn" >Register</a>   --}}
                     @endif
-                
+                    </div>
                 </div>
             </div>
         </div>

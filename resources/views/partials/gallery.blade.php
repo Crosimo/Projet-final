@@ -29,5 +29,6 @@
                 @endforeach
             </div>
         </div>
+        <div style="text-align: center">{{ $gallerys->links() }}</div>
     </div>
 </section>    

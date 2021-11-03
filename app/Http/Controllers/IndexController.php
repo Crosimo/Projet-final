@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use App\Models\About;
 use App\Models\Categorie;
 use App\Models\Classe;
@@ -20,6 +20,8 @@ use App\Models\Titre;
 use App\Models\Trainer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Stringable;
 
 class IndexController extends Controller
 {
@@ -32,39 +34,41 @@ class IndexController extends Controller
         $classes = Classe::all();
         $clients = Client::all();
         $events = Event::first();
-        $gallerys = Gallery::all()->random(6);
+        $gallerys = Gallery::paginate(6);
         $maps = Map::all();
         $newsletters = Newsletter::all();
         $pricings = Pricing::all();
-        $schedules = Schedule::first();
+        $schedules = Schedule::paginate(1);
         $sliders = Slider::all();
         $tags = Tag::first();
         $trainers = Trainer::all();
         $footers = Footer::first();
         
+
+
+
+        // //Schedule Classes
+        $schedules2 = Schedule::all();
+        $week1 =  DB::table('classes')->whereDate('date',">=", $schedules2[0]->dateDébut)->whereDate('date', "<=",$schedules2[1]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
+        $week2 = DB::table('classes')->whereDate('date',">=", $schedules2[1]->dateDébut)->whereDate('date', "<=",$schedules2[2]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
+        $week3 = DB::table('classes')->whereDate('date',">=", $schedules2[2]->dateDébut)->whereDate('date', "<=",$schedules2[3]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
+ 
+    //    dd($week3);
+
+
+
+
+// Titres
         
         for($i = 0; $i <= 8; $i++){
-            $dataTitre = current(explode('(' , rtrim($titres[$i]->titre, ')')));
-            $dateurTitre = explode('(' , rtrim($titres[$i]->titre, ')'),3);
-            if(count($dateurTitre)>1){
-                if($dataTitre ="" ){
-                    $dateurTitre[0] = '<span class="span">'.$dateurTitre[0].'</span>';
-                    $value = implode('', $dateurTitre);
-                    $titres[$i]->titre =  $dateurTitre;
-                    $titres[$i]->titre =  $value;
-                }elseif((count($dateurTitre))<3 ){
-                    $dateurTitre[1] = '<span class="span">'.$dateurTitre[1].'</span>';
-                    $value = implode('', $dateurTitre);
-                    $titres[$i]->titre =  $value;
-                }else{
-                    $dateurTitre[2] = '<span class="span">'.$dateurTitre[2].'</span>';
-                    $value = implode('', $dateurTitre);
-                    $titres[$i]->titre =  $value;
-                }
-            }
+
+
+            $titres[$i]->titre = Str::replace('(',  '<span class="span">', $titres[$i]->titre);
+            $titres[$i]->titre = Str::replace(')',  '</span>', $titres[$i]->titre);
+            
         }
         
-
+       
         //slider
         
         function moveElement(&$array, $a, $b) {
@@ -120,6 +124,6 @@ class IndexController extends Controller
         $classe = $allItems->take(3);
         // verifier si vide ou pas
 
-        return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers'));
+        return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers', 'week3'));
     }
 }

@@ -24,10 +24,24 @@
             
             Intitulé du cours: <input type="text" name="nom" class="form-control" id="nom" value="{{ $classe->nom }}">
             
-            Horaire:<input type="datetime-local" name="heure" class="form-control" id="heure" {{ $classe->heure }}>
+            Horaire de début:<input type="datetime-local" name="heureDébut" class="form-control" id="heureDébut" {{ $classe->heureDébut }}>
             </div>
             
+            Horaire de Fin:<input type="datetime-local" name="heureFin" class="form-control" id="heureFin" {{ $classe->heureFin }}>
+            </div>
             
+            Places: <input type="number" name="places" class="form-control" id="places" min="0" max="20">
+
+
+            <label for="pricing" class="form-label ">Formule d'accès</label>
+            <select class="form-select " id="pricing" name="pricing_id" aria-label="Default select example">
+               
+                @foreach ($pricing as $item)                   
+                    <option value = "{{ $item->id }}">{{ $item->packageTitle }}</option>
+                @endforeach
+                
+            </select>
+
             Catégorie<select class="form-select " id="categorie" name="categorie_id" aria-label="Default select example">
                
                 @foreach ($categorie as $item)

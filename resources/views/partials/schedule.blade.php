@@ -13,6 +13,10 @@
         <div class="row">
             <div class="col-xs-12">                             
                 <div class="scehedule-table table-responsive text-center">
+                    <div>
+                        {{ $schedules[0]->DateDébut }}
+                        {{ $schedules->links() }} 
+                    </div>
                     <table>
                         <thead>
                             <tr>
@@ -28,14 +32,31 @@
                         </thead>
                         <tbody class="pt-30">
                             <tr>
+                                
                                 <td class="time">
                                     <p>8:00 AM</p>
-                                </td>
-                                <td class="purple">
-                                    <h4>yoga for climbers</h4>
-                                    <p>Sathi Bhuiyan</p>
-                                    <p>8.00 Am-10.00Am</p>
-                                </td>
+                                     </td>
+                                        
+                            @foreach ($week3 as $item)
+                            @php
+                            $d = new DateTime($item->date);
+                            $d = $d->format('l');
+                            
+                            @endphp 
+                            @if ($d == 'Monday' && $item->heureDébut == 8)
+                            <td class="purple">
+                                <h4>yoga for climbers</h4>
+                                <p>Sathi Bhuiyan</p>
+                                <p>8.00 Am-10.00Am</p>
+                            </td>
+                            @else
+                                <td></td>
+                            @endif  
+                            
+                            
+                            @endforeach  
+                                
+                                
                                 <td></td>
                                 <td></td>
                                 <td class="purple">

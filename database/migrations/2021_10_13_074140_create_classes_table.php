@@ -17,8 +17,9 @@ class CreateClassesTable extends Migration
             $table->id();
             $table->string("nom");
             $table->string("lestags");
-            $table->timestamp("heureDébut");
-            $table->timestamp("heureFin");
+            $table->string("heureDébut");
+            $table->date("date");
+            // $table->timestamp("heureFin");
             $table->string("image");
             $table->foreignId('trainer_id')->constrained('trainers', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('categorie_id')->constrained('categories', 'id')->onUpdate('cascade')->onDelete('cascade');

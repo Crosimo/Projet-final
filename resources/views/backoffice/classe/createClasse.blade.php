@@ -28,7 +28,6 @@
             min="08:00:00" max="22:00:00">
             <label for="places" class="form-label">places</label>
             <input type="number" name="places" class="form-control" id="places" min="0" max="20">
-            
             </div>
             
             <label for="categorie" class="form-label ">Catégorie</label>

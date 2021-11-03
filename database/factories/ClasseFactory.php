@@ -28,12 +28,14 @@ class ClasseFactory extends Factory
         
         static $x =0;
         $x++;
-       
+        static $y =8;
+        $y+=4;
         return [
             "nom"=>"yoga for climbers",
             "lestags"=>"Sathi Bhuiyan".$x,
-            "heureDébut"=>Carbon::now(),
-            "heureFin"=>Carbon::now(),
+            "heureDébut"=>$y,
+            "date"=>"2021-11-".$y,
+            // "heureFin"=>Carbon::now(),
             "image"=>$x.".jpg",
             "trainer_id"=>$this->faker->numberBetween(1, count(Trainer::all())),
             "categorie_id"=>$this->faker->numberBetween(1, count(Categorie::all())),

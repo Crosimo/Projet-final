@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -15,9 +16,18 @@ class ScheduleSeeder extends Seeder
     public function run()
     {
         DB::table('schedules')->insert([
-            "nom"=>"yoga for climbers",
-            "instructeur"=>"Sathi Bhuiyan",
-            "heure"=>"8.00 Am-10.00Am"
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->format('Y-m-d'),   
+            ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(1)->format('Y-m-d'),
+            ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(2)->format('Y-m-d'),
+            ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+            ],
         ]);
     }
 }
