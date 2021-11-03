@@ -102,6 +102,9 @@ class ClasseController extends Controller
         $classe->save();
         $classe->tags()->attach($request->lestags);
 
+
+
+        //Envoi de Newsletter
         $allNews = Newsletter::all();
         
           
@@ -200,7 +203,7 @@ class ClasseController extends Controller
         // dd($id->users->find(Auth::user()->id));
         if((count($id->users)) < $id->places  ){
             // if($id->users->find(Auth::user()->id) !== null){
-            //     return redirect()->back()->with("error", "La classe est pleine");
+            //     return redirect()->back()->with("message", "La classe est pleine");
             // }else{
                 $id->users()->attach([Auth::user()->id]);
                 return redirect()->back()->with("message", "vous êtes inscrits");
@@ -208,7 +211,13 @@ class ClasseController extends Controller
             
             
         }else{
-            return redirect()->back()->with("error", "La classe est pleine");
+            return redirect()->back()->with("message", "La classe est pleine");
         } 
+    }
+
+
+    public function desinscription(Classe $id){
+        $id->users()->detach([Auth::user()->id]);
+        return redirect('/profil')->with("message", "vous êtes désinscrits");   
     }
 }

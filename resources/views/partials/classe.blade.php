@@ -30,7 +30,7 @@
                         </div>
                     </div>
                    
-                    {{-- {{ dd($item) }} --}}
+                   
                     @if ($item->prioritaire == true)
                     <div class="single-content" style="background-color:green"> 
                     @elseif((count($item->users)) <= 3 ) 
@@ -53,7 +53,6 @@
                 </div>
             </div>
 
-            {{-- -----Modal------ --}}
 
            @php
                
@@ -64,11 +63,7 @@
                   <div class="modal-content h-100" >  
                     <div class="single-class">
                         <div class="single-img">
-                            <a href="class.html"><img class="w-100" src="{{ asset('img/class/'.$item->image) }}" alt="class"></a>
-                            <div class="gallery-icon">
-                                <a class="image-popup" href="{{ asset('img/class/'.$item->image) }}">
-                                    <i class="zmdi zmdi-zoom-in"></i>
-                                </a>   
+                            
                             </div>
                         </div>
                         <div class="single-content">
@@ -98,7 +93,7 @@
                   </div>
                 </div>
               </div>
-{{-- -------Modal---------- --}}
+
            
             @endforeach
               
@@ -110,7 +105,7 @@
     </div>
 </section>
 
-<script>
+{{-- <script>
 
     // Get the modal
 var modal = document.getElementById("myModal");
@@ -137,4 +132,4 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-</script>
+</script> --}}

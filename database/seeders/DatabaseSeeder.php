@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
             "email" => "jean.deborsu@hotmail.com",
             "password" => Hash::make('testtest'),
             "role_id" => 1,
-            "image" => "img/profile/Jean.jpg",
+            "image" => "img/blog/blog2.jpg",
             "created_at" => now()
         ]);
         \App\Models\Trainer::factory(3)->create();

@@ -3,7 +3,7 @@
     <div class="google-map-area">
         <!--  Map Section -->
         <div id="contacts" class="map-area">
-            <div id="googleMap" style="width:100%;height:380px;"></div>
+            <div id="map" class="map" style="width:100%;height:380px;"></div>
         </div>
     </div>
 </div>

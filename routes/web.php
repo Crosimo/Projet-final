@@ -68,6 +68,7 @@ Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->na
 
 // Route::resource('/backoffice/classe', ClasseController::class);
 Route::get('inscription/{id}', [ClasseController::class, "inscription"])->name("inscription");
+Route::get('desinscription/{id}', [ClasseController::class, "desinscription"])->name("classe.desinscription");
 Route::get('paiement/{id}', [PaiementController::class, "index"])->name("paiement");
 Route::resource('/backoffice/trainer', TrainerController::class);
 Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");

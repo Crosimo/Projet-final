@@ -93,8 +93,31 @@ class IndexController extends Controller
 
       
         // ------Classes-------
+        $ClasseMerge = Classe::all();
+        $ClassePrio = $ClasseMerge->where('Prioritaire', true);
+        $ClasseRed= [];
+        $ClasseOrange= [];
+        $ClasseGrey= [];
+        $ClasseRand= [];
+        foreach($ClasseMerge as $test){
+            if($test->places-(count($test->users)) == 0){
+                array_push($ClasseGrey, $test);  
+            }elseif($test->places -(count($test->users)) <= 3){
+                array_push($ClasseRed, $test);
+            }elseif( $test->places -(count($test->users)) <=5){
+                array_push($ClasseOrange, $test);
+            }else{
+                array_push($ClasseRand, $test);
+            }
+        }
         
-        
+        $allItems = new \Illuminate\Database\Eloquent\Collection; //Create empty collection which we know has the merge() method
+        $allItems = $allItems->merge($ClassePrio);
+        $allItems = $allItems->merge($ClasseGrey);
+        $allItems = $allItems->merge($ClasseRed);
+        $allItems = $allItems->merge($ClasseOrange);
+        $allItems = $allItems->merge($ClasseRand);
+        $classe = $allItems->take(3);
         // verifier si vide ou pas
 
         return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers'));

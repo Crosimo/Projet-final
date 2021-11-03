@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classe;
+use App\Models\Classe_user;
 use App\Models\Footer;
 use App\Models\Header;
 use App\Models\User;
@@ -17,6 +18,8 @@ class UserController extends Controller
         $classe = Classe::all();
         $headers = Header::first();
         $footers = Footer::first();
+        
+        
         return view('backoffice/profile/indexProfile', compact('classe', 'headers', 'footers'));
     }
 
