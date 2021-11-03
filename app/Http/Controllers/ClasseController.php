@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ClasseController extends Controller
 {
@@ -166,20 +167,23 @@ class ClasseController extends Controller
             "lestags" => ["required"],
             "trainer_id" => ["required"],
             "heureDébut" => ["required"], 
-            "heureFin" => ["required"], 
+            
         ]);
 
-        Storage::disk("public")->delete("img/classe/" .$classe->image);
+        Storage::disk("public")->delete("img/classe/".$classe->image);
         $x = $request->id;
-        $classe->image= $x.".jpg";
+        $classe->image= $request->file('image');
+        $filename    = $classe->image->getClientOriginalName();
         $classe->nom = $request->nom;
         $classe->trainer_id = $request->trainer_id;
         $classe->categorie_id = $request->categorie_id;
         $classe->pricing_id = $request->pricing_id;
         $classe->lestags = implode(',',$request->lestags);
         $classe->heureDébut = $request->heureDébut;
-        $classe->heureFin = $request->heureFin;
-        $request->file("image")->storePubliclyAs("img/class", $x.".jpg", "public");
+        $classe->date = $request->date;
+        $image_resize = Image::make($classe->image->getRealPath());
+        $image_resize->resize(407,207);
+        $image_resize->save(public_path('img/classe/'.$filename));
         $classe->save();
         $classe->tags()->sync($request->lestags);
         return redirect('/');

@@ -12,13 +12,13 @@
             @foreach ($classes as $item)
                 
             
-
+            {{-- width="407" style="height: 207px" --}}
             <div class="col-md-4 col-sm-6 col-xs-12">     
                 <div class="single-class">
                     <div class="single-img">
-                        <a href="class.html"><img width="407" style="height: 207px"  src="{{ asset('img/class/'.$item->image) }}" alt="class"></a>
+                        <a href="class.html"><img   src="{{ asset('img/classe/'.$item->image) }}" alt="class"></a>
                         <div class="gallery-icon">
-                            <a class="image-popup" href="{{ asset('img/class/'.$item->image) }}">
+                            <a class="image-popup" href="{{ asset('img/classe/'.$item->image) }}">
                                 <i class="zmdi zmdi-zoom-in"></i>
                             </a>   
                         </div>
@@ -43,6 +43,7 @@
                 </div>
             </div>
             @endforeach
+            
             {{-- <div class="col-md-4 col-sm-6 col-xs-12">     
                 <div class="single-class">
                     <div class="single-img">

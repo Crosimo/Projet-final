@@ -27,7 +27,7 @@
             Horaire de début:<input type="datetime-local" name="heureDébut" class="form-control" id="heureDébut" {{ $classe->heureDébut }}>
             </div>
             
-            Horaire de Fin:<input type="datetime-local" name="heureFin" class="form-control" id="heureFin" {{ $classe->heureFin }}>
+            Horaire de Fin:<input type="datetime-local" name="date" class="form-control" id="date" {{ $classe->date }}>
             </div>
             
             Places: <input type="number" name="places" class="form-control" id="places" min="0" max="20">
