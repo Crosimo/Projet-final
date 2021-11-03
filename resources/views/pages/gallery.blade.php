@@ -11,13 +11,13 @@
 		
 		<!-- Header Area End -->
 		<!-- Banner Area Start -->
-		@include('partials.class.banner')
+		@include('partials.banner')
 		<!-- Banner Area End -->
         <!-- Gallery Area Start -->
-        @include('partials.class.gallery')
+        @include('partials.gallery')
         <!-- Gallery Area End -->
         <!-- Client Area Strat -->
-        @include('partials.class.client')
+        @include('partials.client')
         <!-- Client Area End -->
         <!-- Start of Map Area -->
        

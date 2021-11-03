@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Titre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TitreController extends Controller
 {
@@ -14,7 +15,8 @@ class TitreController extends Controller
      */
     public function index()
     {
-        //
+        $titre = Titre::all();
+        return view('backoffice.titre.indexTitre', compact('titre'));
     }
 
     /**
@@ -24,7 +26,8 @@ class TitreController extends Controller
      */
     public function create()
     {
-        //
+        
+        return view('backoffice.titre.createTitre');
     }
 
     /**
@@ -35,51 +38,68 @@ class TitreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->authorize("create", Testimonial::class);
+
+        $request->validate([
+            "nom" => ["required"],  
+        ]);
+        $titre = Titre::new();
+        $titre->nom = $request->nom;
+
+        return redirect()->route('titre.index')->with("message", "nouvelle instance de client enregistré");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Titre  $titre
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function show(Titre $titre)
+    public function show(Titre $categorie)
     {
-        //
+       
+        return view('backoffice.categorie.show', compact('titre'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Titre  $titre
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function edit(Titre $titre)
     {
-        //
+       
+        return view('backoffice.titre.edittitre', compact('titre'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Titre  $titre
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Titre $titre)
     {
-        //
+        
+        $request->validate([
+            "nom" => ["required"],  
+        ]);
+        $titre->nom = $request->nom;
+        return redirect('/')->with("message", "modification réussie");
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Titre  $titre
+     * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
     public function destroy(Titre $titre)
     {
-        //
+        Storage::disk("public")->delete("img/icon/" .$titre->image);
+        $titre->delete();
+        return redirect()->route('titre.index');
     }
 }

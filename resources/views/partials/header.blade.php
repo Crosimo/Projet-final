@@ -13,11 +13,11 @@
                         <div class="main-menu text-center">
                             <nav>
                                 <ul>
-                                    <li><a href="index.html">{{ $headers->titre1 }}</a></li>
-                                    <li><a href="/about-us">{{ $headers->titre2 }}</a></li>
-                                    <li><a href="menu.html">{{ $headers->titre3 }}</a></li>
-                                    <li><a href="reservation.html">{{ $headers->titre4 }}</a></li>
-                                    <li><a href="contact.html">{{ $headers->titre5 }}</a></li>
+                                    <li><a href="/">{{ $headers->titre1 }}</a></li>
+                                    <li><a href="{{ route('abouter') }}">{{ $headers->titre2 }}</a></li>
+                                    <li><a href="{{ route('classer') }}">{{ $headers->titre3 }}</a></li>
+                                    <li><a href="{{ route('galleryer') }}">{{ $headers->titre4 }}</a></li>
+                                    <li><a href="{{ route('contacter') }}">{{ $headers->titre5 }}</a></li>
                                     @auth
                                     <li><a href="/profil">Profil</a></li>
                                     @endauth

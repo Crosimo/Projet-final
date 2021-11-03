@@ -37,7 +37,7 @@
                                     <p>8:00 AM</p>
                                      </td>
                                         
-                            @foreach ($week3 as $item)
+                            {{-- @foreach ($week3 as $item)
                             @php
                             $d = new DateTime($item->date);
                             $d = $d->format('l');
@@ -54,7 +54,7 @@
                             @endif  
                             
                             
-                            @endforeach  
+                            @endforeach   --}}
                                 
                                 
                                 <td></td>

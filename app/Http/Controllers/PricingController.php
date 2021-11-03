@@ -52,7 +52,7 @@ class PricingController extends Controller
         $pricing->packageLink3 = $request->packageLink3;
         $pricing->packageLink4= $request->packageLink4;
         $pricing->save();
-        return redirect()->route('pricing.index');
+        return redirect()->route('pricing.index')->with("message", "Nouvelle instance crée avec succès");
     }
 
     /**
@@ -107,7 +107,7 @@ class PricingController extends Controller
         $pricing->packageLink3 = $request->packageLink3;
         $pricing->packageLink4= $request->packageLink4;
         $pricing->save();
-        return redirect('/');
+        return redirect('/')->with("message", "modifications réalisées avec succès");
     }
 
     /**

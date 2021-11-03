@@ -44,7 +44,7 @@ class GalleryController extends Controller
         $gallery->image = $request->file("image")->hashName();
         $request->file("image")->storePubliclyAs("img/portfolio",  "gal".$x.".jpg", "public",);
         $gallery->save();
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with("message", "Création de nouvelle instance réussie");
     }
 
     /**
@@ -91,7 +91,7 @@ class GalleryController extends Controller
         $gallery->image= $request->file("image")->hashName();
         $request->file("image")->storePubliclyAs("img/gallery", "gallery.jpg", "public");
         $gallery->save();
-        return redirect('/');
+        return redirect('/')->with("modification éffectuée avec succès !");
     }
 
     /**

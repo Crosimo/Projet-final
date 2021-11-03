@@ -62,14 +62,13 @@ class IndexController extends Controller
         
         for($i = 0; $i <= 8; $i++){
 
-
             $titres[$i]->titre = Str::replace('(',  '<span class="span">', $titres[$i]->titre);
             $titres[$i]->titre = Str::replace(')',  '</span>', $titres[$i]->titre);
             
         }
         
        
-        //slider
+// Slider
         
         function moveElement(&$array, $a, $b) {
             $arr = $array->toArray();
@@ -121,7 +120,9 @@ class IndexController extends Controller
         $allItems = $allItems->merge($ClasseRed);
         $allItems = $allItems->merge($ClasseOrange);
         $allItems = $allItems->merge($ClasseRand);
-        $classe = $allItems->take(3);
+      
+        $classes = $allItems->take(3);
+        
         // verifier si vide ou pas
 
         return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers', 'week3'));

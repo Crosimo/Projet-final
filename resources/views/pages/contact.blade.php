@@ -12,7 +12,7 @@
     
     <!-- Header Area End -->
     <!-- Banner Area Start -->
-    @include('partials.class.banner')
+    @include('partials.banner')
     <!-- Banner Area End -->
     <!-- Contact Area Start -->
     <div class="contact-area pt-95 pb-100">
@@ -44,7 +44,7 @@
     </div>
     <!-- Contact Area End -->
     <!-- Client Area Strat -->
-    @include('partials.class.client')
+    @include('partials.client')
     <!-- Client Area End -->
     <!-- Start of Map Area -->
     

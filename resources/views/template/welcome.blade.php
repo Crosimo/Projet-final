@@ -56,17 +56,19 @@
 
             //Leaflet
 
+         
+              console.log( fetch('https://nominatim.openstreetmap.org/search?q=17+Strada+Pictor+Alexandru+Romano%2C+Bukarest&format=geojson'))
+     
 
-
-            var getLocation = function(address) {
-                var geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    'address': address, 'region' : 'be'
-                }, function(results, status) {
-                    console.log(status);
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var latitude = results[0].geometry.location.lat();
-                        var longitude = results[0].geometry.location.lng();
+            // var getLocation = function(address) {
+                // var geocoder = new google.maps.Geocoder();
+                // geocoder.geocode({
+                //     'address': address, 'region' : 'be'
+                // }, function(results, status) {
+                //     console.log(status);
+                //     if (status == google.maps.GeocoderStatus.OK) {
+                //         var latitude = results[0].geometry.location.lat();
+                //         var longitude = results[0].geometry.location.lng();
                         
 
 
@@ -82,12 +84,12 @@
                             .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
                             .openPopup();
 
-                    }
-                });
-            }
+            //         }
+            //     });
+            // }
 
             //Call the function with address as parameter
-            getLocation('2 Lincoln Memorial Circle NW');
+            // getLocation('2 Lincoln Memorial Circle NW');
 
 
             // var map = new google.maps.Map(document.getElementById('googleMap'),

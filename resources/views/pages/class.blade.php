@@ -14,16 +14,16 @@
 		@include('partials.banner')
 		<!-- Banner Area End -->
         <!-- Classes Start -->
-        @include('partials.class.class')
+        @include('partials.classe')
         <!-- Class Area End -->
         <!-- Schedule Area Strat -->
-        @include('partials.class.schedule')
+        @include('partials.schedule')
         <!-- Schedule Area End -->
         <!-- Pricing Area Start -->
         
         <!-- Pricing Area End -->
         <!-- Client Area Strat -->
-        @include('partials.class.client')
+        @include('partials.client')
         
         <!-- Client Area End -->
         <!-- Start of Map Area -->

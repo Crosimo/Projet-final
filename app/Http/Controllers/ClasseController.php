@@ -118,7 +118,7 @@ class ClasseController extends Controller
             Mail::to("$news->email")->send(new Email($contenuEmail));
         }
         
-        return redirect()->route('classe.index');
+        return redirect()->route('classe.index')->with("message", "création réussie");
     }
 
     /**
@@ -186,7 +186,7 @@ class ClasseController extends Controller
         $image_resize->save(public_path('img/classe/'.$filename));
         $classe->save();
         $classe->tags()->sync($request->lestags);
-        return redirect('/');
+        return redirect()->back()->with("message", "edit réussie");
     }
 
     /**

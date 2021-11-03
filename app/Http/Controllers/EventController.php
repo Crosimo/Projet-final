@@ -51,7 +51,7 @@ class EventController extends Controller
         $event->heure=$request->heure;
         
         $event->save();
-        return redirect()->route('event.index');
+        return redirect()->route('event.index')->with("message", "Nouvelle instance crée avec succès");
     }
 
     /**
@@ -102,7 +102,7 @@ class EventController extends Controller
         $event->data=$request->data;
         $event->heure=$request->heure;
         $event->save();
-        return redirect('/');
+        return redirect('/')->with("message", "modification réalisée avec succès");
     }
 
     /**

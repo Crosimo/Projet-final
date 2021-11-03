@@ -55,7 +55,7 @@ class SliderController extends Controller
         $slider->button = $request->button;
         $slider->boolean = $request->boolean;
         $slider->save();
-        return redirect()->route('slider.index');
+        return redirect()->route('slider.index')->with("message", "Création de nouvelle instance réussie");
     }
 
     /**
@@ -108,7 +108,7 @@ class SliderController extends Controller
         $slider->button = $request->button;
         $slider->boolean = $request->boolean;
         $slider->save();
-        return redirect('/');
+        return redirect('/')->with("message", "Modifications éffectuées avec succès");
     }
 
     /**

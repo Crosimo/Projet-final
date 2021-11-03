@@ -3,7 +3,7 @@
     <div class="google-map-area">
         <!--  Map Section -->
         <div id="contacts" class="map-area">
-            <div id="map" class="map" style="width:100%;height:380px;"></div>
+            <iframe src="https://www.google.com/maps?q=<?php echo $footers->adresse ?>&output=embed"  width="100%" height="380px" frameborder="0"></iframe>
         </div>
     </div>
 </div>

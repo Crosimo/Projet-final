@@ -55,7 +55,7 @@ class ClientController extends Controller
         $client->titre = $request->titre;
         $request->file("image")->storePubliclyAs("img/icon", "signature".$x.".jpg", "public",);
         $client->save();
-        return redirect()->route('client.index');
+        return redirect()->route('client.index')->with("message", "nouvelle isntance de client enregistré");
     }
 
     /**
@@ -107,7 +107,7 @@ class ClientController extends Controller
         $client->heure = $request->heure;
         $request->file("image")->storePubliclyAs("img/icon", "signature".$x.".jpg", "public");
         $client->save();
-        return redirect('/');
+        return redirect('/')->with("message", "modification réussie");
     }
 
     /**

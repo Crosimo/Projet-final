@@ -42,10 +42,42 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/about-us', function () {
-    return view('pages.about-us');
-});
 
+
+// Pages
+Route::get('/about', function () {
+    $headers = Header::first();
+    $footers = Footer::first();
+    $titres =Titre::all();
+    return view('pages.about-us', compact('headers', 'footers'));
+})->name('abouter');
+
+Route::get('class', function () {
+    $headers = Header::first();
+    $footers = Footer::first();
+    $titres =Titre::all();
+    $classes = Classe::all();
+    $schedules = Schedule::paginate(1);
+    $clients = Client::all();
+    return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'schedules', 'clients'));
+})->name('classer');
+
+Route::get('contact', function () {
+    $headers = Header::first();
+    $footers = Footer::first();
+    $titres =Titre::all();
+    $clients = Client::all();
+    return view('pages.contact', compact('headers', 'footers', 'titres', 'clients'));
+})->name('contacter');
+
+Route::get('gallery', function () {
+    $headers = Header::first();
+    $footers = Footer::first();
+    $titres =Titre::all();
+    $clients = Client::all();
+    $gallerys = Gallery::paginate(6);
+    return view('pages.gallery', compact('headers', 'footers','titres', 'gallerys', 'clients'));
+})->name('galleryer');
 
 
 Route::get('/', [IndexController::class,'index']);
@@ -79,6 +111,11 @@ Route::get('/dashboard', function () {
 
 Route::get('/profil', [UserController::class, 'profil']);
 Route::put('/profil/update/{id}', [UserController::class, 'updateProfil'])->name('updateProfil');
+
+
+
+
+
 
 
 

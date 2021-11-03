@@ -21,7 +21,7 @@ class FooterSeeder extends Seeder
             "logoEmail"=>"zmdi zmdi-email",
             "tel"=>"+660 256 24857",
             "logoTel"=>"zmdi zmdi-email",
-            "adresse"=>"Molenbeek la zone",
+            "adresse"=>"Rue Fernand Mélard, 3",
             "logoAdresse"=>"zmdi zmdi-email",
             "tweets"=>"Recent Tweets",
             "tweetIcon"=>"zmdi zmdi-twitter",

@@ -36,7 +36,12 @@ class TrainerController extends Controller
 
         $request->validate([
             "image" => ["required"],
-            "nom" => ["required"],   
+            "nom" => ["required"],
+            "facebookLien"=> ["required"],
+            "twitterLien"=> ["required"],
+            "instagramLien"=> ["required"],
+            "pinterestLien"=> ["required"],
+            "role_id"   => ["required"],
             
         ]);
         $trainer = new Trainer();
@@ -52,7 +57,7 @@ class TrainerController extends Controller
         $trainer->pinterestLien = $request->pinterestLien;
         $trainer->role_id = $request->role_id;
         $trainer->save();
-        return redirect()->route('trainer.index');
+        return redirect()->route('trainer.index')->with("message", "Nouvelle instance crée avec succès");
     } 
 
     /**
@@ -90,7 +95,12 @@ class TrainerController extends Controller
     {
         $request->validate([
             "image" => ["required"],
-            "nom" => ["required"],  
+            "nom" => ["required"],
+            "facebookLien"=> ["required"],
+            "twitterLien"=> ["required"],
+            "instagramLien"=> ["required"],
+            "pinterestLien"=> ["required"],
+            "role_id"   => ["required"], 
         ]);
        
         $trainer->image = $request->image;
@@ -105,7 +115,7 @@ class TrainerController extends Controller
         $trainer->pinterestLien = $request->pinterestLien;
         $trainer->role_id = $request->role_id;
         $trainer->save();
-        return redirect('/');
+        return redirect('/')->with("message", "Modifications réalisées avec succès");
     }
 
     /**

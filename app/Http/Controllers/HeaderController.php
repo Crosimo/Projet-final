@@ -54,7 +54,7 @@ class HeaderController extends Controller
         $header->titre5 = $request->titre5;
         $request->file("image")->storePubliclyAs("img/logo",  "logo".$x.".jpg", "public",);
         $header->save();
-        return redirect()->route('header.index');
+        return redirect()->route('header.index')->with("message", "Création de nouvelle instance réussie");
     }
 
     /**
@@ -111,7 +111,7 @@ class HeaderController extends Controller
         $header->titre5 = $request->titre5;
         $request->file("image")->storePubliclyAs("img/logo", "logo".$request->id.".jpg", "public");
         $header->save();
-        return redirect('/');
+        return redirect('/')->with("message", "Modifications éffectuées avec succès");
     }
 
     /**

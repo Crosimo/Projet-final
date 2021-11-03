@@ -9,8 +9,9 @@
             </div>
         </div>
         <div class="row"> 
+            
             @foreach ($classes as $item)
-                
+            
             
             {{-- width="407" style="height: 207px" --}}
             <div class="col-md-4 col-sm-6 col-xs-12">     
