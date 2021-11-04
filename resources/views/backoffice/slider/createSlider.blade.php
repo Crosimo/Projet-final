@@ -26,7 +26,8 @@
             <label for="exampleInputEmail1" class="form-label">button</label>
             <input type="text" name="button" class="form-control" id="exampleInputEmail1">
             </div>
-            Prioritaire: <input type="checkbox" name="boolean" checked>
+            <label for="boolean">Prioritaire</label>
+            <input type="checkbox" name="boolean" id="boolean" checked>
             <div>
                 <button type="submit" class="btn btn-primary mt-4">Submit</button>
             </div>

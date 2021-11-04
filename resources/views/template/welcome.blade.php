@@ -108,6 +108,7 @@
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     <script src="{{ asset('js/main.js') }}"></script>
+    
     @include('partials.map')
     @include('partials.newsletter')
     @include('partials.footer')

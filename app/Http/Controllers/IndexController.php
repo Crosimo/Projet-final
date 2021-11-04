@@ -33,7 +33,7 @@ class IndexController extends Controller
         $abouts = About::first();
         $classes = Classe::all();
         $clients = Client::all();
-        $events = Event::paginate(1);
+        $events = Event::all();
         $gallerys = Gallery::paginate(6);
         $maps = Map::all();
         $newsletters = Newsletter::all();
@@ -82,7 +82,24 @@ class IndexController extends Controller
                 moveElement($sliders, $i, 0);
             }
         }
-      
+
+// Event
+
+        
+        function moverElement(&$array, $a, $b) {
+            $arr = $array->toArray();
+            $out = array_splice($arr, $a, 1);
+            array_splice($arr, $b, 0, $out); 
+            $array = $arr; 
+        }
+    
+        for($i = 0; $i < count($events); $i++){
+            if($events[$i]->boolean == "on"){
+                moverElement($events, $i, 0);
+            }
+        }
+        $events = $events[0];
+        
 
         // ------Trainers------
         $leadCoach= Trainer::all()->where('role_id', 2)->take(1)->toArray();

@@ -19,6 +19,10 @@
                     <th class="text-center" scope="col">image</th>
                     <th class="text-center" scope="col">description</th>
                     <th class="text-center" scope="col">button</th>
+                    <th class="text-center" scope="col">Create</th>
+                    <th class="text-center" scope="col">Edit</th>
+                    <th class="text-center" scope="col">Show</th>
+                    <th class="text-center" scope="col">Destroy</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +33,13 @@
                         <td> {{ $item->image }}</td>
                         <td> {{ $item->description }}</td>
                         <td> {{ $item->button }}</td>
+                        <td>
+                            <a href="{{ route('slider.create', $item->id) }}">
+                                <button class="btn btn-info" type="submit">
+                                    CREATE
+                                </button>
+                            </a>
+                        </td>
                         <td>
                             <a href="{{ route('slider.edit', $item->id) }}">
                                 <button class="btn btn-primary" type="submit">

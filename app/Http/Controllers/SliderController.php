@@ -67,7 +67,7 @@ class SliderController extends Controller
     public function show(Slider $slider)
     {
        
-        // return view('backoffice.testimonials.show', compact('testimonial'));
+        return view('backoffice.slider.showSlider', compact('slider'));
     }
 
     /**
@@ -103,6 +103,7 @@ class SliderController extends Controller
             $esteban->save();
             }
         }
+        
         $slider->description = $request->description;
         $slider->image = $request->image;
         $slider->button = $request->button;

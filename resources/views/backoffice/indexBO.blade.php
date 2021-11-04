@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     
     <script src="{{ asset('js/vendor/modernizr-2.8.3.min.js') }}"></script>
+    
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+   
     
      
 </head>
@@ -37,6 +39,7 @@
     <script src="{{ asset('js/jquery.magnific-popup.js') }}"></script>
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    
     <script>
                     //Modal
 
@@ -67,5 +70,6 @@
             }
             }
     </script>
+   
 </body>
 </html>

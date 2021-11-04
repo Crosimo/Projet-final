@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->string("description");
             $table->string("data");
             $table->string("heure");
+            $table->string("boolean");
             $table->timestamps();
         });
     }

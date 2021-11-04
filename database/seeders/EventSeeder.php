@@ -18,11 +18,15 @@ class EventSeeder extends Seeder
            [ "titre"=>"Yoga celebration in Handstand",
             "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'ssurvived ",
             "data"=>"25 March 2016",
-            "heure"=>"10AM - 12AM"],
+            "heure"=>"10AM - 12AM",
+            "boolean"=>"",
+            ],
             [ "titre"=>"Yoga celebration in Handstand",
             "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'ssurvived ",
             "data"=>"25 March 2016",
-            "heure"=>"10AM - 12AM"],
+            "heure"=>"10AM - 12AM",
+            "boolean"=>"",        
+            ],
         ]);
     }
 }

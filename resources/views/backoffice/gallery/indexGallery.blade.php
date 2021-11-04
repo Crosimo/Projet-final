@@ -17,7 +17,7 @@
                     <th class="text-center" scope="col">ID</th>
                     
                     <th class="text-center" scope="col">image</th>
-
+                    <th class="text-center" scope="col">Create</th>
                     <th class="text-center" scope="col">Edit</th>
                    
                     <th class="text-center" scope="col">Delete</th>
@@ -30,6 +30,13 @@
                         <th style="text-align: center" scope="row">{{ $item->id }}</th>
                         
                         <td > <img style="margin:auto" height="75" width="100" src="{{ asset("img/portfolio/".$item->image) }}" alt=""></td>
+                        <td>
+                            <a href="{{ route('gallery.create') }}">
+                                <button class="btn btn-info" type="submit">
+                                    CREATE
+                                </button>
+                            </a>
+                        </td>
                         <td>
 
                             <form  action="{{route('gallery.update', $item->id)}}" method="POST" enctype="multipart/form-data">                             

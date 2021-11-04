@@ -16,13 +16,14 @@
                 <tr>
                     <th class="text-center" scope="col">ID</th>
 
-                    <th class="text-center" scope="col">packageTitle</th>
-                    <th class="text-center" scope="col">packagePrice</th>
-                    <th class="text-center" scope="col">packageLink1</th>
-                    <th class="text-center" scope="col">packageLink2</th>
-                    <th class="text-center" scope="col">packageLink3</th>
-                    <th class="text-center" scope="col">packageLink4</th>
+                    <th class="text-center" scope="col">package Titre</th>
+                    <th class="text-center" scope="col">package Prix</th>
+                    <th class="text-center" scope="col">package Lien 1</th>
+                    <th class="text-center" scope="col">package Lien 2</th>
+                    <th class="text-center" scope="col">package Lien 3</th>
+                    <th class="text-center" scope="col">package Lien 4</th>
                     <th class="text-center" scope="col">bouton</th>
+                    
                     <th class="text-center" scope="col">Edit</th>
                     <th class="text-center" scope="col">Show</th>
                     <th class="text-center" scope="col">Delete</th>
@@ -40,6 +41,7 @@
                         <td> {{ $item->packageLink3 }}</td>
                         <td> {{ $item->packageLink4 }}</td>
                         <td> {{ $item->button }}</td>
+                        
                         <td>
                             <a href="{{ route('pricing.edit', $item->id) }}">
                                 <button class="btn btn-primary" type="submit">

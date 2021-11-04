@@ -2,10 +2,7 @@
 
 @section('contentBO')
 <div class="home-section" style="background-color: white">
-    <a href="/backoffice" class=" text-center w-100" >
-        <button class="banner-btn" type="submit">Retour backoffice</button>
-    </a>
-
+    
 <section class=" pt-95 pb-100 bg-gray">
    
     <div class="container">
@@ -49,7 +46,10 @@
             description: <input type="text" name="description" value="{{$event->description}}">
             data: <input type="text" name="data" value="{{$event->data}}">
             heure: <input type="text" name="heure" value="{{$event->heure}}">
-            <button class="banner-btn w-25 mt-2" type="submit">Submit</button>
+            event Prioritaire: <input type="checkbox" name="boolean" >
+            <div>
+                <button class="banner-btn w-25 mt-4 block" type="submit">Submit</button>
+            </div>
         </div>
         </form>
     

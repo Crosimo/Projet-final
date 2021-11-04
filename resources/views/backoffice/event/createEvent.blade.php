@@ -27,7 +27,10 @@
             <label for="exampleInputEmail1" class="form-label">heure</label>
             <input type="time" name="heure" class="form-control" id="exampleInputEmail1">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            Prioritaire: <input type="checkbox" name="boolean" checked>
+            <div>
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </div>
         </form>
     </div>
     </div>

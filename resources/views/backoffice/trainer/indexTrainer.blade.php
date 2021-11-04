@@ -18,6 +18,7 @@
 
                     <th class="text-center" scope="col">image</th>
                     <th class="text-center" scope="col">nom</th>
+                    <th class="text-center" scope="col">Create</th>
                     <th class="text-center" scope="col">Edit</th>
                     <th class="text-center" scope="col">Show</th>
                     <th class="text-center" scope="col">Delete</th>
@@ -30,6 +31,13 @@
                         <th style="text-align: center" scope="row">{{ $item->id }}</th>
                         <td> <img style="margin:auto" width="100" height="75" src="{{ asset('img/trainer/'. $item->image)  }}" alt=""> </td>
                         <td> {{ $item->nom }}</td>
+                        <td> 
+                            <a href="{{ route('trainer.create', $item->id) }}">
+                                <button class="btn btn-info" type="submit">
+                                    CREATE
+                                </button>
+                            </a>
+                        </td>
                         <td>
                             <a href="{{ route('trainer.edit', $item->id) }}">
                                 <button class="btn btn-primary" type="submit">

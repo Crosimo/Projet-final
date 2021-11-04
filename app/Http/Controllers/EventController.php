@@ -45,17 +45,25 @@ class EventController extends Controller
             "titre" => ["required"],
             "description" => ["required"],
             "heure" => ["required"],
-            
+            "data"=>["required"]
         ]);
 
+        if($request->boolean == "on"){
+            $events = Event::all();
+            foreach($events as $esteban){
+            $esteban->boolean = "";
+            $esteban->save();
+            }
+        }
         $event = new Event();
         $event->titre=$request->titre;
         $event->description=$request->description;
         $event->data=$request->data;
         $event->heure=$request->heure;
-        
+        $event->boolean = $request->boolean;
         $event->save();
         $allNews = Newsletter::all();
+
         
           
         foreach($allNews as $news){
@@ -104,7 +112,7 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         
-
+       
         $request->validate([
             
             "titre" => ["required"],
@@ -112,11 +120,18 @@ class EventController extends Controller
             "heure" => ["required"],
             
         ]);
-
+        if($request->boolean == "on"){
+            $events = Event::all();
+            foreach($events as $esteban){
+            $esteban->boolean = "";
+            $esteban->save();
+            }
+        }
         $event->titre=$request->titre;
         $event->description=$request->description;
         $event->data=$request->data;
         $event->heure=$request->heure;
+        $event->boolean = $request->boolean;
         $event->save();
         return redirect('/')->with("message", "modification réalisée avec succès");
     }

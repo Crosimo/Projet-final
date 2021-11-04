@@ -5,7 +5,7 @@
 
 
 
-{{-- <div class="slider-area">	
+<div class="slider-area" style="height: 65rem">	
     <div class="slider-wrapper">
        
         <div class="single-slide" style="background-image: url({{ asset('img/slider/'.$slider->image) }});">
@@ -29,7 +29,7 @@
        
         
     </div>
-</div> --}}
+</div>
     
         <form class=" d-flex flex-column  p-2" action="{{route('slider.update', $slider->id)}}" method="POST" enctype="multipart/form-data">
             <div class="container">

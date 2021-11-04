@@ -32,6 +32,7 @@ use App\Models\Slider;
 use App\Models\Tag;
 use App\Models\Titre;
 use App\Models\Trainer;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -145,7 +146,10 @@ Route::get('paiement/{id}', [PaiementController::class, "index"])->name("paiemen
 Route::resource('/backoffice/trainer', TrainerController::class);
 Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");
 Route::get('/backoffice', function () {
-    return view('dashboard');
+    $users = User::all();
+    $classes = Classe::all();
+    
+    return view('dashboard', compact('users', 'classes'));
 })->middleware(['auth'])->name('dashboard');
 
 

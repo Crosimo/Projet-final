@@ -6,9 +6,7 @@
 
 
     <div class="home-section">
-        <a href="/backoffice" class=" text-center w-100" >
-            <button class="banner-btn" type="submit">Retour backoffice</button>
-        </a>
+      
         <section class="event-area pt-95 pb-100" style="border: 5px solid white;">
             <div class="container">
                 <div class="row">
@@ -94,8 +92,6 @@
         </div>
 
     </div>
-
-
 
 
 @endsection

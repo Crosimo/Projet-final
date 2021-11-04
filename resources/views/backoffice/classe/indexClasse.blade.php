@@ -19,8 +19,9 @@
                     <th class="text-center" scope="col">nom</th>
                     <th class="text-center" scope="col">instructeur</th>
                     <th class="text-center" scope="col">heure</th>
-
+                    <th class="text-center" scope="col">Create</th>
                     <th class="text-center" scope="col">Edit</th>
+                    
 
                     <th class="text-center" scope="col">Show</th>
 
@@ -35,6 +36,13 @@
                         <td> {{ $item->nom }}</td>
                         <td>{{ $item->instructeur }}</td>
                         <td> <i class="{{ $item->heure }}"></i></td>
+                        <td>
+                            <a href="{{ route('about.create') }}">
+                                <button class="btn btn-info" type="submit">
+                                    Create
+                                </button>
+                            </a>
+                        </td>
                         <td>
                             <a href="{{ route('about.edit', $item->id) }}">
                                 <button class="btn btn-primary" type="submit">
