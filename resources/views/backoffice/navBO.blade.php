@@ -12,11 +12,11 @@
          <span class="tooltip">Search</span>
       </li>
       <li>
-        <a href="#">
+        <a href="/">
           <i class='bx bx-grid-alt'></i>
-          <span class="links_name">Dashboard</span>
+          <span class="links_name">Backoffice</span>
         </a>
-         <span class="tooltip">Dashboard</span>
+         <span class="tooltip">Backoffice</span>
       </li>
       <li>
        <a href="#">
@@ -26,46 +26,46 @@
        <span class="tooltip">User</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{ route('about.index') }}">
          <i class='bx bx-chat' ></i>
-         <span class="links_name">Messages</span>
+         <span class="links_name">About</span>
        </a>
-       <span class="tooltip">Messages</span>
+       <span class="tooltip">About</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{ route('gallery.index') }}">
          <i class='bx bx-pie-chart-alt-2' ></i>
-         <span class="links_name">Analytics</span>
+         <span class="links_name">gallery</span>
        </a>
-       <span class="tooltip">Analytics</span>
+       <span class="tooltip">gallery</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{ route('event.index') }}">
          <i class='bx bx-folder' ></i>
-         <span class="links_name">File Manager</span>
+         <span class="links_name">Event</span>
        </a>
-       <span class="tooltip">Files</span>
+       <span class="tooltip">Event</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{ route('client.index') }}">
          <i class='bx bx-cart-alt' ></i>
-         <span class="links_name">Order</span>
+         <span class="links_name">Client</span>
        </a>
-       <span class="tooltip">Order</span>
+       <span class="tooltip">Client</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{ route('slider.index') }}">
          <i class='bx bx-heart' ></i>
-         <span class="links_name">Saved</span>
+         <span class="links_name">Slider</span>
        </a>
-       <span class="tooltip">Saved</span>
+       <span class="tooltip">Slider</span>
      </li>
      <li>
-       <a href="#">
+       <a href="{{ route('classe.index') }}">
          <i class='bx bx-cog' ></i>
-         <span class="links_name">Setting</span>
+         <span class="links_name">Classe</span>
        </a>
-       <span class="tooltip">Setting</span>
+       <span class="tooltip">Classe</span>
      </li>
      <li>
         <form style=" margin-left:0; width:100%" method="POST" action="{{ route('logout') }}">

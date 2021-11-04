@@ -29,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($gallery as $item)
+                @foreach ($pricing as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
 
@@ -41,21 +41,21 @@
                         <td> {{ $item->packageLink4 }}</td>
                         <td> {{ $item->button }}</td>
                         <td>
-                            <a href="{{ route('gallery.edit', $item->id) }}">
+                            <a href="{{ route('pricing.edit', $item->id) }}">
                                 <button class="btn btn-primary" type="submit">
                                     EDIT
                                 </button>
                             </a>
                         </td>
                         <td>
-                            <a href="{{ route('gallery.show', $item->id) }}">
+                            <a href="{{ route('pricing.show', $item->id) }}">
                                 <button class="btn" style="background-color:#5FC7AE; color:white" type="submit">
                                     SHOW
                                 </button>
                             </a>
                         </td>
                         <td>
-                            <form action="{{ route('gallery.destroy', $item->id) }}" method="post">
+                            <form action="{{ route('pricing.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">DELETE</button>

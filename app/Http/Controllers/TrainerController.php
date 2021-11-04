@@ -69,7 +69,7 @@ class TrainerController extends Controller
     public function show(Trainer $trainer)
     {
        
-        // return view('backoffice.testimonials.show', compact('testimonial'));
+        return view('backoffice.trainer.showTrainer', compact('trainer'));
     }
 
     /**

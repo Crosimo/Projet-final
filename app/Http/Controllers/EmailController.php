@@ -127,6 +127,7 @@ class EmailController extends Controller
     public function destroy(Email $email)
     {
         $email->delete();
-        return view('backoffice.email.boitemail');
+        
+        return redirect('/backoffice/email');
     }
 }

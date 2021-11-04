@@ -2,6 +2,7 @@
 
 @section('contentBO')
     <div class="home-section d-flex flex-column align-items-center">
+        
         <h1 class="text-center mt-3 d-flex align-items-center">Créer CLASSE</h1>
         <br>
         <form action="{{route('classe.store')}}" method="POST" enctype="multipart/form-data">

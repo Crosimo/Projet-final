@@ -13,8 +13,8 @@
     <!-- Header Area End -->
     <!-- Banner Area Start -->
     @include('partials.banner')
-    @include('partials.about.about')
-    @include('partials.about.event')
+    @include('partials.about')
+    @include('partials.event')
     <!-- Banner Area End -->
     <!-- About Start -->
     
@@ -23,7 +23,7 @@
     
     <!-- Event Area End -->
     <!-- Client Area Strat -->
-    @include('partials.about.client')
+    @include('partials.client')
     <!-- Client Area End -->
     <!-- Start of Map Area -->
     

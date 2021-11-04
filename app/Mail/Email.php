@@ -30,10 +30,13 @@ class Email extends Mailable
     {
         
        $contenu = $this->contenuEmail;
-        if(count($this->contenuEmail)>1){
+        if(count($this->contenuEmail) == 3){
            
             return $this->view('nouvelleClasse', compact('contenu'));
-        }else{
+        }elseif((count($this->contenuEmail)) == 4){
+            return $this->view('nouvelEvent', compact('contenu'));
+        } 
+         else{
             return $this->view('email', compact('contenu'));
         }
        

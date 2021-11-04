@@ -5,10 +5,9 @@
                 <div class="about-content">
                      <h2>
                          
-                        
+                       
                         {!! ($titres[1])->titre !!}
-                         
-                         
+                             
                     </h2>
                      <p class="m-0">{{ $titres[1]->description }}</p>
                      <p>{{ $abouts->content }} </p>

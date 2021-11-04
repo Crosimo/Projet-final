@@ -28,21 +28,18 @@
                     <th class="text-center" scope="col">formElem1</th>
                     <th class="text-center" scope="col">formElem2</th>
                     <th class="text-center" scope="col">formElem3</th>
-                        <th class="text-center" scope="col">Edit</th>
-
-                        <th  class="text-center"scope="col">Show</th>
-                   
+                    <th class="text-center" scope="col">Edit</th>                 
                     <th class="text-center" scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($event as $item)
+                @foreach ($footer as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
                         
-                        <td> {{ $item->titre }}</td>
+                        <td> <img src="{{ asset("img/logo/".$item->image) }}" alt=""> </td>
                         <td>{{ $item->description }}</td>
-                        <td> {{ $item->email) }}</td>
+                        <td> {{ $item->email }}</td>
                         <td> {{ $item->tel }}</td>
                         <td> {{ $item->adresse }}</td>
                         <td> {{ $item->tweets }}</td>
@@ -53,24 +50,15 @@
                         <td> {{ $item->formElem2 }}</td>
                         <td> {{ $item->formElem3 }}</td>
                             <td>
-                                <a href="{{ route('event.edit', $item->id) }}">
+                                <a href="{{ route('Footer.edit', $item->id) }}">
                                     <button class="btn btn-primary" type="submit">
                                         EDIT
                                     </button>
                                 </a>
 
-                            </td>
-
-                            <td>
-                                <a href="{{ route('event.show', $item->id) }}">
-                                    <button class="btn" style="background-color:#5FC7AE; color:white" type="submit">
-                                        SHOW
-                                    </button>
-                                </a>
-                            </td>
-                      
+                            </td>                    
                         <td>
-                            <form action="{{ route('event.destroy', $item->id) }}" method="post">
+                            <form action="{{ route('Footer.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">DELETE</button>

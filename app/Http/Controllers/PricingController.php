@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pricing;
+use App\Models\Titre;
 use Illuminate\Http\Request;
 
 class PricingController extends Controller
@@ -64,7 +65,7 @@ class PricingController extends Controller
     public function show(Pricing $pricing)
     {
        
-        // return view('backoffice.testimonials.show', compact('testimonial'));
+        return view('backoffice.pricing.showPricing', compact('pricing'));
     }
 
     /**
@@ -75,7 +76,7 @@ class PricingController extends Controller
      */
     public function edit(Pricing $pricing)
     {
-       
+      
         return view('backoffice.pricing.editPricing', compact('pricing'));
     }
 

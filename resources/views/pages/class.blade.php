@@ -15,6 +15,11 @@
 		<!-- Banner Area End -->
         <!-- Classes Start -->
         @include('partials.classe')
+        {{-- <div style="text-align: center">
+            @if (URL::current() == "http://127.0.0.1:8000/class")
+                {{ $classes->links() }}
+            @endif
+        </div> --}}
         <!-- Class Area End -->
         <!-- Schedule Area Strat -->
         @include('partials.schedule')

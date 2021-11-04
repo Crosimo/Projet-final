@@ -35,7 +35,7 @@
                         
                         <td> {{ $item->titre }}</td>
                         <td>{{ $item->description }}</td>
-                        <td> {{ $item->data) }}</td>
+                        <td> {{ $item->data }}</td>
                         <td> {{ $item->heure }}</td>
 
                         

@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($gallery as $item)
+                @foreach ($header as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
 
@@ -40,7 +40,7 @@
                         <td> {{ $item->titre5 }}</td>
                         <td>
 
-                            <a href="{{ route('gallery.edit', $item->id) }}">
+                            <a href="{{ route('header.edit', $item->id) }}">
                                 <button class="btn btn-primary" type="submit">
                                     EDIT
                                 </button>
@@ -49,7 +49,7 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('gallery.show', $item->id) }}">
+                            <a href="{{ route('header.show', $item->id) }}">
                                 <button class="btn" style="background-color:#5FC7AE; color:white" type="submit">
                                     SHOW
                                 </button>

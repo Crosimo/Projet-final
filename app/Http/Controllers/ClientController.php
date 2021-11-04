@@ -16,7 +16,7 @@ class ClientController extends Controller
     public function index()
     {
         $client = Client::all();
-        return view('backoffice.client.indexClient', compact('classe'));
+        return view('backoffice.client.indexClient', compact('client'));
     }
 
     /**
@@ -67,7 +67,7 @@ class ClientController extends Controller
     public function show(Client $client)
     {
        
-        return view('backoffice.client.show', compact('testimonial'));
+        return view('backoffice.client.show', compact('client'));
     }
 
     /**
@@ -76,7 +76,7 @@ class ClientController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function edit(Client $classe)
+    public function edit(Client $client)
     {
        
         return view('backoffice.client.editClient', compact('client'));

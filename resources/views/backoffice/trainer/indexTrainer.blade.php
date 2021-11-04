@@ -18,14 +18,17 @@
 
                     <th class="text-center" scope="col">image</th>
                     <th class="text-center" scope="col">nom</th>
+                    <th class="text-center" scope="col">Edit</th>
+                    <th class="text-center" scope="col">Show</th>
+                    <th class="text-center" scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
 
                 @foreach ($trainer as $item)
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
-                        <td> {{ $item->image }}</td>
+                        <th style="text-align: center" scope="row">{{ $item->id }}</th>
+                        <td> <img style="margin:auto" width="100" height="75" src="{{ asset('img/trainer/'. $item->image)  }}" alt=""> </td>
                         <td> {{ $item->nom }}</td>
                         <td>
                             <a href="{{ route('trainer.edit', $item->id) }}">

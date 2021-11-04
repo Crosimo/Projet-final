@@ -89,7 +89,7 @@ class FooterController extends Controller
      */
     public function edit(Footer $footer)
     {
-       
+       $footer = Footer::first();
         return view('backoffice.footer.editFooter', compact('footer'));
     }
 

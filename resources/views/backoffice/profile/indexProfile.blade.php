@@ -30,8 +30,11 @@
                     </form>
                 </div>
             </div>
+            
+   
+        
     
-    @if (Auth::user()->role_id == 1 )
+    
         <table class="table table-secondary table-striped" style="margin-top:20px; border:5px solid white">
         <thead>
             <tr>
@@ -62,7 +65,7 @@
             
         </tbody>
         </table>
-    @elseif(Auth::user()->role_id == 2  || Auth::user()->role_id == 3 )
+    @if(Auth::user()->role_id == 2  || Auth::user()->role_id == 3 )
         
     <table class="table table-primary table-striped" style="margin-top:20px">
         <thead>
@@ -93,6 +96,7 @@
     </table>
     @else
     @endif
+   
 </div>
 </div> 
 <div class="container" >

@@ -4,7 +4,9 @@
 
        
         <form class=" d-flex flex-column home-section p-2" action="{{route('classe.update', $classe->id)}}" method="POST" enctype="multipart/form-data">
-            
+            <a href="/backoffice" class=" text-center w-100" >
+                <button class="banner-btn" type="submit">Retour backoffice</button>
+            </a>
             <h1 class="text-center fs-4">
             Modifier la section</h1>
                 <br>

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Email;
 use App\Models\Event;
+use App\Models\Newsletter;
+use App\Models\Titre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
@@ -37,7 +41,7 @@ class EventController extends Controller
         // $this->authorize("create", Testimonial::class);
 
         $request->validate([
-            "image" => ["required"],
+            
             "titre" => ["required"],
             "description" => ["required"],
             "heure" => ["required"],
@@ -51,6 +55,18 @@ class EventController extends Controller
         $event->heure=$request->heure;
         
         $event->save();
+        $allNews = Newsletter::all();
+        
+          
+        foreach($allNews as $news){
+            $contenuEmail = [
+                "email"=>$news->email,
+                "titre"=>$request->titre,
+                "description"=>$request->description,
+                "date"=>$request->data,
+                ];
+            Mail::to("$news->email")->send(new Email($contenuEmail));
+        }
         return redirect()->route('event.index')->with("message", "Nouvelle instance crée avec succès");
     }
 
@@ -60,10 +76,10 @@ class EventController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $Event)
+    public function show(Event $event)
     {
-       
-        // return view('backoffice.testimonials.show', compact('testimonial'));
+        $titres = Titre::all();
+        return view('backoffice.event.showEvent', compact('event', 'titres'));
     }
 
     /**
@@ -74,7 +90,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-       
+        
         return view('backoffice.event.editEvent', compact('event'));
     }
 
@@ -90,7 +106,7 @@ class EventController extends Controller
         
 
         $request->validate([
-            "image" => ["required"],
+            
             "titre" => ["required"],
             "description" => ["required"],
             "heure" => ["required"],

@@ -31,7 +31,7 @@
                 @foreach ($client as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
-                        <td> <img src="{{ asset("img/client/".$item->image) }}" alt=""></td>
+                        <td> <img src="{{ asset($item->image) }}" alt=""></td>
                         <td> {{ $item->titre }}</td>
                         <td>{{ $item->description }}</td>
                         <td> <i class="{{ $item->logo }}"></i></td>

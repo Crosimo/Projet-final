@@ -89,7 +89,8 @@ class GalleryController extends Controller
 
         Storage::disk("public")->delete("img/gallery/" .$gallery->image);
         $gallery->image= $request->file("image")->hashName();
-        $request->file("image")->storePubliclyAs("img/gallery", "gallery.jpg", "public");
+        $x = count(Gallery::all());
+        $request->file("image")->storePubliclyAs("img/portfolio", "gal".$x.".jpg", "public");
         $gallery->save();
         return redirect('/')->with("modification éffectuée avec succès !");
     }

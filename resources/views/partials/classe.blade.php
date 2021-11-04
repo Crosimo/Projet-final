@@ -35,14 +35,16 @@
                     @else
                     <div class="single-content">
                     @endif
-                        <h3><a href="class.html">{{ $item->nom }}</a></h3>
+                        <h3><a href="{{ route('classe.shower', $item->id) }}">{{ $item->nom }}</a></h3>
                         <ul>
                             <li><i class="zmdi zmdi-face"></i>{{ $item->trainer->nom }}</li>
                             <li><i class="zmdi zmdi-alarm"></i>{{ substr($item->heureDébut,11, 2) }}-{{ substr($item->heureFin,11, 2) }}A.M.</li>
                         </ul>
                     </div>
+                    
                 </div>
             </div>
+            
             @endforeach
             
             {{-- <div class="col-md-4 col-sm-6 col-xs-12">     
@@ -85,9 +87,9 @@
             </div>  --}}
         </div>
         <div class="row">
-            <div class="col-xs-12 text-center">
+            {{-- <div class="col-xs-12 text-center">
                 <a class="banner-btn mt-55" href="class.html" data-text="view all classes"><span>view all classes</span></a>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

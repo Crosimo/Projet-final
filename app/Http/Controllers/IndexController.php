@@ -33,7 +33,7 @@ class IndexController extends Controller
         $abouts = About::first();
         $classes = Classe::all();
         $clients = Client::all();
-        $events = Event::first();
+        $events = Event::paginate(1);
         $gallerys = Gallery::paginate(6);
         $maps = Map::all();
         $newsletters = Newsletter::all();

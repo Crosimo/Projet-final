@@ -66,7 +66,7 @@ class AboutController extends Controller
     public function show(About $about)
     {
        
-        // return view('backoffice.testimonials.show', compact('testimonial'));
+        return view('backoffice.about.showAbout', compact('about'));
     }
 
     /**
@@ -122,6 +122,6 @@ class AboutController extends Controller
 
         Storage::disk("public")->delete("img/about/" .$about->image);
         $about->delete();
-        return redirect()->route('abouts.index');
+        return redirect()->route('about.index');
     }
 }

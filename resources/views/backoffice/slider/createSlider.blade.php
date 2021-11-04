@@ -2,6 +2,9 @@
 
 @section('contentBO')
     <div class="home-section d-flex flex-column align-items-center">
+        <div class="container">
+
+        
         <h1 class="text-center mt-3 d-flex align-items-center">Créer SLIDER</h1>
         <br>
         <form action="{{route('slider.store')}}" method="POST" enctype="multipart/form-data">
@@ -23,8 +26,12 @@
             <label for="exampleInputEmail1" class="form-label">button</label>
             <input type="text" name="button" class="form-control" id="exampleInputEmail1">
             </div>
-            <input type="checkbox" name="boolean" checked>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            Prioritaire: <input type="checkbox" name="boolean" checked>
+            <div>
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+            </div>
+            
+        </div>
         </form>
     </div>
 @endsection

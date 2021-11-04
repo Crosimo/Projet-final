@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\Email;
 use App\Models\Categorie;
 use App\Models\Classe;
+use App\Models\Footer;
+use App\Models\Header;
 use App\Models\Newsletter;
 use App\Models\Pricing;
 use App\Models\Tag;
@@ -113,7 +115,7 @@ class ClasseController extends Controller
             $contenuEmail = [
                 "email"=>$news->email,
                 "name"=>$request->nom,
-                "pricing"=>$classe->pricing->packageTitle,
+                "pricing"=>$request->pricing->packageTitle,
                 ];
             Mail::to("$news->email")->send(new Email($contenuEmail));
         }
@@ -133,6 +135,13 @@ class ClasseController extends Controller
         return view('backoffice.classe.showClass', compact('classe'));
     }
 
+    public function shower(Classe $id){
+        
+        $classe = $id;
+        $headers = Header::first();
+        $footers = Footer::first();
+        return view('pages.showClass', compact('classe', 'headers', 'footers'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

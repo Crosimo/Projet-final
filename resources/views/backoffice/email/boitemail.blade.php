@@ -2,7 +2,7 @@
 
 @section('contentBO')
 <section class="home-section">
-    
+ 
 <div class="text">Boite Mail</div>
     <div>
         @if (session()->has('message'))
@@ -41,18 +41,17 @@
                     
                         
                     @else
-                    <tr style="background-color: gray">  
+                    <tr style="background-color: gray; color:white">  
                     
                     @endif 
                     <td>{{$item['id']}}</td>
                         <td>{{$item['email']}}</td>
                         <td>{{$item['name']}}</td>
                         <td>{{$item['message']}}</td>
-                        
                         <td>
-                            <div class="d-flex justify-content-around my-3">
+                            <div class=" flex justify-content-around my-3" >
                                 
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="{{"#staticBackdrop".$item['id']}}">
+                                <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" id="myBtna" >
                                     Lire
                                   </button>
                                 <form action="{{ route('email.destroy', $item['id']) }}" method="post">
@@ -64,29 +63,41 @@
                         </td>
                     </tr>
 
-                  <!-- Button trigger modal -->
-{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">
-    Launch static backdrop modal
-  </button> --}}
+                    
+              
+              
+              
+                  
+              
+                  <div id="myModal" class="modal">
+              
+                      <!-- Modal content -->
+                      <div class="modal-content">
+                          <span class="close">&times;</span>
+                          <section class="event-area pt-35 pb-50">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12" style="display: flex; align-items:center; flex-direction:column">
+                                          <div class="section-title text-center mb-2">
+                                              <h2>
+                                                {{ $item['name'] }}
+                                              </h2>
+                                              
+                                          </div>
+                                          Message : <div class="p-2" style="border: 4px solid #5FC7AE; width: 100%; min-height: 5rem; margin-top: 1rem;">
+                                            {{ $item['message'] }}
+                                          </div>
+                                          <a class="btn btn-warning mx-2 mt-2"  href="{{ route('email.show',$item['id']) }}" >Fermer</a>
+                                      </div>
+                                      
+                                  </div>
+                              </div>
+                          </section>
+                      </div>
+
+                  </div>
   
-  <!-- Modal -->
-  <div class="modal" id="{{"staticBackdrop".$item['id']}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="height:35rem">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">{{ $item['name'] }}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          {{ $item['message'] }}
-        </div>
-        <div class="modal-footer">
-            <a class="btn btn-warning mx-2"  href="{{ route('email.show',$item['id']) }}" >Fermer</a>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
                 @endforeach
             </tbody>
         </table>

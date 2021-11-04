@@ -1,10 +1,9 @@
-@extends('backoffice.indexBO')
+{{-- @extends('backoffice.indexBO')
 
 @section('contentBO')
 
        
         <form class=" d-flex flex-column home-section p-2" action="{{route('gallery.update', $gallery->id)}}" method="POST" enctype="multipart/form-data">
-            
             <h1 class="text-center fs-4">
             Modifier la section</h1>
                 <br>
@@ -24,4 +23,4 @@
         </form>
   
 
-@endsection
+@endsection --}}
