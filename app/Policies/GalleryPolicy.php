@@ -41,7 +41,7 @@ class GalleryPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -53,7 +53,7 @@ class GalleryPolicy
      */
     public function update(User $user, Gallery $gallery)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -65,7 +65,7 @@ class GalleryPolicy
      */
     public function delete(User $user, Gallery $gallery)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**

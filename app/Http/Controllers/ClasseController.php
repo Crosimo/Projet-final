@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Mail\Email;
 use App\Models\Categorie;
 use App\Models\Classe;
+use App\Models\Client;
 use App\Models\Footer;
 use App\Models\Header;
 use App\Models\Newsletter;
 use App\Models\Pricing;
+use App\Models\Schedule;
 use App\Models\Tag;
+use App\Models\Titre;
 use App\Models\Trainer;
 use App\Models\User;
 use Carbon\Carbon;
@@ -21,8 +24,51 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class ClasseController extends Controller
 {
+    public function classePage(){
+    $headers = Header::first();
+    $footers = Footer::first();
+    $titres =Titre::all();
+    $classes = Classe::all();
+    $schedules = Schedule::paginate(1);
+    $clients = Client::all();
+    $ClasseMerge = Classe::all();
+    
+    $ClassePrio = $ClasseMerge->where('Prioritaire', true);
+    $ClasseRed= [];
+    $ClasseOrange= [];
+    $ClasseGrey= [];
+    $ClasseRand= [];
+    $ClassePassed = [];
+    foreach($ClasseMerge as $test){
+        if((new Carbon($test->date))->isPast()){
+            array_push($ClassePassed, $test);
+        }elseif($test->places-(count($test->users)) == 0){
+            array_push($ClasseGrey, $test);
+        }
+        elseif($test->places -(count($test->users)) <= 3){
+            array_push($ClasseRed, $test);
+        }elseif( $test->places -(count($test->users)) <=5){
+            array_push($ClasseOrange, $test);
+        }else{
+            array_push($ClasseRand, $test);
+        }
+    }
+    
+    $allItems = new \Illuminate\Database\Eloquent\Collection; //Create empty collection which we know has the merge() method
+    $allItems = $allItems->merge($ClassePrio);
+    $allItems = $allItems->merge($ClasseGrey);
+    $allItems = $allItems->merge($ClasseRed);
+    $allItems = $allItems->merge($ClasseOrange);
+    $allItems = $allItems->merge($ClasseRand);
+    $allItems = $allItems->merge($ClassePassed);
+    $classes = $allItems;
+    $classes->save();
+    
+    return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'schedules', 'clients'));
+    }
     public function index()
     {
+        $this->authorize('adminManagerTrainer');
         $classe = Classe::all();
         return view('backoffice.classe.indexClasse', compact('classe'));
     }
@@ -34,6 +80,7 @@ class ClasseController extends Controller
      */
     public function create()
     {   
+        $this->authorize('admin');
         $tag = Tag::all();
         $categorie = Categorie::all();
         $trainer = Trainer::all();
@@ -51,8 +98,8 @@ class ClasseController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->authorize("create", Testimonial::class);
         
+        $this->authorize('create', Classe::class );
         $request->validate([
             "image" => ["required"],
             "nom" => ["required"],
@@ -131,12 +178,12 @@ class ClasseController extends Controller
      */
     public function show(Classe $classe)
     {
-       
+        $this->authorize('adminManagerTrainer');
         return view('backoffice.classe.showClass', compact('classe'));
     }
 
     public function shower(Classe $id){
-        
+        $this->authorize('pricing', $id );
         $classe = $id;
         $headers = Header::first();
         $footers = Footer::first();
@@ -150,6 +197,7 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
+        $this->authorize('adminManagerTrainer');
         $tag = Tag::all();
         $categorie = Categorie::all();
         $trainer = Trainer::all();
@@ -168,7 +216,7 @@ class ClasseController extends Controller
     public function update(Request $request, Classe $classe)
     {
         
-        
+        $this->authorize('update', $classe);
         $request->validate([
             "image" => ["required"],
             "nom" => ["required"],
@@ -206,7 +254,7 @@ class ClasseController extends Controller
      */
     public function destroy(Classe $classe)
     {
-       
+        $this->authorize('delete', $classe);
         Storage::disk("public")->delete("img/class/" .$classe->image);
         $classe->delete();
         return redirect()->route('classe.index');

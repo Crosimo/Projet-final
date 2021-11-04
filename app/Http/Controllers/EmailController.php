@@ -14,6 +14,7 @@ class EmailController extends Controller
      */
     public function index()
     {
+        $this->authorize('adminManager');
         $email=Email::all();
         $email=Email::all()->toArray();
         $email=array_reverse($email);
@@ -23,13 +24,14 @@ class EmailController extends Controller
 
     public function indexLu()
     {
-       
+        $this->authorize('adminManager');
         $email=Email::all()->where('lu',1);
         return view('backoffice.email.boitemail',compact('email'));
     }
 
     public function indexNonLu()
     {
+        $this->authorize('adminManager');
         $email=Email::all()->where('lu',0);;
         return view('backoffice.email.boitemail',compact('email'));
     }
@@ -52,13 +54,11 @@ class EmailController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Email::class);
         $request->validate([
             "name" => "required",
             "message" => "required",
-            "email" => "required",
-            
-            
-            
+            "email" => "required",   
         ]);
        
 
@@ -89,6 +89,7 @@ class EmailController extends Controller
      */
     public function show(Email $email)
     {
+        $this->authorize('adminManager');
         $email->lu=1;
         $email->save();
         $email = Email::all();
@@ -126,6 +127,7 @@ class EmailController extends Controller
      */
     public function destroy(Email $email)
     {
+        $this->authorize('delete', $email);
         $email->delete();
         
         return redirect('/backoffice/email');

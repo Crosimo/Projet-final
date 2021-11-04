@@ -14,7 +14,8 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $this->authorize('admin');
         $client = Client::all();
         return view('backoffice.client.indexClient', compact('client'));
     }
@@ -26,7 +27,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.client.createClient');
     }
 
@@ -38,8 +39,8 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->authorize("create", Testimonial::class);
-
+        
+        $this->authorize('create', Client::class);
         $request->validate([
             "image" => ["required"],
             "logo" => ["required"],
@@ -66,7 +67,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.client.show', compact('client'));
     }
 
@@ -78,7 +79,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.client.editClient', compact('client'));
     }
 
@@ -92,7 +93,7 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         
-
+        $this->authorize('update', $client);
         $request->validate([
             "image" => ["required"],
             "logo" => ["required"],
@@ -119,7 +120,7 @@ class ClientController extends Controller
     public function destroy(Client $client)
     {
        
-
+        $this->authorize('delete', $client);
         Storage::disk("public")->delete("img/icon/" .$client->image);
         $client->delete();
         return redirect()->route('client.index');

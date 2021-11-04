@@ -41,7 +41,7 @@ class PricingPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -53,7 +53,7 @@ class PricingPolicy
      */
     public function update(User $user, Pricing $pricing)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -65,7 +65,7 @@ class PricingPolicy
      */
     public function delete(User $user, Pricing $pricing)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**

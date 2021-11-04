@@ -10,6 +10,7 @@ class GalleryController extends Controller
 {
     public function index()
     {
+        $this->authorize('admin');
         $gallery = Gallery::all();
         return view('backoffice.gallery.indexGallery', compact('gallery'));
     }
@@ -21,7 +22,7 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.gallery.createGallery');
     }
 
@@ -34,7 +35,7 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        $this->authorize('admin', Gallery::class);
         $request->validate([
             "image" => ["required"],
         ]);
@@ -67,7 +68,7 @@ class GalleryController extends Controller
      */
     public function edit(Gallery $gallery)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.gallery.editGallery', compact('gallery'));
     }
 
@@ -80,7 +81,7 @@ class GalleryController extends Controller
      */
     public function update(Request $request, Gallery $gallery)
     {
-        
+        $this->authorize('update', $gallery);
 
         $request->validate([
             "image" => ["required"],
@@ -103,7 +104,7 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
-       
+        $this->authorize('delete', $gallery);
 
         Storage::disk("public")->delete("img/gallery/" .$gallery->image);
         $gallery->delete();

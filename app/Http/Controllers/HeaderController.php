@@ -10,6 +10,7 @@ class HeaderController extends Controller
 {
     public function index()
     {
+        $this->authorize('admin');
         $header = Header::all();
         return view('backoffice.header.indexHeader', compact('header'));
     }
@@ -21,7 +22,7 @@ class HeaderController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.header.createHeader');
     }
 
@@ -34,7 +35,7 @@ class HeaderController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        $this->authorize('create', Header::class);
         $request->validate([
             "image" => ["required"],
             "titre1" => ["required"],
@@ -77,7 +78,7 @@ class HeaderController extends Controller
      */
     public function edit(Header $header)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.header.editHeader', compact('header'));
     }
 
@@ -90,7 +91,7 @@ class HeaderController extends Controller
      */
     public function update(Request $request, Header $header)
     {
-        
+        $this->authorize('update', $header);
 
         $request->validate([
             "image" => ["required"],
@@ -123,7 +124,7 @@ class HeaderController extends Controller
     public function destroy(Header $header)
     {
        
-
+        $this->authorize('delete', $header);
         Storage::disk("public")->delete("img/logo/" .$header->image);
         $header->delete();
         return redirect()->route('header.index');

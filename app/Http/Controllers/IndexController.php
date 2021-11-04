@@ -119,10 +119,14 @@ class IndexController extends Controller
         $ClasseOrange= [];
         $ClasseGrey= [];
         $ClasseRand= [];
+        $ClassePassed = [];
         foreach($ClasseMerge as $test){
-            if($test->places-(count($test->users)) == 0){
-                array_push($ClasseGrey, $test);  
-            }elseif($test->places -(count($test->users)) <= 3){
+            if((new Carbon($test->date))->isPast()){
+                array_push($ClassePassed, $test);
+            }elseif($test->places-(count($test->users)) == 0){
+                array_push($ClasseGrey, $test);
+            }
+            elseif($test->places -(count($test->users)) <= 3){
                 array_push($ClasseRed, $test);
             }elseif( $test->places -(count($test->users)) <=5){
                 array_push($ClasseOrange, $test);
@@ -137,9 +141,9 @@ class IndexController extends Controller
         $allItems = $allItems->merge($ClasseRed);
         $allItems = $allItems->merge($ClasseOrange);
         $allItems = $allItems->merge($ClasseRand);
-      
+        $allItems = $allItems->merge($ClassePassed);
         $classes = $allItems->take(3);
-        
+       
         // verifier si vide ou pas
 
         return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers', 'week3'));

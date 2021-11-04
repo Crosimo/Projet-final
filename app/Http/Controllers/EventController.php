@@ -15,6 +15,7 @@ class EventController extends Controller
    
     public function index()
     {
+        $this->authorize('admin');
         $event = Event::all();
         return view('backoffice.event.indexEvent', compact('event'));
     }
@@ -26,7 +27,7 @@ class EventController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('adminManager');
         return view('backoffice.event.createEvent');
     }
 
@@ -39,7 +40,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        $this->authorize('create', Event::class);
         $request->validate([
             
             "titre" => ["required"],
@@ -86,6 +87,7 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
+        $this->authorize('adminManager');
         $titres = Titre::all();
         return view('backoffice.event.showEvent', compact('event', 'titres'));
     }
@@ -98,7 +100,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        
+        $this->authorize('adminManager');
         return view('backoffice.event.editEvent', compact('event'));
     }
 
@@ -112,7 +114,7 @@ class EventController extends Controller
     public function update(Request $request, Event $event)
     {
         
-       
+        $this->authorize('update', $event);
         $request->validate([
             
             "titre" => ["required"],
@@ -144,6 +146,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
+        $this->authorize('delete', $event);
         $event->delete();
         return redirect()->route('event.index');
     }

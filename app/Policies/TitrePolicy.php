@@ -41,7 +41,7 @@ class TitrePolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -53,7 +53,7 @@ class TitrePolicy
      */
     public function update(User $user, Titre $titre)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -65,7 +65,7 @@ class TitrePolicy
      */
     public function delete(User $user, Titre $titre)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**

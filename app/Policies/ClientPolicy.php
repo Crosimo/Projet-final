@@ -30,7 +30,7 @@ class ClientPolicy
      */
     public function view(User $user, Client $client)
     {
-        //
+       
     }
 
     /**
@@ -41,7 +41,7 @@ class ClientPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -53,7 +53,7 @@ class ClientPolicy
      */
     public function update(User $user, Client $client)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**
@@ -65,7 +65,7 @@ class ClientPolicy
      */
     public function delete(User $user, Client $client)
     {
-        //
+        return in_array($user->role_id, [1]);
     }
 
     /**

@@ -10,6 +10,7 @@ class FooterController extends Controller
 {
     public function index()
     {
+        $this->authorize('admin');
         $footer = Footer::all();
         return view('backoffice.footer.indexFooter', compact('footer'));
     }
@@ -21,7 +22,7 @@ class FooterController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.footer.createFooter');
     }
 
@@ -33,6 +34,7 @@ class FooterController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Footer::class);
         // $this->authorize("create", Testimonial::class);
 
         $request->validate([
@@ -89,6 +91,7 @@ class FooterController extends Controller
      */
     public function edit(Footer $footer)
     {
+        $this->authorize('admin');
        $footer = Footer::first();
         return view('backoffice.footer.editFooter', compact('footer'));
     }
@@ -103,7 +106,7 @@ class FooterController extends Controller
     public function update(Request $request, Footer $footer)
     {
         
-
+        $this->authorize('update', $footer);
         $request->validate([
             "image" => ["required"],
             "description" => ["required"],
@@ -146,7 +149,7 @@ class FooterController extends Controller
     public function destroy(Footer $footer)
     {
        
-
+        $this->authorize('admin', $footer);
         Storage::disk("public")->delete("img/logo/" .$footer->image);
         $footer->delete();
         return redirect()->route('footer.index');

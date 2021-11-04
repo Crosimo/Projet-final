@@ -1,6 +1,6 @@
 @extends('template/welcome')
 @section('content')
-    
+        
 
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -15,11 +15,11 @@
 		<!-- Banner Area End -->
         <!-- Classes Start -->
         @include('partials.classe')
-        {{-- <div style="text-align: center">
-            @if (URL::current() == "http://127.0.0.1:8000/class")
+        <div style="text-align: center">
+           
                 {{ $classes->links() }}
-            @endif
-        </div> --}}
+           
+        </div>
         <!-- Class Area End -->
         <!-- Schedule Area Strat -->
         @include('partials.schedule')

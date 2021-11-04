@@ -15,6 +15,7 @@ class AboutController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $about = About::all();
         return view('backoffice.about.indexAbout', compact('about'));
     }
@@ -26,7 +27,7 @@ class AboutController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.about.createAbout');
     }
 
@@ -65,7 +66,7 @@ class AboutController extends Controller
      */
     public function show(About $about)
     {
-       
+       $this->authorize('admin');
         return view('backoffice.about.showAbout', compact('about'));
     }
 
@@ -77,7 +78,7 @@ class AboutController extends Controller
      */
     public function edit(About $about)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.about.editAbout', compact('about'));
     }
 
@@ -91,6 +92,7 @@ class AboutController extends Controller
     public function update(Request $request, About $about)
     {
         
+        $this->authorize('update', $about);
 
         $request->validate([
             "image" => ["required"],

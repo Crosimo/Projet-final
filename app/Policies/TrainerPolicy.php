@@ -41,7 +41,7 @@ class TrainerPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role_id, [1,2]);
     }
 
     /**
@@ -53,7 +53,7 @@ class TrainerPolicy
      */
     public function update(User $user, Trainer $trainer)
     {
-        //
+        return in_array($user->role_id, [1,2]);
     }
 
     /**
@@ -65,7 +65,7 @@ class TrainerPolicy
      */
     public function delete(User $user, Trainer $trainer)
     {
-        //
+        return in_array($user->role_id, [1,2]);
     }
 
     /**

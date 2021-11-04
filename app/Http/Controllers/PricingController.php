@@ -10,6 +10,7 @@ class PricingController extends Controller
 {
     public function index()
     {
+        $this->authorize('admin');
         $pricing = Pricing::all();
         return view('backoffice.pricing.indexPricing', compact('pricing'));
     }
@@ -21,9 +22,9 @@ class PricingController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.pricing.createPricing');
-}
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +35,7 @@ class PricingController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        $this->authorize('create', Pricing::class);
         $request->validate([
             "packageTitle" => ["required"],
             "packagePrice" => ["required"],
@@ -64,7 +65,7 @@ class PricingController extends Controller
      */
     public function show(Pricing $pricing)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.pricing.showPricing', compact('pricing'));
     }
 
@@ -76,7 +77,7 @@ class PricingController extends Controller
      */
     public function edit(Pricing $pricing)
     {
-      
+        $this->authorize('admin');
         return view('backoffice.pricing.editPricing', compact('pricing'));
     }
 
@@ -89,7 +90,7 @@ class PricingController extends Controller
      */
     public function update(Request $request, Pricing $pricing)
     {
-        
+        $this->authorize('update', $pricing);
 
         $request->validate([
             "packageTitle" => ["required"],
@@ -119,7 +120,7 @@ class PricingController extends Controller
      */
     public function destroy(Pricing $pricing)
     {
-       
+        $this->authorize('delete', $pricing);
         $pricing->delete();
         return redirect()->route('pricing.index');
     }

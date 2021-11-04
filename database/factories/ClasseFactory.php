@@ -29,7 +29,7 @@ class ClasseFactory extends Factory
         static $x =0;
         $x++;
         static $y =8;
-        $y+=4;
+        $y+=2;
         return [
             "nom"=>"yoga for climbers",
             "lestags"=>"Sathi Bhuiyan".$x,
@@ -40,7 +40,7 @@ class ClasseFactory extends Factory
             "trainer_id"=>$this->faker->numberBetween(1, count(Trainer::all())),
             "categorie_id"=>$this->faker->numberBetween(1, count(Categorie::all())),
             "pricing_id"=>$this->faker->numberBetween(1, count(Pricing::all())),
-            "places"=>$this->faker->numberBetween(5, 15),
+            "places"=>$this->faker->numberBetween(0, 5),
             // "participants"=> '[]',
             "prioritaire"=>false,
             

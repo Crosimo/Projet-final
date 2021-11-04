@@ -15,6 +15,7 @@ class TitreController extends Controller
      */
     public function index()
     {
+        $this->authorize('admin');
         $titre = Titre::all();
         return view('backoffice.titre.indexTitre', compact('titre'));
     }
@@ -26,7 +27,7 @@ class TitreController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('admin');
         return view('backoffice.titre.createTitre');
     }
 
@@ -39,7 +40,7 @@ class TitreController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        $this->authorize('create', Titre::class);
         $request->validate([
             "nom" => ["required"],  
         ]);
@@ -57,7 +58,7 @@ class TitreController extends Controller
      */
     public function show(Titre $categorie)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.categorie.show', compact('titre'));
     }
 
@@ -69,7 +70,7 @@ class TitreController extends Controller
      */
     public function edit(Titre $titre)
     {
-       
+        $this->authorize('admin');
         return view('backoffice.titre.edittitre', compact('titre'));
     }
 
@@ -82,7 +83,7 @@ class TitreController extends Controller
      */
     public function update(Request $request, Titre $titre)
     {
-        
+        $this->authorize('update', $titre);
         $request->validate([
             "nom" => ["required"],  
         ]);
@@ -98,6 +99,7 @@ class TitreController extends Controller
      */
     public function destroy(Titre $titre)
     {
+        $this->authorize('delete', $titre);
         Storage::disk("public")->delete("img/icon/" .$titre->image);
         $titre->delete();
         return redirect()->route('titre.index');

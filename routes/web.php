@@ -33,6 +33,7 @@ use App\Models\Tag;
 use App\Models\Titre;
 use App\Models\Trainer;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,41 +61,7 @@ Route::get('/about', function () {
     return view('pages.about-us', compact('headers', 'footers', 'titres', 'abouts', 'events', 'clients'));
 })->name('abouter');
 
-Route::get('class', function () {
-    $headers = Header::first();
-    $footers = Footer::first();
-    $titres =Titre::all();
-    $classes = Classe::all();
-    $schedules = Schedule::paginate(1);
-    $clients = Client::all();
-    $ClasseMerge = Classe::all();
-    $ClassePrio = $ClasseMerge->where('Prioritaire', true);
-    $ClasseRed= [];
-    $ClasseOrange= [];
-    $ClasseGrey= [];
-    $ClasseRand= [];
-    foreach($ClasseMerge as $test){
-        if($test->places-(count($test->users)) == 0){
-            array_push($ClasseGrey, $test);  
-        }elseif($test->places -(count($test->users)) <= 3){
-            array_push($ClasseRed, $test);
-        }elseif( $test->places -(count($test->users)) <=5){
-            array_push($ClasseOrange, $test);
-        }else{
-            array_push($ClasseRand, $test);
-        }
-    }
-    
-    $allItems = new \Illuminate\Database\Eloquent\Collection; //Create empty collection which we know has the merge() method
-    $allItems = $allItems->merge($ClassePrio);
-    $allItems = $allItems->merge($ClasseGrey);
-    $allItems = $allItems->merge($ClasseRed);
-    $allItems = $allItems->merge($ClasseOrange);
-    $allItems = $allItems->merge($ClasseRand);
-  
-    $classes = $allItems->paginate(9);
-    return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'schedules', 'clients'));
-})->name('classer');
+Route::get('/class', [ClasseController::class, 'classePage' ])->name('classer');
 
 Route::get('contact', function () {
     $headers = Header::first();
@@ -115,19 +82,18 @@ Route::get('gallery', function () {
 
 
 Route::get('/', [IndexController::class,'index']);
-
-Route::resource('/backoffice/about', AboutController::class);
-Route::resource('/backoffice/gallery', GalleryController::class);
-Route::resource('/backoffice/event', EventController::class);
-Route::resource('/backoffice/client', ClientController::class);
-Route::resource('/backoffice/slider', SliderController::class);
+Route::resource('/backoffice/about', AboutController::class)->middleware(['admin']);
+Route::resource('/backoffice/gallery', GalleryController::class)->middleware(['admin']);
+Route::resource('/backoffice/event', EventController::class)->middleware(['admin']);
+Route::resource('/backoffice/client', ClientController::class)->middleware(['admin']);
+Route::resource('/backoffice/slider', SliderController::class)->middleware(['admin']);
 Route::resource('/backoffice/classe', ClasseController::class);
 Route::get("/classe/{id}", [ClasseController::class, "shower"])->name("classe.shower");
-Route::resource('/backoffice/footer', FooterController::class);
-Route::resource('/backoffice/header', HeaderController::class);
-Route::resource('/backoffice/pricing', PricingController::class);
-Route::resource('/backoffice/schedule', ScheduleController::class);
-Route::resource('/backoffice/slider', SliderController::class);
+Route::resource('/backoffice/footer', FooterController::class)->middleware(['admin']);
+Route::resource('/backoffice/header', HeaderController::class)->middleware(['admin']);
+Route::resource('/backoffice/pricing', PricingController::class)->middleware(['admin']);
+Route::resource('/backoffice/schedule', ScheduleController::class)->middleware(['admin']);
+Route::resource('/backoffice/slider', SliderController::class)->middleware(['admin']);
 
 
 
@@ -148,19 +114,10 @@ Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");
 Route::get('/backoffice', function () {
     $users = User::all();
     $classes = Classe::all();
-    
     return view('dashboard', compact('users', 'classes'));
 })->middleware(['auth'])->name('dashboard');
-
-
 Route::get('/profil', [UserController::class, 'profil']);
 Route::put('/profil/update/{id}', [UserController::class, 'updateProfil'])->name('updateProfil');
-
-
-
-
-
-
 
 
 require __DIR__.'/auth.php';

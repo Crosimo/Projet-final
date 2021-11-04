@@ -14,11 +14,11 @@
          <span class="tooltip">Backoffice</span>
       </li>
       <li>
-       <a href="#">
+       <a href="/profil">
          <i class='bx bx-user' ></i>
-         <span class="links_name">User</span>
+         <span class="links_name">Profil</span>
        </a>
-       <span class="tooltip">User</span>
+       <span class="tooltip">Profil</span>
      </li>
      <li>
        <a href="{{ route('about.index') }}">

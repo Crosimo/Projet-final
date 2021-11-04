@@ -9,6 +9,7 @@ class TrainerController extends Controller
 {
     public function index()
     {
+        $this->authorize('adminManager');
         $trainer = Trainer::all();
         return view('backoffice.trainer.indexTrainer', compact('trainer'));
     }
@@ -20,7 +21,7 @@ class TrainerController extends Controller
      */
     public function create()
     {
-        
+        $this->authorize('adminManager');
         return view('backoffice.trainer.createTrainer');
 }
 
@@ -33,7 +34,7 @@ class TrainerController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-
+        $this->authorize('create', Trainer::class);
         $request->validate([
             "image" => ["required"],
             "nom" => ["required"],
@@ -68,7 +69,7 @@ class TrainerController extends Controller
      */
     public function show(Trainer $trainer)
     {
-       
+        $this->authorize('adminManager');
         return view('backoffice.trainer.showTrainer', compact('trainer'));
     }
 
@@ -80,7 +81,7 @@ class TrainerController extends Controller
      */
     public function edit(Trainer $trainer)
     {
-       
+        $this->authorize('adminManager');
         return view('backoffice.trainer.editTrainer', compact('trainer'));
     }
 
@@ -93,6 +94,7 @@ class TrainerController extends Controller
      */
     public function update(Request $request, Trainer $trainer)
     {
+        $this->authorize('update', $trainer);
         $request->validate([
             "image" => ["required"],
             "nom" => ["required"],
