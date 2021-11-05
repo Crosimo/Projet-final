@@ -17,7 +17,7 @@
         @include('partials.classe')
         <div style="text-align: center">
            
-                {{ $classes->links() }}
+               
            
         </div>
         <!-- Class Area End -->

@@ -54,7 +54,7 @@ class ClientController extends Controller
         $client->logo = $request->logo;
         $client->description = $request->description;
         $client->titre = $request->titre;
-        $request->file("image")->storePubliclyAs("img/icon", "signature".$x.".jpg", "public",);
+        $request->file("image")->storePublicly("img/icon", "public",);
         $client->save();
         return redirect()->route('client.index')->with("message", "nouvelle isntance de client enregistré");
     }
@@ -103,10 +103,10 @@ class ClientController extends Controller
         $x = count(Client::all());
         Storage::disk("public")->delete("img/icon/" .$client->image);
         $client->image= $request->file("image")->hashName();
-        $client->nom = $request->nom;
-        $client->instructeur = $request->instructeur;
-        $client->heure = $request->heure;
-        $request->file("image")->storePubliclyAs("img/icon", "signature".$x.".jpg", "public");
+        $client->titre = $request->titre;
+        $client->description = $request->description;
+        $client->logo = $request->logo;
+        $request->file("image")->storePublicly("img/icon", "public");
         $client->save();
         return redirect('/')->with("message", "modification réussie");
     }

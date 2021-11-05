@@ -66,7 +66,7 @@ class FooterController extends Controller
         $footer->formElem1 = $request->formElem1;
         $footer->formElem2 = $request->formElem2;
         $footer->formElem3 = $request->formElem3;
-        $request->file("image")->storePubliclyAs("img/logo",  "logo".$x.".jpg", "public",);
+        $request->file("image")->storePublicly("img/logo",  "public",);
         $footer->save();
         return redirect()->route('footer.index')->with("message", "création de nouvelle instance réussie");
     }
@@ -135,7 +135,7 @@ class FooterController extends Controller
         $footer->formElem1 = $request->formElem1;
         $footer->formElem2 = $request->formElem2;
         $footer->formElem3 = $request->formElem3;
-        $request->file("image")->storePubliclyAs("img/logo", "logo".$request->id.".jpg", "public");
+        $request->file("image")->storePubliclyAs("img/logo", "public");
         $footer->save();
         return redirect('/')->with("message", "modification éffectuée avec succès !");
     }

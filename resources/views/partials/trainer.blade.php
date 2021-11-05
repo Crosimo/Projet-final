@@ -13,7 +13,7 @@
             @foreach ($trainers as $item)
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <div class="single-trainer text-center">
-                    <img src="{{ asset('img/trainer/'.$item['image']) }}" alt="trainer">
+                    <img style="height: 345px; width: 370px" src="{{ asset('img/trainer/'.$item['image']) }}" alt="trainer">
                     <div class="trainer-hover">
                         <h3>{{ $item['nom'] }}</h3>
                         <ul>

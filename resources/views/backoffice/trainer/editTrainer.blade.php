@@ -68,6 +68,11 @@
                 instagramLien: <input type="text" name="instagramLien" value="{{ $trainer->instagramLien }}">
                 twitterLien: <input type="text" name="twitterLien" value="{{ $trainer->twitterLien }}">
                 pinterestLien: <input type="text" name="pinterestLien" value="{{ $trainer->pinterestLien }}">
+                <select class="form-select"  id="trainer" name="role_id" aria-label="Default select example">    
+                    <option value = "2">LeadTrainer</option>
+                    <option  value = "3">Trainer</option>
+            
+            </select>
                 <button class="banner-btn w-25 mt-2" type="submit">Submit</button>
             </form>
         </div>

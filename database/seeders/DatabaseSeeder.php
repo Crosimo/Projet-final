@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
             "image" => "img/blog/blog2.jpg",
             "created_at" => now()
         ]);
-        \App\Models\Trainer::factory(9)->create();
+        \App\Models\Trainer::factory(3)->create();
         \App\Models\Classe::factory(9)->create();
         \App\Models\User::factory(1)->create();
         \App\Models\classe_tag::factory(4)->create();

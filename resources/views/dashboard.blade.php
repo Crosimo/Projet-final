@@ -19,7 +19,7 @@
 
     <div class="home-section">
         <div class="container">
-            <h1 class="m-2" style="text-align: center"> Welcome {{ Auth::user()->name }} </h1>
+            <h1 class="m-8" style="text-align: center; "> Welcome {{ Auth::user()->name }} </h1>
             <div class="row flex justify-around mt-2">
                 
                 <div class="col4">

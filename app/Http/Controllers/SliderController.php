@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use PhpParser\Node\Stmt\Foreach_;
 
 class SliderController extends Controller
@@ -52,7 +53,8 @@ class SliderController extends Controller
         }
         $slider = new Slider();
         $slider->description = $request->description;
-        $slider->image = $request->image;
+        $slider->image = $request->file("image")->hashName();
+        $request->file("image")->storePublicly("img/slider", "public");
         $slider->button = $request->button;
         $slider->boolean = $request->boolean;
         $slider->save();
@@ -105,9 +107,10 @@ class SliderController extends Controller
             $esteban->save();
             }
         }
-        
+        Storage::disk("public")->delete("img/slider/" .$slider->image);
         $slider->description = $request->description;
-        $slider->image = $request->image;
+        $slider->image = $request->file("image")->hashName();
+        $request->file("image")->storePublicly("img/slider", "public");
         $slider->button = $request->button;
         $slider->boolean = $request->boolean;
         $slider->save();
@@ -123,6 +126,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         $this->authorize('delete', $slider);
+        Storage::disk("public")->delete("img/slider/" .$slider->image);
         $slider->delete();
         return redirect()->route('slider.index');
     }

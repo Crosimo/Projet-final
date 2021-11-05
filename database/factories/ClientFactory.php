@@ -25,7 +25,7 @@ class ClientFactory extends Factory
             "logo"=>"zmdi zmdi-quote",
             "description"=>$this->faker->sentence(),
             "titre"=>"Co-Founder Of Company",
-            "image"=>"img/icon/signature1.png"
+            "image"=>"signature1.png"
         ];
     }
 }

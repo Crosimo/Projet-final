@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trainer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TrainerController extends Controller
 {
@@ -46,7 +47,8 @@ class TrainerController extends Controller
             
         ]);
         $trainer = new Trainer();
-        $trainer->image = $request->image;
+        $trainer->image = $request->file("image")->hashName();
+        $request->file("image")->storePublicly("img/trainer", "public");
         $trainer->nom = $request->nom;
         $trainer->facebook = "fa fa-facebook";
         $trainer->facebookLien = $request->facebookLien;
@@ -104,8 +106,9 @@ class TrainerController extends Controller
             "pinterestLien"=> ["required"],
             "role_id"   => ["required"], 
         ]);
-       
-        $trainer->image = $request->image;
+        Storage::disk("public")->delete("img/slider/" .$trainer->image);
+        $trainer->image = $request->file("image")->hashName();
+        $request->file("image")->storePublicly("img/trainer", "public");
         $trainer->nom = $request->nom;
         $trainer->facebook = "fa fa-facebook";
         $trainer->facebookLien = $request->facebookLien;
@@ -128,6 +131,7 @@ class TrainerController extends Controller
      */
     public function destroy(Trainer $trainer)
     {
+        Storage::disk("public")->delete("img/trainer/" .$trainer->image);
         $trainer->delete();
         return redirect()->route('trainer.index');
     }

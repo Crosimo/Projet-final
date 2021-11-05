@@ -3,10 +3,8 @@
 @section('contentBO')
 
        
-        <form class=" d-flex flex-column home-section p-2" action="{{route('classe.update', $classe->id)}}" method="POST" enctype="multipart/form-data">
-            <a href="/backoffice" class=" text-center w-100" >
-                <button class="banner-btn" type="submit">Retour backoffice</button>
-            </a>
+        <form class=" d-flex flex-column home-section  p-2" action="{{route('classe.update', $classe->id)}}" method="POST" enctype="multipart/form-data">
+           
             <h1 class="text-center fs-4">
             Modifier la section</h1>
                 <br>
@@ -29,7 +27,7 @@
             Horaire de début:<input type="datetime-local" name="heureDébut" class="form-control" id="heureDébut" {{ $classe->heureDébut }}>
             </div>
             
-            Horaire de Fin:<input type="datetime-local" name="date" class="form-control" id="date" {{ $classe->date }}>
+            Horaire de fin:<input type="datetime-local" name="heureFin" class="form-control" id="heureFin" {{ $classe->heureFin }}>
             </div>
             
             Places: <input type="number" name="places" class="form-control" id="places" min="0" max="20">
@@ -84,9 +82,15 @@
                   @endforeach
               </select>
               <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
-            <button type="submit" class="btn btn-primary">Submit</button>
+
+              <label for="prioritaire" class="form-label">Prioritaire</label>
+              <input type="checkbox" name="prioritaire" >
+              <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            
         </form>
-        </form>
+        
   
 
 

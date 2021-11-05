@@ -33,14 +33,14 @@ class ClasseController extends Controller
     $clients = Client::all();
     $ClasseMerge = Classe::all();
     
-    $ClassePrio = $ClasseMerge->where('Prioritaire', true);
+    $ClassePrio = $ClasseMerge->where('prioritaire', 1);
     $ClasseRed= [];
     $ClasseOrange= [];
     $ClasseGrey= [];
     $ClasseRand= [];
     $ClassePassed = [];
     foreach($ClasseMerge as $test){
-        if((new Carbon($test->date))->isPast()){
+        if((new Carbon($test->heureDébut))->isPast()){
             array_push($ClassePassed, $test);
         }elseif($test->places-(count($test->users)) == 0){
             array_push($ClasseGrey, $test);
@@ -52,18 +52,19 @@ class ClasseController extends Controller
         }else{
             array_push($ClasseRand, $test);
         }
+       
     }
     
     $allItems = new \Illuminate\Database\Eloquent\Collection; //Create empty collection which we know has the merge() method
     $allItems = $allItems->merge($ClassePrio);
-    $allItems = $allItems->merge($ClasseGrey);
     $allItems = $allItems->merge($ClasseRed);
     $allItems = $allItems->merge($ClasseOrange);
     $allItems = $allItems->merge($ClasseRand);
+    $allItems = $allItems->merge($ClasseGrey);
     $allItems = $allItems->merge($ClassePassed);
     $classes = $allItems;
-    $classes->save();
-    
+  
+   
     return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'schedules', 'clients'));
     }
     public function index()
@@ -108,7 +109,7 @@ class ClasseController extends Controller
             "places" => ["required"],
             "trainer_id" => ["required"],
             "heureDébut" => ["required"],
-            "heureFin" => ["required"],
+           
         ]);
     
 // Checker que ça n'est bloqué par aucunes autres dates    
@@ -139,7 +140,12 @@ class ClasseController extends Controller
             $classe->prioriatier = false;
         };
         $x = count(Classe::all());
-        $classe->image = $request->file("image")->hashName();
+        $image= $request->file('image');
+        $filename  = $image->getClientOriginalName();
+        $classe->image = $filename;
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->resize(370,207);
+        $image_resize->save(public_path('img/classe/'.$filename));
         $classe->nom = $request->nom;
         $classe->places = $request->places;
         $classe->trainer_id = $request->trainer_id;
@@ -148,7 +154,7 @@ class ClasseController extends Controller
         $classe->lestags = implode(',',$request->lestags);
         $classe->heureDébut = $request->heureDébut;
         $classe->heureFin = $request->heureFin;
-        $request->file("image")->storePubliclyAs("img/class",  $x.".jpg", "public",);
+       
         $classe->save();
         $classe->tags()->attach($request->lestags);
 
@@ -179,7 +185,11 @@ class ClasseController extends Controller
     public function show(Classe $classe)
     {
         $this->authorize('adminManagerTrainer');
-        return view('backoffice.classe.showClass', compact('classe'));
+        $tag = Tag::all();
+        $categorie = Categorie::all();
+        $trainer = Trainer::all();
+        $pricing = Pricing::all();
+        return view('backoffice.classe.showClasse', compact('classe', 'tag', 'categorie', 'trainer', 'pricing'));
     }
 
     public function shower(Classe $id){
@@ -229,21 +239,23 @@ class ClasseController extends Controller
 
         Storage::disk("public")->delete("img/classe/".$classe->image);
         $x = $request->id;
-        $classe->image= $request->file('image');
-        $filename    = $classe->image->getClientOriginalName();
+        $image= $request->file('image');
+        
+        $filename  = $image->getClientOriginalName();
+        $classe->image = $filename;
         $classe->nom = $request->nom;
         $classe->trainer_id = $request->trainer_id;
         $classe->categorie_id = $request->categorie_id;
         $classe->pricing_id = $request->pricing_id;
         $classe->lestags = implode(',',$request->lestags);
         $classe->heureDébut = $request->heureDébut;
-        $classe->date = $request->date;
-        $image_resize = Image::make($classe->image->getRealPath());
-        $image_resize->resize(407,207);
+        $classe->heureFin = $request->heureFin;
+        $image_resize = Image::make($image->getRealPath());
+        $image_resize->resize(370,207);
         $image_resize->save(public_path('img/classe/'.$filename));
         $classe->save();
         $classe->tags()->sync($request->lestags);
-        return redirect()->back()->with("message", "edit réussie");
+        return redirect()->route('classe.index')->with("message", "edit réussie");
     }
 
     /**
@@ -255,7 +267,7 @@ class ClasseController extends Controller
     public function destroy(Classe $classe)
     {
         $this->authorize('delete', $classe);
-        Storage::disk("public")->delete("img/class/" .$classe->image);
+        Storage::disk("public")->delete("img/classe/" .$classe->image);
         $classe->delete();
         return redirect()->route('classe.index');
     }

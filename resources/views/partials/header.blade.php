@@ -20,7 +20,10 @@
                                     <li><a href="{{ route('contacter') }}">{{ $headers->titre5 }}</a></li>
                                     @auth
                                     <li><a href="/profil">Profil</a></li>
+                                    @if (Auth::user()->role_id != 4)
                                     <li><a href="/backoffice">backoffice</a></li>
+                                    @endif
+                                    
                                     @endauth
                                     {{-- Boîte mail --}}
                                     

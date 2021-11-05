@@ -107,7 +107,7 @@ class AboutController extends Controller
         $about->vidéo = $request->vidéo;
         $about->logo = $request->logo;
         
-        $request->file("image")->storePubliclyAs("img/about", "about.jpg", "public");
+        $request->file("image")->storePublicly("img/about", "public");
         $about->save();
         return redirect('/');
     }

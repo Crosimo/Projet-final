@@ -17,7 +17,7 @@
                             <div class="single-testimonial">
                                 <i class="{{ $item->logo }}"></i>
                                 <p>{{ $item->description }} </p>
-                                <img src="{{ asset($item->image) }}" alt="signature">
+                                <img style="height: 15px; width:142px" src="{{ asset("img/icon/".$item->image) }}" alt="signature">
                                 <h6>{{ $item->titre }}</h6>
                             </div>    
                         </div> 

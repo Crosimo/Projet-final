@@ -98,9 +98,9 @@ Route::resource('/backoffice/slider', SliderController::class)->middleware(['adm
 
 
 //Email
-Route::resource('/backoffice/email', EmailController::class);
-Route::get("/backoffice/emailLu", [EmailController::class, "indexLu"])->name("Lu");
-Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->name("NonLu");
+Route::resource('/backoffice/email', EmailController::class)->middleware(['back']);
+Route::get("/backoffice/emailLu", [EmailController::class, "indexLu"])->name("Lu")->middleware(['back']);
+Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->name("NonLu")->middleware(['back']);
 
 
 
@@ -109,13 +109,13 @@ Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->na
 Route::get('inscription/{id}', [ClasseController::class, "inscription"])->name("inscription");
 Route::get('desinscription/{id}', [ClasseController::class, "desinscription"])->name("classe.desinscription");
 Route::get('paiement/{id}', [PaiementController::class, "index"])->name("paiement");
-Route::resource('/backoffice/trainer', TrainerController::class);
+Route::resource('/backoffice/trainer', TrainerController::class)->middleware(['back']);
 Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");
 Route::get('/backoffice', function () {
     $users = User::all();
     $classes = Classe::all();
     return view('dashboard', compact('users', 'classes'));
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['back'])->name('dashboard');
 Route::get('/profil', [UserController::class, 'profil']);
 Route::put('/profil/update/{id}', [UserController::class, 'updateProfil'])->name('updateProfil');
 

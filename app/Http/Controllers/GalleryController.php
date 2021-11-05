@@ -43,7 +43,7 @@ class GalleryController extends Controller
         $gallery = new Gallery();
         $x = count(Gallery::all());
         $gallery->image = $request->file("image")->hashName();
-        $request->file("image")->storePubliclyAs("img/portfolio",  "gal".$x.".jpg", "public",);
+        $request->file("image")->storePublicly("img/portfolio", "public",);
         $gallery->save();
         return redirect()->route('gallery.index')->with("message", "Création de nouvelle instance réussie");
     }
@@ -88,10 +88,10 @@ class GalleryController extends Controller
             
         ]);
 
-        Storage::disk("public")->delete("img/gallery/" .$gallery->image);
+        Storage::disk("public")->delete("img/portfolio/" .$gallery->image);
         $gallery->image= $request->file("image")->hashName();
-        $x = count(Gallery::all());
-        $request->file("image")->storePubliclyAs("img/portfolio", "gal".$x.".jpg", "public");
+        // $x = count(Gallery::all());
+        $request->file("image")->storePublicly("img/portfolio", "public");
         $gallery->save();
         return redirect('/')->with("modification éffectuée avec succès !");
     }

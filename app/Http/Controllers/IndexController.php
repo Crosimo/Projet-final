@@ -48,10 +48,10 @@ class IndexController extends Controller
 
 
         // //Schedule Classes
-        $schedules2 = Schedule::all();
-        $week1 =  DB::table('classes')->whereDate('date',">=", $schedules2[0]->dateDébut)->whereDate('date', "<=",$schedules2[1]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
-        $week2 = DB::table('classes')->whereDate('date',">=", $schedules2[1]->dateDébut)->whereDate('date', "<=",$schedules2[2]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
-        $week3 = DB::table('classes')->whereDate('date',">=", $schedules2[2]->dateDébut)->whereDate('date', "<=",$schedules2[3]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
+        // $schedules2 = Schedule::all();
+        // $week1 =  DB::table('classes')->whereDate('date',">=", $schedules2[0]->dateDébut)->whereDate('date', "<=",$schedules2[1]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
+        // $week2 = DB::table('classes')->whereDate('date',">=", $schedules2[1]->dateDébut)->whereDate('date', "<=",$schedules2[2]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
+        // $week3 = DB::table('classes')->whereDate('date',">=", $schedules2[2]->dateDébut)->whereDate('date', "<=",$schedules2[3]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
  
     //    dd($week3);
 
@@ -78,7 +78,8 @@ class IndexController extends Controller
         }
 
         for($i = 0; $i < count($sliders); $i++){
-            if($sliders[$i]->boolean == "on"){
+            
+            if($sliders[$i]['boolean'] == "on"){
                 moveElement($sliders, $i, 0);
             }
         }
@@ -114,14 +115,14 @@ class IndexController extends Controller
       
         // ------Classes-------
         $ClasseMerge = Classe::all();
-        $ClassePrio = $ClasseMerge->where('Prioritaire', true);
+        $ClassePrio = $ClasseMerge->where('prioritaire', 1);
         $ClasseRed= [];
         $ClasseOrange= [];
         $ClasseGrey= [];
         $ClasseRand= [];
         $ClassePassed = [];
         foreach($ClasseMerge as $test){
-            if((new Carbon($test->date))->isPast()){
+            if((new Carbon($test->heureDébut))->isPast()){
                 array_push($ClassePassed, $test);
             }elseif($test->places-(count($test->users)) == 0){
                 array_push($ClasseGrey, $test);
@@ -133,19 +134,20 @@ class IndexController extends Controller
             }else{
                 array_push($ClasseRand, $test);
             }
+        
         }
         
         $allItems = new \Illuminate\Database\Eloquent\Collection; //Create empty collection which we know has the merge() method
         $allItems = $allItems->merge($ClassePrio);
-        $allItems = $allItems->merge($ClasseGrey);
         $allItems = $allItems->merge($ClasseRed);
         $allItems = $allItems->merge($ClasseOrange);
         $allItems = $allItems->merge($ClasseRand);
+        $allItems = $allItems->merge($ClasseGrey);
         $allItems = $allItems->merge($ClassePassed);
         $classes = $allItems->take(3);
-       
+        
         // verifier si vide ou pas
 
-        return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers', 'week3'));
+        return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers'));
     }
 }
