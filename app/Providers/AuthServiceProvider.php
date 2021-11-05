@@ -56,7 +56,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('pricing', function(User $user, Pricing $pricing){
-           
+            
             return $user->pricing_id == $pricing->id ;
 
         });

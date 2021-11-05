@@ -33,12 +33,34 @@ class DatabaseSeeder extends Seeder
         ]);
         
         DB::table('users')->insert([
-            "name" => "Jean",
+            ["name" => "Jean",
             "email" => "jean.deborsu@hotmail.com",
             "password" => Hash::make('testtest'),
             "role_id" => 1,
+            "pricing_id"=>1,
             "image" => "img/blog/blog2.jpg",
-            "created_at" => now()
+            "created_at" => now()],
+            ["name" => "Roch",
+            "email" => "roch.deborsu@hotmail.com",
+            "pricing_id"=>1,
+            "password" => Hash::make('testtest'),
+            "role_id" => 3,
+            "image" => "img/blog/blog2.jpg",
+            "created_at" => now()],
+            ["name" => "Pol",
+            "email" => "pol.deborsu@hotmail.com",
+            "pricing_id"=>1,
+            "password" => Hash::make('testtest'),
+            "role_id" => 2,
+            "image" => "img/blog/blog2.jpg",
+            "created_at" => now()],
+            ["name" => "Papa",
+            "email" => "papa.deborsu@hotmail.com",
+            "pricing_id"=>1,
+            "password" => Hash::make('testtest'),
+            "role_id" => 4,
+            "image" => "img/blog/blog2.jpg",
+            "created_at" => now()],
         ]);
         \App\Models\Trainer::factory(3)->create();
         \App\Models\Classe::factory(9)->create();

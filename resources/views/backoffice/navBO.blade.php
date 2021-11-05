@@ -20,6 +20,9 @@
        </a>
        <span class="tooltip">Profil</span>
      </li>
+     @can('admin')
+       
+     
      <li>
        <a href="{{ route('about.index') }}">
          <i class='bx bx-chat' ></i>
@@ -55,6 +58,7 @@
        </a>
        <span class="tooltip">Slider</span>
      </li>
+     @endcan
      <li>
        <a href="{{ route('classe.index') }}">
          <i class='bx bx-cog' ></i>

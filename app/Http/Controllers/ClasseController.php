@@ -62,7 +62,7 @@ class ClasseController extends Controller
     $allItems = $allItems->merge($ClasseRand);
     $allItems = $allItems->merge($ClasseGrey);
     $allItems = $allItems->merge($ClassePassed);
-    $classes = $allItems;
+    $classes = $allItems->take(9);
   
    
     return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'schedules', 'clients'));
@@ -193,7 +193,9 @@ class ClasseController extends Controller
     }
 
     public function shower(Classe $id){
-        $this->authorize('pricing', $id );
+        
+        $this->authorize('pricing', $id->pricing );
+        
         $classe = $id;
         $headers = Header::first();
         $footers = Footer::first();
@@ -276,16 +278,16 @@ class ClasseController extends Controller
     public function inscription(Classe $id){
         // dd($id->users->find(Auth::user()->id));
         if((count($id->users)) < $id->places  ){
-            // if($id->users->find(Auth::user()->id) !== null){
-            //     return redirect()->back()->with("message", "La classe est pleine");
-            // }else{
+            if($id->users->find(Auth::user()->id) !== null){
+                return redirect('/')->with("message", "Vous êtes déjà inscrit");
+            }else{
                 $id->users()->attach([Auth::user()->id]);
-                return redirect()->back()->with("message", "vous êtes inscrits");
-            // }
+                return redirect('/')->with("message", "vous êtes inscrits");
+            }
             
             
         }else{
-            return redirect()->back()->with("message", "La classe est pleine");
+            return redirect('/')->with("message", "La classe est pleine");
         } 
     }
 

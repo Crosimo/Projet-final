@@ -82,25 +82,25 @@ Route::get('gallery', function () {
 
 
 Route::get('/', [IndexController::class,'index']);
-Route::resource('/backoffice/about', AboutController::class)->middleware(['admin']);
-Route::resource('/backoffice/gallery', GalleryController::class)->middleware(['admin']);
-Route::resource('/backoffice/event', EventController::class)->middleware(['admin']);
-Route::resource('/backoffice/client', ClientController::class)->middleware(['admin']);
-Route::resource('/backoffice/slider', SliderController::class)->middleware(['admin']);
+Route::resource('/backoffice/about', AboutController::class);
+Route::resource('/backoffice/gallery', GalleryController::class);
+Route::resource('/backoffice/event', EventController::class);
+Route::resource('/backoffice/client', ClientController::class);
+Route::resource('/backoffice/slider', SliderController::class);
 Route::resource('/backoffice/classe', ClasseController::class);
 Route::get("/classe/{id}", [ClasseController::class, "shower"])->name("classe.shower");
-Route::resource('/backoffice/footer', FooterController::class)->middleware(['admin']);
-Route::resource('/backoffice/header', HeaderController::class)->middleware(['admin']);
-Route::resource('/backoffice/pricing', PricingController::class)->middleware(['admin']);
-Route::resource('/backoffice/schedule', ScheduleController::class)->middleware(['admin']);
-Route::resource('/backoffice/slider', SliderController::class)->middleware(['admin']);
+Route::resource('/backoffice/footer', FooterController::class);
+Route::resource('/backoffice/header', HeaderController::class);
+Route::resource('/backoffice/pricing', PricingController::class);
+Route::resource('/backoffice/schedule', ScheduleController::class);
+Route::resource('/backoffice/slider', SliderController::class);
 
 
 
 //Email
-Route::resource('/backoffice/email', EmailController::class)->middleware(['back']);
-Route::get("/backoffice/emailLu", [EmailController::class, "indexLu"])->name("Lu")->middleware(['back']);
-Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->name("NonLu")->middleware(['back']);
+Route::resource('/backoffice/email', EmailController::class);
+Route::get("/backoffice/emailLu", [EmailController::class, "indexLu"])->name("Lu");
+Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->name("NonLu");
 
 
 
@@ -109,7 +109,9 @@ Route::get("/backoffice/emailNonLu", [EmailController::class, "indexNonLu"])->na
 Route::get('inscription/{id}', [ClasseController::class, "inscription"])->name("inscription");
 Route::get('desinscription/{id}', [ClasseController::class, "desinscription"])->name("classe.desinscription");
 Route::get('paiement/{id}', [PaiementController::class, "index"])->name("paiement");
-Route::resource('/backoffice/trainer', TrainerController::class)->middleware(['back']);
+Route::put('paiementMade/{id}', [PaiementController::class, "paiementEffectué"])->name('paiementEffectué');
+
+Route::resource('/backoffice/trainer', TrainerController::class);
 Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");
 Route::get('/backoffice', function () {
     $users = User::all();

@@ -21,13 +21,13 @@
                         <thead>
                             <tr>
                                 <th>Time</th>
-                                <th>saturday</th>
-                                <th>sunday</th>
                                 <th>monday</th>
                                 <th>tuesday</th>
                                 <th>wednesday</th>
                                 <th>thursday</th>
                                 <th>friday</th>
+                                <th>saturday</th>
+                                <th>sunday</th>
                             </tr>
                         </thead>
                         <tbody class="pt-30">
@@ -36,7 +36,36 @@
                                 <td class="time">
                                     <p>8:00 AM</p>
                                      </td>
-                                        
+                                       
+                            @foreach ($classes as $item)
+                                @php
+                                $now = \Carbon\Carbon::now();
+                                $weekStartDate ="";
+                                
+                                if(URL::current() == "http://127.0.0.1:8000" || URL::current()=='http://127.0.0.1:8000/?page=2'){
+
+                                    $weekStartDate = $now->startOfWeek();
+
+                                }else{
+                                    $ajout = URL::full()[strlen(URL::full())-1] -1;
+                                $weekStartDate = $now->startOfWeek()->addWeek(1);
+                                }
+                               
+                                
+                                $tuesday = $weekStartDate->copy()->addDay()->format("Y-m-d");
+                                $wednesday = $weekStartDate->copy()->addDay(2)->format("Y-m-d");
+                                $thursday = $weekStartDate->copy()->addDay(3)->format("Y-m-d");
+                                $friday = $weekStartDate->copy()->addDay(4)->format("Y-m-d");
+                                $saturday = $weekStartDate->copy()->addDay(5)->format("Y-m-d");
+                                $sunday = $weekStartDate->copy()->addDay(6)->format("Y-m-d");
+                                $weekStartDate = $now->startOfWeek()->format("Y-m-d");
+
+                                $dateDébut = $item->heureDébut->format("Y-m-d");
+
+                                $heureDébut = $item->heureDébut->format("h");
+                               
+                                @endphp  
+                            @endforeach       
                             {{-- @foreach ($week3 as $item)
                             @php
                             $d = new DateTime($item->date);

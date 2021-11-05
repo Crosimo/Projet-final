@@ -169,7 +169,7 @@
                                 <div class="row">
                                     <div class="col-md-12 red-bg">
                                         <p class="bill-date" id="total-label">Total Price</p>
-                                        <input class="bill-date myRed" onchange="myFunction()" id="total-label "
+                                        Code de réduction: <input class="bill-date myRed" onchange="myFunction()" id="total-label "
                                             type="text">
                                         <h2 class="bill-head prix" id="total">{{ $pricing->packagePrice }}</h2> <small
                                             class="bill-date" id="total-label">Price includes all taxes</small>
@@ -206,8 +206,14 @@
                                                 placeholder="MM/YY" minlength="5" maxlength="5"> </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-6"> <a class="btn btn-danger" href="/">Make
-                                                Paiement</a> </div>
+                                        <div class="col-md-6"> 
+                                        <form action="{{ route('paiementEffectué', $pricing->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                        <button type="submit" class="btn btn-info">Make
+                                            Paiement</button>
+                                        </form> 
+                                             </div>
                                     </div>
                                 </div>
                             </div>

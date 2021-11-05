@@ -20,6 +20,6 @@ class BackofficeMiddleware
         if(Auth::user()->role->nom === 'manager' || Auth::user()->role->nom === 'coach' || Auth::user()->role->nom === 'admin'){
             return $next($request);
         }  
-        return $next($request);
+        
     }
 }

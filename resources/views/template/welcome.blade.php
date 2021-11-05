@@ -28,6 +28,11 @@
     
     
     @include('partials.header')
+    @if (session()->has('message'))
+    <div class="alert alert-info">
+        {{ session()->get('message') }}
+    </div>
+    @endif
     @yield('content')
    
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

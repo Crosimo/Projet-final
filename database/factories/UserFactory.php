@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'image'=> $this->faker->imageUrl(),
             'email' => $this->faker->unique()->safeEmail(),
             'role_id' => $this->faker->numberBetween(1, count(Role::all())),
+            'pricing_id' => $this->faker->numberBetween(1, count(Pricing::all())),
             "facebook"=>"fa fa-facebook",
             "facebookLien"=>"https://www.facebook.com/",
             "twitter"=>"fa fa-twitter",

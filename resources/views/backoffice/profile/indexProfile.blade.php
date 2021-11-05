@@ -4,7 +4,7 @@
    
 
     
-
+    
     <div  style="background-color: #F1F1F1">
         <div class="container" >
             <div class="row text-center">
@@ -34,8 +34,9 @@
    
         
     
-    
+        @if(Auth::user()->role_id == 1)
         <table class="table table-secondary table-striped" style="margin-top:20px; border:5px solid white">
+            <h1 style="text-align: center; margin-top: 2rem">Vos inscription</h1>
         <thead>
             <tr>
                 <th scope="col">Nom de la classe</th>
@@ -45,7 +46,7 @@
             </tr>
         </thead>
         <tbody>
-            
+           
             @foreach ($classe as $item)
                 
             @if ($item->users->contains(Auth::user()->id))
@@ -60,14 +61,19 @@
                    
                     <td><a class="btn btn-danger" href="{{ route('classe.desinscription', $item->id) }}">Se désinscrire</a></td>
                 </tr>
-                @endif  
+            @endif 
+            
             @endforeach
             
         </tbody>
         </table>
+        @endif 
     @if(Auth::user()->role_id == 2  || Auth::user()->role_id == 3 )
-        
-    <table class="table table-primary table-striped" style="margin-top:20px">
+    <div>
+        <h1 style="text-align: center; margin-top: 2rem">Vos Cours</h1>
+        <a class="btn btn-info" href="{{ route('classe.create') }}">Créer</a>
+    </div>  
+    <table class="table table-primary table-striped" style="margin-top:20px; border:5px solid white" >
         <thead>
             <tr>
                 <th scope="col">Nom de la classe</th>
@@ -78,11 +84,13 @@
         </thead>
         <tbody>
             @foreach ($classe as $item)
-            @if ($classe->id == $classeUser[$item->id]->id)
+           
+            @if ($item->id == Auth::user()->classe_id)
             <tr>
                 <td>{{ $item->nom }}</td>
                 <td>{{ $item->heureDébut }}</td>
                 <td>{{ $item->heureFin }}</td>
+                
                 <td><form action="{{ route('classe.destroy', $item->id) }}" method="post">
                     @csrf
                     @method('DELETE')
