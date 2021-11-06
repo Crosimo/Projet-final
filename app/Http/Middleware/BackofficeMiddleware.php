@@ -17,9 +17,12 @@ class BackofficeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role->nom === 'manager' || Auth::user()->role->nom === 'coach' || Auth::user()->role->nom === 'admin'){
+        
+        if(in_array(Auth::user()->role_id, [1,2,3])){
+
             return $next($request);
-        }  
+        }
+       
         
     }
 }

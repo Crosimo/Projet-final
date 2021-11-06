@@ -83,17 +83,18 @@ class GalleryController extends Controller
     {
         $this->authorize('update', $gallery);
 
-        $request->validate([
-            "image" => ["required"],
-            
-        ]);
+        
+        if ($request->file('image') !== null){
+            Storage::disk("public")->delete("img/portfolio/" .$gallery->image);
+            $gallery->image= $request->file("image")->hashName();
+            $request->file("image")->storePublicly("img/portfolio", "public");
 
-        Storage::disk("public")->delete("img/portfolio/" .$gallery->image);
-        $gallery->image= $request->file("image")->hashName();
+        }
+      
         // $x = count(Gallery::all());
-        $request->file("image")->storePublicly("img/portfolio", "public");
+       
         $gallery->save();
-        return redirect('/')->with("modification éffectuée avec succès !");
+        return redirect()->route('gallery.index')->with("modification éffectuée avec succès !");
     }
 
     /**

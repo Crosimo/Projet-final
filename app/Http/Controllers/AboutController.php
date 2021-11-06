@@ -95,19 +95,22 @@ class AboutController extends Controller
         $this->authorize('update', $about);
 
         $request->validate([
-            "image" => ["required"],
+            
             "content" => ["required"],
             "vidéo" => ["required"],
             "logo" => ["required"]
         ]);
-
+        if ($request->file('image') !== null) {
         Storage::disk("public")->delete("img/about/" .$about->image);
-        $about->content = $request->content;
         $about->image= $request->file("image")->hashName();
+        $request->file("image")->storePublicly("img/about", "public");
+        }
+        $about->content = $request->content;
+        
         $about->vidéo = $request->vidéo;
         $about->logo = $request->logo;
         
-        $request->file("image")->storePublicly("img/about", "public");
+        
         $about->save();
         return redirect('/');
     }

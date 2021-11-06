@@ -148,7 +148,7 @@
         }
 
     </style>
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: #5FC7AE">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-11">
                 <div class="card card0 rounded-0">

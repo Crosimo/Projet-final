@@ -2,8 +2,8 @@
 
 @section('contentBO')
 <section class="home-section">
- 
-<div class="text">Boite Mail</div>
+ <div class="container">
+    <div class="text" style="text-decoration: underline">Boite Mail</div>
     <div>
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -102,6 +102,8 @@
             </tbody>
         </table>
     </div>
+ </div>
+
 
 
     

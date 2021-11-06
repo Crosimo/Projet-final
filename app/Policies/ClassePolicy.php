@@ -65,6 +65,7 @@ class ClassePolicy
      */
     public function delete(User $user, Classe $classe)
     {
+        
         return in_array($user->role_id, [1,2,3]);
     }
 

@@ -10,7 +10,7 @@
         </div>
         <div class="row"> 
            
-            @foreach ($classes as $item)
+            @foreach ($classeurs as $item)
             
             
             {{-- width="407" style="height: 207px" --}}
@@ -27,6 +27,8 @@
                     @if ($item->prioritaire == true)
                     <div class="single-content" style="background-color:rgba(0, 177, 106, 0.9)"> 
                     @elseif($item->places-(count($item->users)) == 0) 
+                    <div class="single-content" style="background-color:rgba(149, 165, 166, 1)">
+                    @elseif ((new \Carbon\Carbon($item->heureDébut))->isPast())
                     <div class="single-content" style="background-color:rgba(149, 165, 166, 1)">
                     @elseif($item->places -(count($item->users)) <= 3 ) 
                     <div class="single-content" style="background-color:rgba(207, 0, 15, 0.90)">
@@ -46,7 +48,7 @@
             </div>
             
             @endforeach
-            
+           
            
         </div>
         <div class="row">

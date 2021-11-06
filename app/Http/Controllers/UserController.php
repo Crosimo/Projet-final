@@ -13,7 +13,20 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    
+    public function index(){
+        $this->authorize('admin');
+       
+        $users = User::all();
+        return view('backoffice/user/indexUser', compact('users'));
+
+    }
+    public function destroy(User $id){
+        $this->authorize('delete', [$id]);
+        Storage::disk("public")->delete("img/profile/" .$id->image);
+        $id->delete();
+        return redirect()->back()->with('message', 'élément supprimé');
+
+    }
     public function profil(){
         $classe = Classe::all();
         $headers = Header::first();
@@ -31,13 +44,9 @@ class UserController extends Controller
         
         Storage::disk("public")->delete("img/profile/" .$user->image);    
         $user->image= $request->file("image")->hashName();
-        $request->file("image")->storePubliclyAs("img/profile", $user->image, "public");
+        $request->file("image")->storePublicly("img/profile","public");
         $user->save();
-        return redirect('/');
+        return redirect()->back();
     }
-
-
-
-
 
 }

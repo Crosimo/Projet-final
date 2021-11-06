@@ -31,11 +31,14 @@
 input{
   margin-bottom: 0.5rem;
   margin-top:0.5rem;
+  font-size: 1.5rem !important;
 }
 select{
   background-color: white;
 }
-
+h1{
+  padding: 3rem !important;
+}
 /* //Modal */
 
 .modal-backdrop {
@@ -98,7 +101,9 @@ select{
   
 }
 
-
+.pagination>.active>a{
+  background-color: #5FC7AE;
+}
 
 
 
@@ -122,6 +127,8 @@ select{
 }
 .sidebar.open{
   width: 250px;
+  
+  overflow: auto;
 }
 .sidebar .logo-details{
   height: 60px;
@@ -337,7 +344,7 @@ select{
 }
 .sidebar.open ~ .home-section{
   left: 250px;
-  width: calc(100% - 250px);
+  width: fit-content;
 }
 .home-section .text{
   display: inline-block;

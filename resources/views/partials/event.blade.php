@@ -11,21 +11,22 @@
                         </h2>
                     <p>{{ $titres[6]->description }} </p>
                 </div>
+                @foreach ($events as $event)
+                    
+               
                 <div class="event-wrapper" style="width: 770px; height: 237px" >
                     <div class="event-content text-center">
-                        <h3>{{ $events['titre'] }}</h3>
-                        <p>{{ $events['description'] }} </p>
-                        <h4>{{ $events['data']}}</h4>
-                        <h5>{{ $events['heure'] }}</h5>
+                        <h3>{{ $event->titre }}</h3>
+                        <p>{{ $event->description }} </p>
+                        <h4>{{ $event->data}}</h4>
+                        <h5>{{ $event->heure }}</h5>
                     </div>  
                 </div>
+                @endforeach
             </div>
         </div>
     </div>
     
-    {{-- <div style="text-align: center; margin-top:1rem; background-color:none">
-        {{ $events->links() }}
-        
-    </div> --}}
+    
 </section>
 

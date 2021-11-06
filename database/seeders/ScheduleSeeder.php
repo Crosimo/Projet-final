@@ -28,6 +28,36 @@ class ScheduleSeeder extends Seeder
             [
             "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
             ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+            ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+            ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+            ],
+            [
+            "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+            ],
+            [
+                "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+                ],
+                [
+                "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+                ],
+                [
+                    "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+                    ],
+                    [
+                    "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+                    ],
+                    [
+                        "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+                        ],
+                        [
+                        "dateDébut"=>Carbon::now()->startOfWeek()->addWeek(3)->format('Y-m-d'),
+                        ],
         ]);
     }
 }

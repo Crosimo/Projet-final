@@ -85,10 +85,13 @@ class TitreController extends Controller
     {
         $this->authorize('update', $titre);
         $request->validate([
-            "nom" => ["required"],  
+            "titre" => ["required"], 
+            "description"=>["required"] 
         ]);
-        $titre->nom = $request->nom;
-        return redirect('/')->with("message", "modification réussie");
+        $titre->titre = $request->titre;
+        $titre->description = $request->description;
+        $titre->save();
+        return redirect()->route('titre.index')->with("message", "modification réussie");
     }
 
     /**
@@ -100,7 +103,7 @@ class TitreController extends Controller
     public function destroy(Titre $titre)
     {
         $this->authorize('delete', $titre);
-        Storage::disk("public")->delete("img/icon/" .$titre->image);
+        // Storage::disk("public")->delete("img/icon/" .$titre->image);
         $titre->delete();
         return redirect()->route('titre.index');
     }

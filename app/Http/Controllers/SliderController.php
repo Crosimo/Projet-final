@@ -36,10 +36,10 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         // $this->authorize("create", Testimonial::class);
-        $this->authorize('create', Slider::all());
+        $this->authorize('create', Slider::class);
         $request->validate([
             "description" => ["required"],
-            "image" => ["required"],
+            "image"=>['required'],
             "button" => ["required"],
               
         ]);
@@ -47,16 +47,17 @@ class SliderController extends Controller
         if($request->boolean == "on"){
             $sliders = Slider::all();
             foreach($sliders as $esteban){
-                $esteban->boolean = "";
+                $esteban->boolean = false;
                 $esteban->save();
             }
         }
+        
         $slider = new Slider();
         $slider->description = $request->description;
         $slider->image = $request->file("image")->hashName();
         $request->file("image")->storePublicly("img/slider", "public");
         $slider->button = $request->button;
-        $slider->boolean = $request->boolean;
+        $slider->boolean = true;
         $slider->save();
         return redirect()->route('slider.index')->with("message", "Création de nouvelle instance réussie");
     }
@@ -94,25 +95,30 @@ class SliderController extends Controller
      */
     public function update(Request $request, Slider $slider)
     {
+        
         $this->authorize('update', $slider);
         $request->validate([
             "description" => ["required"],
-            "image" => ["required"],
+            
             "button" => ["required"],
         ]);
         if($request->boolean == "on"){
             $sliders = Slider::all();
             foreach($sliders as $esteban){
-            $esteban->boolean = "";
+            $esteban->boolean = false;
             $esteban->save();
             }
         }
-        Storage::disk("public")->delete("img/slider/" .$slider->image);
+        if ($request->file('image') !== null){
+            Storage::disk("public")->delete("img/slider/" .$slider->image);
+            $slider->image = $request->file("image")->hashName();
+            $request->file("image")->storePublicly("img/slider", "public");
+           
+        }
+        
         $slider->description = $request->description;
-        $slider->image = $request->file("image")->hashName();
-        $request->file("image")->storePublicly("img/slider", "public");
         $slider->button = $request->button;
-        $slider->boolean = $request->boolean;
+        $slider->boolean = true;
         $slider->save();
         return redirect('/')->with("message", "Modifications éffectuées avec succès");
     }

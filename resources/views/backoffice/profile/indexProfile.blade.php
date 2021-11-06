@@ -6,6 +6,7 @@
     
     
     <div  style="background-color: #F1F1F1">
+       
         <div class="container" >
             <div class="row text-center">
                 <div class="col">
@@ -14,11 +15,20 @@
                     @endphp
                     <div style="display: flex; justify-content:space-evenly; align-items:center; margin:1rem">
                        
-                        <img class=" img-thumbnail" src="{{ asset(Auth::user()->image) }}"
+                        <img class=" img-thumbnail" style="height: 35rem; width: 25rem" src="{{ asset("img/profile/".Auth::user()->image) }}"
                         alt="Ceci est une image quali">
                         <h1>Bienvenue {{ $name }}</h1>
                     </div>
-                    
+                    <form style=" margin-left:0; padding:2rem; width:100%;background-color: #5FC7AE; " method="POST" action="{{ route('logout') }}">
+        
+                        @csrf
+                        <x-dropdown-link style="width: 100%; padding-left: 0 !important;" :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                                            <i class='bx bx-log-out' ></i>
+                            <span class="links_name" style="color: white; font-size:2rem; border:1px solid white; padding: 0.5rem">Log Out</span>
+                        </x-dropdown-link>
+                      </form>
                         @php
                            $id = Auth::user()->id;
                         @endphp

@@ -52,7 +52,7 @@ class EventController extends Controller
         if($request->boolean == "on"){
             $events = Event::all();
             foreach($events as $esteban){
-            $esteban->boolean = "";
+            $esteban->boolean = false;
             $esteban->save();
             }
         }
@@ -61,7 +61,7 @@ class EventController extends Controller
         $event->description=$request->description;
         $event->data=$request->data;
         $event->heure=$request->heure;
-        $event->boolean = $request->boolean;
+        $event->boolean = true;
         $event->save();
         $allNews = Newsletter::all();
 
@@ -125,7 +125,7 @@ class EventController extends Controller
         if($request->boolean == "on"){
             $events = Event::all();
             foreach($events as $esteban){
-            $esteban->boolean = "";
+            $esteban->boolean = false;
             $esteban->save();
             }
         }
@@ -133,7 +133,7 @@ class EventController extends Controller
         $event->description=$request->description;
         $event->data=$request->data;
         $event->heure=$request->heure;
-        $event->boolean = $request->boolean;
+        $event->boolean = true;
         $event->save();
         return redirect('/')->with("message", "modification réalisée avec succès");
     }

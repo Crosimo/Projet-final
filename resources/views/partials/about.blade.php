@@ -11,7 +11,7 @@
                     </h2>
                      <p class="m-0">{{ $titres[1]->description }}</p>
                      <p>{{ $abouts->content }} </p>
-                     <a class="banner-btn" href="about-us.html" data-text="read more"><span>read more</span></a>
+                     <a class="banner-btn" href="/about" data-text="read more"><span>read more</span></a>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 col-xs-12">

@@ -17,7 +17,7 @@
                                 <textarea class="mb-30" cols="30" rows="7" name="message"
                                     placeholder="subject"></textarea>
                                 <button type="submit">submit</button>
-                                <p class="form-message"></p>
+                                {{-- <p class="form-message"></p> --}}
                             </div>
                         </form>
                     </div>

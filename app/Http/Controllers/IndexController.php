@@ -33,20 +33,20 @@ class IndexController extends Controller
         $abouts = About::first();
         $classes = Classe::all();
         $clients = Client::all();
-        $events = Event::all();
+        $events = Event::orderBy('boolean', 'DESC')->get()->take(1);
         $gallerys = Gallery::paginate(6);
         $maps = Map::all();
         $newsletters = Newsletter::all();
         $pricings = Pricing::all();
         $schedules = Schedule::paginate(1);
-        $sliders = Slider::all();
+        $sliders = Slider::orderBy('boolean', 'DESC')->get()->all();
         $tags = Tag::first();
         $trainers = Trainer::all();
         $footers = Footer::first();
         
 
-
-
+        
+        
         // //Schedule Classes
         // $schedules2 = Schedule::all();
         // $week1 =  DB::table('classes')->whereDate('date',">=", $schedules2[0]->dateDébut)->whereDate('date', "<=",$schedules2[1]->dateDébut)->orderBy('heureDébut', 'ASC')->orderBy('date', 'ASC')->get();
@@ -70,42 +70,44 @@ class IndexController extends Controller
        
 // Slider
         
-        function moveElement(&$array, $a, $b) {
-            $arr = $array->toArray();
-            $out = array_splice($arr, $a, 1);
-            array_splice($arr, $b, 0, $out); 
-            $array = $arr; 
-        }
+        // function moveElement(&$array, $a, $b) {
+        //     $arr = $array->toArray();
+        //     $out = array_splice($arr, $a, 1);
+        //     array_splice($arr, $b, 0, $out); 
+        //     $array = $arr; 
+        // }
 
-        for($i = 0; $i < count($sliders); $i++){
+        // for($i = 0; $i < count($sliders); $i++){
             
-            if($sliders[$i]['boolean'] == "on"){
-                moveElement($sliders, $i, 0);
-            }
-        }
+        //     if($sliders[$i]['boolean'] == "on"){
+        //         moveElement($sliders, $i, 0);
+        //     }
+        // }
 
 // Event
 
         
-        function moverElement(&$array, $a, $b) {
-            $arr = $array->toArray();
-            $out = array_splice($arr, $a, 1);
-            array_splice($arr, $b, 0, $out); 
-            $array = $arr; 
-        }
+       
+        // function moverElement(&$array, $a, $b) {
+        //     $arr = $array->toArray();
+        //     $out = array_splice($arr, $a, 1);
+        //     array_splice($arr, $b, 0, $out); 
+        //     $array = $arr; 
+        // }
     
-        for($i = 0; $i < count($events); $i++){
-            if($events[$i]->boolean == "on"){
-                moverElement($events, $i, 0);
-            }
-        }
-        $events = $events[0];
+        // for($i = 0; $i < count($events); $i++){
+            
+        //     if($events[$i]['boolean'] == "on"){
+        //         moverElement($events, $i, 0);
+        //     }
+        // }
+        // $events = $events[0];
         
 
         // ------Trainers------
-        $leadCoach= Trainer::all()->where('role_id', 2)->take(1)->toArray();
+        $leadCoach= Trainer::all()->where('role_id', 2)->random(1)->toArray();
         
-        $coach= Trainer::all()->where('role_id', 3)->take(2);
+        $coach= Trainer::all()->where('role_id', 3)->random(2);
         $coach->splice(1, 0, $leadCoach);
        
 
@@ -144,10 +146,11 @@ class IndexController extends Controller
         $allItems = $allItems->merge($ClasseRand);
         $allItems = $allItems->merge($ClasseGrey);
         $allItems = $allItems->merge($ClassePassed);
-        $classes = $allItems->take(3);
+        $classeurs = $allItems->take(3);
+
         
         // verifier si vide ou pas
 
-        return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers'));
+        return view('pages.index', compact('titres', 'categories', 'headers',  'abouts', 'classes', 'clients', 'events', 'gallerys', 'maps', 'newsletters', 'pricings', 'schedules', 'sliders', 'tags', 'trainers', 'sliders', 'footers', 'classeurs'));
     }
 }

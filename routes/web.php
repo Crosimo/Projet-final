@@ -14,6 +14,7 @@ use App\Http\Controllers\PaiementController;
 use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\TitreController;
 use App\Http\Controllers\TrainerController;
 use App\Http\Controllers\UserController;
 use App\Models\About;
@@ -35,7 +36,7 @@ use App\Models\Trainer;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Str;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,16 +58,30 @@ Route::get('/about', function () {
     $titres =Titre::all();
     $abouts =About::first();
     $clients = Client::all();
-    $events = Event::paginate(1);
+ 
+    $events = Event::orderBy('boolean', 'DESC')->paginate(1);
+    for($i = 0; $i <= 8; $i++){
+
+        $titres[$i]->titre = Str::replace('(',  '<span class="span">', $titres[$i]->titre);
+        $titres[$i]->titre = Str::replace(')',  '</span>', $titres[$i]->titre);
+        
+    }
     return view('pages.about-us', compact('headers', 'footers', 'titres', 'abouts', 'events', 'clients'));
 })->name('abouter');
 
 Route::get('/class', [ClasseController::class, 'classePage' ])->name('classer');
 
 Route::get('contact', function () {
+    
     $headers = Header::first();
     $footers = Footer::first();
     $titres =Titre::all();
+    for($i = 0; $i <= 8; $i++){
+
+        $titres[$i]->titre = Str::replace('(',  '<span class="span">', $titres[$i]->titre);
+        $titres[$i]->titre = Str::replace(')',  '</span>', $titres[$i]->titre);
+        
+    }
     $clients = Client::all();
     return view('pages.contact', compact('headers', 'footers', 'titres', 'clients'));
 })->name('contacter');
@@ -76,6 +91,12 @@ Route::get('gallery', function () {
     $footers = Footer::first();
     $titres =Titre::all();
     $clients = Client::all();
+    for($i = 0; $i <= 8; $i++){
+
+        $titres[$i]->titre = Str::replace('(',  '<span class="span">', $titres[$i]->titre);
+        $titres[$i]->titre = Str::replace(')',  '</span>', $titres[$i]->titre);
+        
+    }
     $gallerys = Gallery::paginate(9);
     return view('pages.gallery', compact('headers', 'footers','titres', 'gallerys', 'clients'));
 })->name('galleryer');
@@ -94,6 +115,7 @@ Route::resource('/backoffice/header', HeaderController::class);
 Route::resource('/backoffice/pricing', PricingController::class);
 Route::resource('/backoffice/schedule', ScheduleController::class);
 Route::resource('/backoffice/slider', SliderController::class);
+Route::resource('/backoffice/titre', TitreController::class);
 
 
 
@@ -114,12 +136,15 @@ Route::put('paiementMade/{id}', [PaiementController::class, "paiementEffectué"]
 Route::resource('/backoffice/trainer', TrainerController::class);
 Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");
 Route::get('/backoffice', function () {
+    
     $users = User::all();
     $classes = Classe::all();
     return view('dashboard', compact('users', 'classes'));
-})->middleware(['back'])->name('dashboard');
+})->name('dashboard');
 Route::get('/profil', [UserController::class, 'profil']);
 Route::put('/profil/update/{id}', [UserController::class, 'updateProfil'])->name('updateProfil');
+Route::get('/profil/all', [UserController::class, 'index'])->name('user.index');
+Route::delete('/profil/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
 require __DIR__.'/auth.php';

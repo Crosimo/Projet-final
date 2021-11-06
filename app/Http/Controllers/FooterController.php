@@ -108,7 +108,7 @@ class FooterController extends Controller
         
         $this->authorize('update', $footer);
         $request->validate([
-            "image" => ["required"],
+            
             "description" => ["required"],
             "email" => ["required"],
             "tel" => ["required"],
@@ -122,9 +122,13 @@ class FooterController extends Controller
             "formElem3" => ["required"],
             
         ]);
-
-        Storage::disk("public")->delete("img/footer/" .$footer->image);
-        $footer->image= $request->file("image")->hashName();
+        if ($request->file('image') !== null){
+            Storage::disk("public")->delete("img/footer/" .$footer->image);
+            $footer->image= $request->file("image")->hashName();
+            $request->file("image")->storePubliclyAs("img/logo", "public");
+        }
+        
+       
         $footer->description = $request->description;
         $footer->email = $request->email;
         $footer->tel = $request->tel;
@@ -135,7 +139,7 @@ class FooterController extends Controller
         $footer->formElem1 = $request->formElem1;
         $footer->formElem2 = $request->formElem2;
         $footer->formElem3 = $request->formElem3;
-        $request->file("image")->storePubliclyAs("img/logo", "public");
+      
         $footer->save();
         return redirect('/')->with("message", "modification éffectuée avec succès !");
     }

@@ -19,13 +19,13 @@ class EventSeeder extends Seeder
             "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'ssurvived ",
             "data"=>"25 March 2016",
             "heure"=>"10AM - 12AM",
-            "boolean"=>"",
+            "boolean"=>false,
             ],
             [ "titre"=>"Yoga celebration in Handstand",
             "description"=>"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'ssurvived ",
             "data"=>"25 March 2016",
             "heure"=>"10AM - 12AM",
-            "boolean"=>"",        
+            "boolean"=>false,        
             ],
         ]);
     }

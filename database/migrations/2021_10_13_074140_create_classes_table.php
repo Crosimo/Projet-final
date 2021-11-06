@@ -17,8 +17,6 @@ class CreateClassesTable extends Migration
             $table->id();
             $table->string("nom");
             $table->string("lestags");
-           
-            
             $table->timestamp("heureDébut");
             $table->timestamp("heureFin");
             $table->string("image");

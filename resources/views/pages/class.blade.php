@@ -14,18 +14,14 @@
 		@include('partials.banner')
 		<!-- Banner Area End -->
         <!-- Classes Start -->
-        @include('partials.classe')
-        <div style="text-align: center">
-           
-               
-           
-        </div>
+        @include('partials.pageclasse')
+        
         <!-- Class Area End -->
         <!-- Schedule Area Strat -->
         @include('partials.schedule')
         <!-- Schedule Area End -->
         <!-- Pricing Area Start -->
-        
+        @include('partials.pricing')
         <!-- Pricing Area End -->
         <!-- Client Area Strat -->
         @include('partials.client')

@@ -29,6 +29,6 @@
                
             </div>
         </div>
-        <div style="text-align: center">{{ $gallerys->links() }}</div>
+        <div style="text-align: center">{{ $gallerys->links('vendor.pagination.custom') }}</div>
     </div>
 </section>    

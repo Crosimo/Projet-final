@@ -17,14 +17,15 @@ use App\Models\Trainer;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Illuminate\Support\Str;
 class ClasseController extends Controller
 {
-    public function classePage(){
+    public function classePage(Request $request){
     $headers = Header::first();
     $footers = Footer::first();
     $titres =Titre::all();
@@ -32,7 +33,13 @@ class ClasseController extends Controller
     $schedules = Schedule::paginate(1);
     $clients = Client::all();
     $ClasseMerge = Classe::all();
-    
+    $pricings = Pricing::all();
+    for($i = 0; $i <= 8; $i++){
+
+        $titres[$i]->titre = Str::replace('(',  '<span class="span">', $titres[$i]->titre);
+        $titres[$i]->titre = Str::replace(')',  '</span>', $titres[$i]->titre);
+        
+    }
     $ClassePrio = $ClasseMerge->where('prioritaire', 1);
     $ClasseRed= [];
     $ClasseOrange= [];
@@ -59,13 +66,32 @@ class ClasseController extends Controller
     $allItems = $allItems->merge($ClassePrio);
     $allItems = $allItems->merge($ClasseRed);
     $allItems = $allItems->merge($ClasseOrange);
+    
     $allItems = $allItems->merge($ClasseRand);
+    
     $allItems = $allItems->merge($ClasseGrey);
+    
     $allItems = $allItems->merge($ClassePassed);
-    $classes = $allItems->take(9);
-  
-   
-    return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'schedules', 'clients'));
+    $classes = $allItems->all();
+    
+    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+ 
+    // Create a new Laravel collection from the array data
+    $itemCollection = collect($classes);
+
+    // Define how many items we want to be visible in each page
+    $perPage = 9;
+
+    // Slice the collection to get the items to display in current page
+    $currentPageItems = $itemCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+
+    // Create our paginator and pass it to the view
+    $paginatedItems= new LengthAwarePaginator($currentPageItems , count($itemCollection), $perPage);
+
+    // set url path for generted links
+    $paginatedItems->setPath($request->url());
+    $classeurs = $paginatedItems;
+    return view('pages.class', compact('headers', 'footers', 'titres', 'classes', 'classeurs', 'schedules', 'clients', 'pricings'));
     }
     public function index()
     {
@@ -81,7 +107,7 @@ class ClasseController extends Controller
      */
     public function create()
     {   
-        $this->authorize('admin');
+        $this->authorize('adminManagerTrainer');
         $tag = Tag::all();
         $categorie = Categorie::all();
         $trainer = Trainer::all();
@@ -111,24 +137,31 @@ class ClasseController extends Controller
             "heureDébut" => ["required"],
            
         ]);
-    
-// Checker que ça n'est bloqué par aucunes autres dates    
-        $check1 = Classe::select('heureDébut', 'heureFin')
-        ->whereDate('heureDébut', '<=', $request->heureDébut)
-        ->whereDate('heureFin', '>=', $request->heureDébut)
-        ->first();
         
-        $check2 = Classe::select('heureDébut', 'heureFin')
-        ->whereDate('heureDébut', '<=', $request->heureFin)
-        ->whereDate('heureFin', '>=', $request->heureFin)
-        ->first();
-        
-// checker pas d'erreurs dans l'organisation date début et fin
-        $start = Carbon::parse($request->heureDébut);
-        $fin = Carbon::parse($request->heureFin);
-        if($check1 !== null || $check2 !== null || $start->greaterThan($fin)){
-            return redirect()->back()->with('message', 'you fucked up');
+       
+// Checker que ça n'est bloqué par aucunes autres dates 
+        $lesclasses =Classe::all();
+        foreach($lesclasses as $item){
+            
+            if($item->heureDébut->format('Y-m-d H') ==  Carbon::createFromFormat('Y-m-d H', $request->heureDébut." ".$request->heureFin)->format('Y-m-d H')){
+               
+                return redirect()->back()->with('message', 'Il existe déjà une classe à ce moment-là');
+            }
         }
+        // ->whereDate('heureFin', '>=', $request->heureDébut)
+        // ->first();
+        
+        // $check2 = Classe::select('heureDébut', 'heureFin')
+        // ->whereDate('heureDébut', '<=', $request->heureFin)
+        // ->whereDate('heureFin', '>=', $request->heureFin)
+        // ->first();
+        
+// // checker pas d'erreurs dans l'organisation date début et fin
+//         $start = Carbon::parse($request->heureDébut);
+//         $fin = Carbon::parse($request->heureFin);
+//         if($check1 !== null || $check2 !== null || $start->greaterThan($fin)){
+//             return redirect()->back()->with('message', 'you fucked up');
+//         }
 
 
 
@@ -152,8 +185,8 @@ class ClasseController extends Controller
         $classe->categorie_id = $request->categorie_id;
         $classe->pricing_id = $request->pricing_id;
         $classe->lestags = implode(',',$request->lestags);
-        $classe->heureDébut = $request->heureDébut;
-        $classe->heureFin = $request->heureFin;
+        $classe->heureDébut = Carbon::createFromFormat('Y-m-d H', $request->heureDébut." ".$request->heureFin);
+        $classe->heureFin = $request->heureDébut;
        
         $classe->save();
         $classe->tags()->attach($request->lestags);
@@ -165,10 +198,11 @@ class ClasseController extends Controller
         
           
         foreach($allNews as $news){
+            
             $contenuEmail = [
                 "email"=>$news->email,
                 "name"=>$request->nom,
-                "pricing"=>$request->pricing->packageTitle,
+                "pricing"=>$classe->pricing->packageTitle,
                 ];
             Mail::to("$news->email")->send(new Email($contenuEmail));
         }
@@ -230,7 +264,7 @@ class ClasseController extends Controller
         
         $this->authorize('update', $classe);
         $request->validate([
-            "image" => ["required"],
+            
             "nom" => ["required"],
             "categorie_id" => ["required"],
             "lestags" => ["required"],
@@ -238,23 +272,35 @@ class ClasseController extends Controller
             "heureDébut" => ["required"], 
             
         ]);
-
-        Storage::disk("public")->delete("img/classe/".$classe->image);
+        $lesclasses =Classe::all();
+        foreach($lesclasses as $item){
+            
+            if($item->heureDébut->format('Y-m-d H') ==  Carbon::createFromFormat('Y-m-d H', $request->heureDébut." ".$request->heureFin)->format('Y-m-d H')){
+               
+                return redirect()->back()->with('message', 'Il existe déjà une classe à ce moment-là');
+            }
+        }
+        if ($request->file('image') !== null){
+            Storage::disk("public")->delete("img/classe/".$classe->image);
+            $image= $request->file('image');
+            $filename  = $image->getClientOriginalName();
+            $classe->image = $filename;         
+            $image_resize = Image::make($image->getRealPath());
+            $image_resize->resize(370,207);
+            $image_resize->save(public_path('img/classe/'.$filename));
+        }
+       
         $x = $request->id;
-        $image= $request->file('image');
         
-        $filename  = $image->getClientOriginalName();
-        $classe->image = $filename;
+        
         $classe->nom = $request->nom;
         $classe->trainer_id = $request->trainer_id;
         $classe->categorie_id = $request->categorie_id;
         $classe->pricing_id = $request->pricing_id;
         $classe->lestags = implode(',',$request->lestags);
-        $classe->heureDébut = $request->heureDébut;
-        $classe->heureFin = $request->heureFin;
-        $image_resize = Image::make($image->getRealPath());
-        $image_resize->resize(370,207);
-        $image_resize->save(public_path('img/classe/'.$filename));
+        $classe->heureDébut = Carbon::createFromFormat('Y-m-d H', $request->heureDébut." ".$request->heureFin);
+        $classe->heureFin = $request->heureDébut;
+        
         $classe->save();
         $classe->tags()->sync($request->lestags);
         return redirect()->route('classe.index')->with("message", "edit réussie");

@@ -95,18 +95,22 @@ class ClientController extends Controller
         
         $this->authorize('update', $client);
         $request->validate([
-            "image" => ["required"],
+            
             "logo" => ["required"],
             "description" => ["required"],
             "titre" => ["required"],
         ]);
+        if ($request->file('image') !== null){
+            Storage::disk("public")->delete("img/icon/" .$client->image);
+            $client->image= $request->file("image")->hashName();
+            $request->file("image")->storePublicly("img/icon", "public");
+        }
         $x = count(Client::all());
-        Storage::disk("public")->delete("img/icon/" .$client->image);
-        $client->image= $request->file("image")->hashName();
+       
         $client->titre = $request->titre;
         $client->description = $request->description;
         $client->logo = $request->logo;
-        $request->file("image")->storePublicly("img/icon", "public");
+       
         $client->save();
         return redirect('/')->with("message", "modification réussie");
     }

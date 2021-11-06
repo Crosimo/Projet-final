@@ -98,7 +98,7 @@ class TrainerController extends Controller
     {
         $this->authorize('update', $trainer);
         $request->validate([
-            "image" => ["required"],
+           
             "nom" => ["required"],
             "facebookLien"=> ["required"],
             "twitterLien"=> ["required"],
@@ -106,9 +106,12 @@ class TrainerController extends Controller
             "pinterestLien"=> ["required"],
             "role_id"   => ["required"], 
         ]);
-        Storage::disk("public")->delete("img/slider/" .$trainer->image);
-        $trainer->image = $request->file("image")->hashName();
-        $request->file("image")->storePublicly("img/trainer", "public");
+        if ($request->file('image') !== null){
+            Storage::disk("public")->delete("img/slider/" .$trainer->image);
+            $trainer->image = $request->file("image")->hashName();
+            $request->file("image")->storePublicly("img/trainer", "public");
+        }
+      
         $trainer->nom = $request->nom;
         $trainer->facebook = "fa fa-facebook";
         $trainer->facebookLien = $request->facebookLien;

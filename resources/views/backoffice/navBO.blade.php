@@ -2,17 +2,17 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus icon'></i>
-        <div class="logo_name">Handstand</div>
+      <a class="logo_name" href="/">Handstand</a>
         <i class='bx bx-menu' id="btn" ></i>
     </div>
     <ul class="nav-list">
-      <li>
-        <a href="/">
+      {{-- <li>
+        
           <i class='bx bx-grid-alt'></i>
           <span class="links_name">Backoffice</span>
         </a>
          <span class="tooltip">Backoffice</span>
-      </li>
+      </li> --}}
       <li>
        <a href="/profil">
          <i class='bx bx-user' ></i>
@@ -20,8 +20,21 @@
        </a>
        <span class="tooltip">Profil</span>
      </li>
+     <li>
+      <a href="/backoffice/email">
+        <i class='bx bx-user' ></i>
+        <span class="links_name">Email</span>
+      </a>
+      <span class="tooltip">Email</span>
+    </li>
      @can('admin')
-       
+     <li>
+      <a href="{{ route('user.index') }}">
+        <i class='bx bx-chat' ></i>
+        <span class="links_name">Users</span>
+      </a>
+      <span class="tooltip">Users</span>
+    </li>
      
      <li>
        <a href="{{ route('about.index') }}">
@@ -30,6 +43,13 @@
        </a>
        <span class="tooltip">About</span>
      </li>
+     <li>
+      <a href="{{ route('titre.index') }}">
+        <i class='bx bx-chat' ></i>
+        <span class="links_name">Titres</span>
+      </a>
+      <span class="tooltip">Titres</span>
+    </li>
      <li>
        <a href="{{ route('gallery.index') }}">
          <i class='bx bx-pie-chart-alt-2' ></i>

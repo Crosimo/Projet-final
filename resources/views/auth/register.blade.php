@@ -9,7 +9,7 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="/register">
+        <form method="POST" action="/register" enctype="multipart/form-data">
             @csrf
 
             <!-- Name -->
@@ -25,7 +25,15 @@
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
+            <div class="mt-4">
+                <x-label for="image" :value="__('Profile Picture')" />
 
+                <x-input id="image" class="block mt-1 w-full"
+                                type="file"
+                                name="image"
+                                {{-- required autocomplete="new-password" --}}
+                                 />
+            </div>
             <!-- Password -->
             <div class="mt-4">
                 <x-label for="password" :value="__('Password')" />

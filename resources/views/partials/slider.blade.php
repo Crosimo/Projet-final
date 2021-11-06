@@ -14,7 +14,7 @@
                                     </h5>
                                     <h1>{{ $titres[0]->description }}</h1> 
                                     <p>{{ $item['description'] }}</p>
-                                    <a class="banner-btn" href="gallery.html" data-text="read more"><span>{{$item['button'] }}</span></a>
+                                    <a class="banner-btn" href="/gallery" data-text="read more"><span>{{$item['button'] }}</span></a>
                                 </div>
                             </div>
                         </div>

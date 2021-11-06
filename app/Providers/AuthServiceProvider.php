@@ -57,7 +57,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('pricing', function(User $user, Pricing $pricing){
             
-            return $user->pricing_id == $pricing->id ;
+            if( $user->pricing_id >= $pricing->id){
+                return true;
+            }else{
+                redirect('/')->send()->with('message', "Vous n'avez pas accès à ce cours");
+                return false;
+            }
+            
+            
 
         });
     }

@@ -29,7 +29,7 @@
     
     @include('partials.header')
     @if (session()->has('message'))
-    <div class="alert alert-info">
+    <div class="alert alert-info" style="text-align: center">
         {{ session()->get('message') }}
     </div>
     @endif

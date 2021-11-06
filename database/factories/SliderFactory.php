@@ -27,7 +27,7 @@ class SliderFactory extends Factory
             "description"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer auctor pharetra iss neque. Nullam cursus elit sit amet justo interdum facilisis id at tortor. " ,
             "button"=>"read more",
             "image"=>"slider".$x.".jpg",
-            "boolean" => "" ,
+            "boolean" => false ,
         ];
     }
 }

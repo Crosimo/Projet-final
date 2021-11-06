@@ -64,7 +64,7 @@
                                     <li><i class="zmdi zmdi-case"></i>{{ $tag->nom }}</li>
                                     @endforeach
                                 </ul>
-                                <div  style="padding: 2rem; ">
+                                <div  style="padding: 1rem; ">
                                     @auth
                                     <a class="btn btn-primary" href="{{ route('inscription', $classe->id) }}">S'inscrire</a>
                                     @else

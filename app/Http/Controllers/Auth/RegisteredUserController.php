@@ -47,19 +47,21 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+    //    dd($request->file('image'));
         $user = User::create([
             'name' => $request->name,
+            
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'image'=>$request->file('image')->hashName(),
             'role_id'=>4,
+            // 'pricing_id'=>3,
         ]);
-
+        $user->pricing_id = 1;
+        $user->save();
         event(new Registered($user));
-
         Auth::login($user);
-
-        
+        $request->file("image")->storePublicly("img/profile", "public");
         $value = URL::previous();
         $id = ($value[(strlen($value))-1]);
         $pricing = Pricing::find(intval($id));

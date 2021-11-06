@@ -7,10 +7,7 @@
         <div class="container">
             
             <div class="row flex justify-center"> 
-               
-               
-                
-                
+                  
                 {{-- width="407" style="height: 207px" --}}
                 <div class="col-md-4 col-sm-6 col-xs-12 mb-1">     
                     <div class="single-class">
@@ -36,7 +33,7 @@
                             <h3><a href="{{ route('classe.shower', $classe->id) }}">{{ $classe->nom }}</a></h3>
                             <ul>
                                 <li><i class="zmdi zmdi-face"></i>{{ $classe->trainer->nom }}</li>
-                                <li><i class="zmdi zmdi-alarm"></i>{{ substr($classe->heureDébut,11, 2) }}-{{ substr($classe->heureFin,11, 2) }}A.M.</li>
+                                <li><i class="zmdi zmdi-alarm"></i>{{ ($classe->heureDébut) }}</li>
                                 
                             </ul>
                             <div class="m-8 p-2" style="display: flex; justify-content:space-evenly;">

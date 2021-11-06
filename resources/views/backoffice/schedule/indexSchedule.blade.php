@@ -2,7 +2,11 @@
 
 @section('contentBO')
     <div class="home-section text-center">
-
+        @if (session()->has('message'))
+        <div class="alert alert-info" style="text-align: center">
+            {{ session()->get('message') }}
+        </div>
+        @endif
         <h1 class="titresBO text-center">PARTIE PRICING</h1>
 
         <a href="/backoffice" class=" text-center w-100">

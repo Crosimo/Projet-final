@@ -4,7 +4,11 @@
 
        
         <form class=" d-flex flex-column home-section  p-2" action="{{route('classe.update', $classe->id)}}" method="POST" enctype="multipart/form-data">
-           
+            @if (session()->has('message'))
+            <div class="alert alert-info" style="text-align: center">
+                {{ session()->get('message') }}
+            </div>
+        @endif
             <h1 class="text-center fs-4">
             Modifier la section</h1>
                 <br>
@@ -24,13 +28,20 @@
             
             Intitulé du cours: <input type="text" name="nom" class="form-control" id="nom" value="{{ $classe->nom }}">
             
-            Horaire de début:<input type="datetime-local" name="heureDébut" class="form-control" id="heureDébut" {{ $classe->heureDébut }}>
+            Date:<input type="date" name="heureDébut" class="form-control" id="heureDébut" {{ $classe->heureDébut }}>
+            </div>
+            <label for="heureFin" class="form-label ">heure</label>
+            <select class="form-select " id="heureFin" name="heureFin" aria-label="Default select example">
+                                   
+                <option value = "08">8 A.M.</option>
+                <option value = "12">12 P.M.</option>
+                <option value = "15">15 P.M.</option>
+                <option value = "18">18 P.M.</option>     
+            
+            </select>
             </div>
             
-            Horaire de fin:<input type="datetime-local" name="heureFin" class="form-control" id="heureFin" {{ $classe->heureFin }}>
-            </div>
-            
-            Places: <input type="number" name="places" class="form-control" id="places" min="0" max="20">
+            Places: <input type="number" value="{{ $classe->places }}" name="places" class="form-control" id="places" min="0" max="20">
 
 
             <label for="pricing" class="form-label ">Formule d'accès</label>
