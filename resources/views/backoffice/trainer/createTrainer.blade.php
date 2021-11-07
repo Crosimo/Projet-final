@@ -29,6 +29,13 @@
                 <input type="text" name="twitterLien" class="form-control" id="exampleInputEmail1">
                 <label for="exampleInputEmail1" class="form-label">pinterestLien</label>
                 <input type="text" name="pinterestLien" class="form-control" id="exampleInputEmail1">
+                <label for="user" class="form-label ">User</label>
+                <select class="form-select " id="user" name="user" aria-label="Default select example">    
+                        @foreach ($users as $item)
+                        <option value = "{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                
+                </select>
                 <label for="categorie" class="form-label ">Catégorie</label>
                 <select class="form-select " id="trainer" name="role_id" aria-label="Default select example">    
                         <option value = "2">LeadTrainer</option>

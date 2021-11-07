@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trainer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -11,6 +12,7 @@ class TrainerController extends Controller
     public function index()
     {
         $this->authorize('adminManager');
+        
         $trainer = Trainer::all();
         return view('backoffice.trainer.indexTrainer', compact('trainer'));
     }
@@ -23,7 +25,9 @@ class TrainerController extends Controller
     public function create()
     {
         $this->authorize('adminManager');
-        return view('backoffice.trainer.createTrainer');
+        $users = User::orderBy('name', 'ASC')->get();
+        
+        return view('backoffice.trainer.createTrainer', compact('users'));
 }
 
     /**
@@ -60,6 +64,7 @@ class TrainerController extends Controller
         $trainer->pinterestLien = $request->pinterestLien;
         $trainer->role_id = $request->role_id;
         $trainer->save();
+        $trainer->users()->sync($request->user);
         return redirect()->route('trainer.index')->with("message", "Nouvelle instance crée avec succès");
     } 
 

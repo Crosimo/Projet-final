@@ -14,6 +14,7 @@ use App\Models\Schedule;
 use App\Models\Tag;
 use App\Models\Titre;
 use App\Models\Trainer;
+use App\Models\TrainerUser;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -107,6 +108,8 @@ class ClasseController extends Controller
      */
     public function create()
     {   
+        $users =TrainerUser::all();
+        
         $this->authorize('adminManagerTrainer');
         $tag = Tag::all();
         $categorie = Categorie::all();
@@ -114,7 +117,7 @@ class ClasseController extends Controller
         $classe = Classe::all();
         $pricing = Pricing::all();
         
-        return view('backoffice.classe.createClasse', compact('classe', 'categorie', 'tag', 'trainer', 'pricing'));
+        return view('backoffice.classe.createClasse', compact('classe', 'categorie', 'tag', 'trainer', 'pricing','users'));
     }
     
     /**
@@ -170,7 +173,7 @@ class ClasseController extends Controller
         if($request->prioritaire == 'on'){
             $classe->prioritaire = true;
         }else{
-            $classe->prioriatier = false;
+            $classe->prioritaire = false;
         };
         $x = count(Classe::all());
         $image= $request->file('image');
@@ -243,7 +246,12 @@ class ClasseController extends Controller
      */
     public function edit(Classe $classe)
     {
-        $this->authorize('adminManagerTrainer');
+        if(Auth::user()->trainers[0]->id == $classe->trainer_id){
+            $this->authorize('adminManagerTrainer');
+        }else{
+            $this->authorize('adminManager');
+        }
+        
         $tag = Tag::all();
         $categorie = Categorie::all();
         $trainer = Trainer::all();
@@ -272,6 +280,11 @@ class ClasseController extends Controller
             "heureDébut" => ["required"], 
             
         ]);
+        if($request->prioritaire == 'on'){
+            $classe->prioritaire = true;
+        }else{
+            $classe->prioritaire = false;
+        };
         $lesclasses =Classe::all();
         foreach($lesclasses as $item){
             

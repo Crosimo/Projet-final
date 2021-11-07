@@ -26,7 +26,7 @@
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
                                             <i class='bx bx-log-out' ></i>
-                            <span class="links_name" style="color: white; font-size:2rem; border:1px solid white; padding: 0.5rem">Log Out</span>
+                            <span class="links_name" style="color: white; font-size:2rem; border:3px solid white; padding: 0.5rem;font-weight:bolder">Log Out</span>
                         </x-dropdown-link>
                       </form>
                         @php
@@ -78,6 +78,7 @@
         </tbody>
         </table>
         @endif 
+        
     @if(Auth::user()->role_id == 2  || Auth::user()->role_id == 3 )
     <div>
         <h1 style="text-align: center; margin-top: 2rem">Vos Cours</h1>
@@ -95,7 +96,8 @@
         <tbody>
             @foreach ($classe as $item)
            
-            @if ($item->id == Auth::user()->classe_id)
+            
+            @if (Auth::user()->trainers[0]->id == $item->trainer_id)
             <tr>
                 <td>{{ $item->nom }}</td>
                 <td>{{ $item->heureDébut }}</td>
@@ -112,7 +114,7 @@
             @endforeach
         </tbody>
     </table>
-    @else
+    
     @endif
    
 </div>

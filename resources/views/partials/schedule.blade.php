@@ -37,8 +37,34 @@
         <div class="row">
             <div class="col-xs-12">                             
                 <div class="scehedule-table table-responsive text-center">
-                    <div>
-                        {{ $schedules[0]->DateDébut }}
+                    <div> @php
+                        $now = \Carbon\Carbon::now();
+                        $weekStartDate ="";
+                        
+                        if(URL::full() == "http://127.0.0.1:8000" || URL::full()=='http://127.0.0.1:8000/?page=1' || URL::full() =='http://127.0.0.1:8000/class'  || URL::full()=="http://127.0.0.1:8000/class?page=1" ){
+
+                            $weekStartDate = $now->startOfWeek();
+                            
+                        }else{
+                            
+                        $ajout = URL::full()[strlen(URL::full())-1] -1;
+                        $weekStartDate = $now->startOfWeek()->addWeek($ajout);
+                        
+                        }
+                        $tuesday = $weekStartDate->copy()->addDay()->format("Y-m-d");
+                        $wednesday = $weekStartDate->copy()->addDay(2)->format("Y-m-d");
+                        $thursday = $weekStartDate->copy()->addDay(3)->format("Y-m-d");
+                        $friday = $weekStartDate->copy()->addDay(4)->format("Y-m-d");
+                        $saturday = $weekStartDate->copy()->addDay(5)->format("Y-m-d");
+                        $sunday = $weekStartDate->copy()->addDay(6)->format("Y-m-d");
+                        $weekStartDate = $weekStartDate->format("Y-m-d");
+                        
+                        
+                       
+                        
+                       
+                        @endphp
+                        <h1>Semaine du {{ $weekStartDate }}</h1>
                         {{ $schedules->links('vendor.pagination.custom') }} 
                     </div>
                     <table>

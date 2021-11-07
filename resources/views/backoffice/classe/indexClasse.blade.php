@@ -42,6 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                   
                     @foreach ($classe as $item)
 
                         <tr>

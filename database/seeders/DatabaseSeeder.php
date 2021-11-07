@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
             AboutSeeder::class, EventSeeder::class, FooterSeeder::class,
             HeaderSeeder::class, PricingSeeder::class, RoleSeeder::class, 
             ScheduleSeeder::class, TitreSeeder::class, 
-            TagSeeder::class, CategorieSeeder::class,
+            TagSeeder::class, CategorieSeeder::class,TrainerSeeder::class
            
         ]);
         
@@ -66,7 +66,8 @@ class DatabaseSeeder extends Seeder
             "image" => "blog2.jpg",
             "created_at" => now()],
         ]);
-        \App\Models\Trainer::factory(5)->create();
+        
+        // \App\Models\Trainer::factory(5)->create();
         $this->faker = Faker::create();
         DB::table('classes')->insert([
             [
@@ -257,8 +258,20 @@ class DatabaseSeeder extends Seeder
                 
             ],
         ]);
+
+        
         // \App\Models\Classe::factory(9)->create();
-        \App\Models\User::factory(1)->create();
+        \App\Models\User::factory(100)->create();
         \App\Models\classe_tag::factory(4)->create();
+        DB::table('trainer_users')->insert([
+           
+            ['trainer_id'=>2,
+                'user_id'=> 2],
+            ['trainer_id'=>1,
+                'user_id'=> 3],
+            ['trainer_id'=>3,
+            'user_id'=> 1],
+                
+        ]);
     }
 }

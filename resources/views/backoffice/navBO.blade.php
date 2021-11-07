@@ -87,12 +87,14 @@
        <span class="tooltip">Classe</span>
      </li>
      <li>
+      @can('adminManager')
       <a href="{{ route('trainer.index') }}">
         <i class='bx bx-heart' ></i>
         <span class="links_name">Trainer</span>
       </a>
       <span class="tooltip">Trainer</span>
     </li>
+    @endcan
      <li>
         <form style=" margin-left:0; width:100%" method="POST" action="{{ route('logout') }}">
         
@@ -110,6 +112,7 @@
   <div style="background-color: #11101D">
     {{-- @include('partials.header') --}}
   </div>
+  
   <script>
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");

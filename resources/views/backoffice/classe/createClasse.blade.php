@@ -2,6 +2,9 @@
 
 @section('contentBO')
     <div class="home-section d-flex flex-column align-items-center">
+        <div class="container">
+
+        
         @if (session()->has('message'))
         <div class="alert alert-info" style="text-align: center">
             {{ session()->get('message') }}
@@ -55,11 +58,14 @@
     
                 <label for="trainer" class="form-label ">Instructeur</label>
                 <select class="form-select" id="trainer" name="trainer_id" aria-label="Default select example">
-                   
-                    @foreach ($trainer as $item)                   
-                        <option value = "{{ $item->id }}">{{ $item->nom }}</option>
+                    {{-- @if (Auth::user()->role_id == 2) --}}
+                    @foreach ($users as $item)  
+                                     
+                        <option value = "{{ $item->trainer_id }}">{{ $trainer[$item->trainer_id-1]->nom }}</option>
                     @endforeach
-                    
+                    {{-- @else
+                    <option value="{{ Auth::user()->id }}">{{ Auth::user()->nom }}</option>  
+                    @endif --}}
                 </select>
     
     
@@ -75,9 +81,12 @@
     
                 <label for="lestags" class="form-label ">Tags</label>
                   <select style="background-color: white" name="lestags[]"  id="tags" class="form-select " multiple aria-label="Default select example">
-                      @foreach ($tag as $item)
-                      <option value="{{ $item->id }}">{{ $item->nom }}</option>
-                      @endforeach
+                   
+                    @foreach ($tag as $item)
+                    <option value="{{ $item->id }}">{{ $item->nom }}</option>
+                    @endforeach
+                   
+                     
                   </select>
                   <p>Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</p>
     
@@ -88,6 +97,7 @@
                 </div>
                 
             </form>
-        </div>   
+        </div> 
+    </div>  
     </div>
 @endsection

@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Facade\FlareClient\Http\Response;
+use Illuminate\Auth\Access\Response as AccessResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,10 +20,14 @@ class BackofficeMiddleware
     public function handle(Request $request, Closure $next)
     {
         
-        if(in_array(Auth::user()->role_id, [1,2,3])){
 
-            return $next($request);
+    return $next($request);
+       
+        if (in_array(Auth::user()->role_id, [1,2,3]) )
+        {
+            return redirect('/')->with("vous n'avez pas l'accès");
         }
+        return $next($request);
        
         
     }

@@ -4,6 +4,9 @@
 
        
         <form class=" d-flex flex-column home-section  p-2" action="{{route('classe.update', $classe->id)}}" method="POST" enctype="multipart/form-data">
+           
+                
+           
             @if (session()->has('message'))
             <div class="alert alert-info" style="text-align: center">
                 {{ session()->get('message') }}

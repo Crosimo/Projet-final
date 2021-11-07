@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ClasseController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FooterController;
@@ -135,12 +136,7 @@ Route::put('paiementMade/{id}', [PaiementController::class, "paiementEffectué"]
 
 Route::resource('/backoffice/trainer', TrainerController::class);
 Route::post("send-mail", [MailController::class, "sendmail"])->name("sendMail");
-Route::get('/backoffice', function () {
-    
-    $users = User::all();
-    $classes = Classe::all();
-    return view('dashboard', compact('users', 'classes'));
-})->name('dashboard');
+Route::get('/backoffice', [DashController::class, 'index'])->name('dashboard');
 Route::get('/profil', [UserController::class, 'profil']);
 Route::put('/profil/update/{id}', [UserController::class, 'updateProfil'])->name('updateProfil');
 Route::get('/profil/all', [UserController::class, 'index'])->name('user.index');
