@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             "password" => Hash::make('testtest'),
             "role_id" => 1,
             "pricing_id"=>1,
-            "image" => "blog2.jpg",
+            "image" => "blog1.jpg",
             "created_at" => now()],
             ["name" => "Roch",
             "email" => "roch.deborsu@hotmail.com",
@@ -56,14 +56,14 @@ class DatabaseSeeder extends Seeder
             "pricing_id"=>1,
             "password" => Hash::make('testtest'),
             "role_id" => 2,
-            "image" => "blog2.jpg",
+            "image" => "blog3.jpg",
             "created_at" => now()],
             ["name" => "Papa",
             "email" => "papa.deborsu@hotmail.com",
             "pricing_id"=>1,
             "password" => Hash::make('testtest'),
             "role_id" => 4,
-            "image" => "blog2.jpg",
+            "image" => "blog4.jpg",
             "created_at" => now()],
         ]);
         
@@ -261,7 +261,7 @@ class DatabaseSeeder extends Seeder
 
         
         // \App\Models\Classe::factory(9)->create();
-        \App\Models\User::factory(100)->create();
+        // \App\Models\User::factory(100)->create();
         \App\Models\classe_tag::factory(4)->create();
         DB::table('trainer_users')->insert([
            

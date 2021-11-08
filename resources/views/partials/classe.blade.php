@@ -31,7 +31,7 @@
                     @elseif ((new \Carbon\Carbon($item->heureDébut))->isPast())
                     <div class="single-content" style="background-color:rgba(149, 165, 166, 1)">
                     @elseif($item->places -(count($item->users)) <= 3 ) 
-                    <div class="single-content" style="background-color:rgba(207, 0, 15, 0.90)">
+                    <div class="single-content" style="background-color:rgba(217, 30, 24, 0.85)">
                     @elseif($item->places -(count($item->users)) <=5)
                     <div class="single-content" style="background-color:rgba(248, 148, 6, 0.9)">
                     @else
